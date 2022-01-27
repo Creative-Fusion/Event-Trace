@@ -17,6 +17,7 @@ function App() {
         >
           Learn React
         </a>
+        <span className='bg-gray-200'>EventTrace Checked</span>
       </header>
     </div>
   );
