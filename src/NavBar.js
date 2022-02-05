@@ -99,10 +99,8 @@ const NavBar = ({ loggedIn }) => {
                         </ul>
                     </div>
                 </div>
-
                 
  
-                   
                 <div className= { hideUserName }>
                     <button data-collapse-toggle="mobile-menu" type="button" className="pl-3 inline-flex text-sm font-medium rounded-lg hover:bg-transparent border-0 hover:text-blue-700 p-0 text-gray-600">
                         <FaBell  className="self-center"/>
@@ -113,20 +111,17 @@ const NavBar = ({ loggedIn }) => {
                         <IoIosArrowDown  className="self-center pl-1"/>
                     </button>
                 </div> 
+                
                     
-                <div className="inline-flex">
-                    <div className= { hideAuth }>
-                        <button data-collapse-toggle="mobile-menu" type="button" className="text-center border border-gray-600 text-base font-medium inline-flex rounded hover:bg-transparent  hover:text-blue-700 px-1 text-gray-600">
-                            <span className="px-1">SignUp</span>
-                        </button>
-                    </div>
-
-                    <div className= { hideAuth }>
-                        <button data-collapse-toggle="mobile-menu" type="button" className="ml-3.5 text-center border border-gray-600 bg-blue-900 text-base font-medium inline-flex rounded hover:bg-transparent  hover:text-blue-700 px-1 text-gray-600">
-                            <span className="px-1 text-white">Login</span>
-                        </button>
-                    </div>  
-                </div>
+                <div className= { hideAuth }>
+                    <button data-collapse-toggle="mobile-menu" type="button" className="text-center border border-gray-600 text-base font-medium inline-flex rounded hover:bg-transparent  hover:text-blue-700 px-1 text-gray-600">
+                        <span className="px-1">SignUp</span>
+                    </button>
+                    
+                    <button data-collapse-toggle="mobile-menu" type="button" className="ml-3.5 text-center bg-blue-900 text-base font-medium inline-flex rounded hover:bg-transparent  hover:text-blue-700 px-1 text-gray-600">
+                        <span className="px-1 text-white">Login</span>
+                    </button>
+                </div>  
 
                 
             </div>
