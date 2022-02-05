@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaBars } from '@react-icons/all-files/fa/FaBars';
 import { FaBell } from '@react-icons/all-files/fa/FaBell';
 import { IoIosArrowDown } from '@react-icons/all-files/io/IoIosArrowDown';
+import { IoIosLogOut } from '@react-icons/all-files/io/IoIosLogOut';
 import { FaUserCircle } from '@react-icons/all-files/fa/FaUserCircle';
 import logo from "./logo.jpg"
 
@@ -15,19 +16,19 @@ const NavBar = ({ loggedIn }) => {
 
     var hideUserName= "";
     var hideUserNameSS= "";
-    var hideSignUp= "";
-    var hideSignUpSS= "";
+    var hideAuth= "";
+    var hideAuthSS= "";
 
     if(loggedIn === false){
         hideUserName = hide;
         hideUserNameSS = hide;
-        hideSignUp = show;
-        hideSignUpSS = showSmallScreen;
+        hideAuth = show;
+        hideAuthSS = showSmallScreen;
     } else{
         hideUserName = show;
         hideUserNameSS = showSmallScreen;
-        hideSignUp = hide;
-        hideSignUpSS = hide;
+        hideAuth = hide;
+        hideAuthSS = hide;
     }
 
 
@@ -42,11 +43,32 @@ const NavBar = ({ loggedIn }) => {
                                 <img src= { logo } alt="Brand Logo" className="h-6"/>
                             </div>
                             {/* Brand Name */}
-                            <span className="self-center text-2xl font-semibold whitespace-nowrap text-blue-900 dark:text-white">EventTrace</span>
+                            <span className="self-center md:text-2xl font-semibold whitespace-nowrap text-blue-900 dark:text-white">EventTrace</span>
                         </a>
-                        <button data-collapse-toggle="mobile-menu" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-gray-200 ">
-                            <FaBars/>
-                        </button>
+
+                        <div className="inline-flex">
+                            <div className={ hideAuthSS }>
+                                <a href="#" className="block py-2 pr-4 pl-4 hover:text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-gray-600">
+                                    <button data-collapse-toggle="mobile-menu3" type="button" className="inline-flex">
+                                    <span className="self-center text-base font-medium">Sign In</span>
+                                    </button>
+                                </a>  
+                            </div>
+
+                            <div className={ hideUserNameSS }>
+                                <a href="#" title="Log out" className="block py-2 pr-1 pl-4 hover:text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-gray-600">
+                                    <button data-collapse-toggle="mobile-menu3" type="button" className="inline-flex">
+                                        <IoIosLogOut className="self-center"/>
+                                        <span className="pl-0.5 self-center text-sm font-medium">Log Out</span>
+                                    </button>
+                                </a>  
+                            </div>
+
+                            <button data-collapse-toggle="mobile-menu" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-gray-200 ">
+                                <FaBars/>
+                            </button>
+                        </div>
+                        
                     </div>
                      
 
@@ -67,31 +89,18 @@ const NavBar = ({ loggedIn }) => {
                             
                             <li className={ hideUserNameSS }>
                                 <a href="#" className="block py-2 pr-4 pl-4 hover:text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
-                                <button data-collapse-toggle="mobile-menu3" type="button" className="inline-flex">
-                                    <FaUserCircle className="self-center"/>
-                                    <span className="self-center pl-2 text-base font-medium">Username</span>
-                                </button></a>
-                                
-                            </li>
-
-                            <li className= { hideSignUp }>
-                                <button data-collapse-toggle="mobile-menu" type="button" className="text-center border border-black inline-flex text-sm font-medium rounded hover:bg-transparent  hover:text-blue-700 px-1">
-                                SignUp
-                                </button>
-                            </li>
-
-                            <li className={ hideSignUpSS }>
-                                <a href="#" className="block py-2 pr-4 pl-4 hover:text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
                                     <button data-collapse-toggle="mobile-menu3" type="button" className="inline-flex">
-                                        Sign Up
+                                        <FaUserCircle className="self-center"/>
+                                        <span className="self-center pl-2 text-base font-medium">{userName}</span>
                                     </button>
                                 </a>
-                                
                             </li>
 
                         </ul>
                     </div>
                 </div>
+
+                
  
                    
                 <div className= { hideUserName }>
@@ -103,7 +112,23 @@ const NavBar = ({ loggedIn }) => {
                         <span className="self-center pl-2">{ userName }</span>
                         <IoIosArrowDown  className="self-center pl-1"/>
                     </button>
-                </div>   
+                </div> 
+                    
+                <div className="inline-flex">
+                    <div className= { hideAuth }>
+                        <button data-collapse-toggle="mobile-menu" type="button" className="text-center border border-gray-600 text-base font-medium inline-flex rounded hover:bg-transparent  hover:text-blue-700 px-1 text-gray-600">
+                            <span className="px-1">SignUp</span>
+                        </button>
+                    </div>
+
+                    <div className= { hideAuth }>
+                        <button data-collapse-toggle="mobile-menu" type="button" className="ml-3.5 text-center border border-gray-600 bg-blue-900 text-base font-medium inline-flex rounded hover:bg-transparent  hover:text-blue-700 px-1 text-gray-600">
+                            <span className="px-1 text-white">Login</span>
+                        </button>
+                    </div>  
+                </div>
+
+                
             </div>
         </nav>
      );
