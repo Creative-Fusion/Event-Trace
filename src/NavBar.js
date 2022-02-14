@@ -15,6 +15,7 @@ import { BiCalendarHeart } from '@react-icons/all-files/bi/BiCalendarHeart';
 import { BiCalendarCheck } from '@react-icons/all-files/bi/BiCalendarCheck';
 
 import logo from "./logo.jpg"
+import Brand from "./components/Brand";
 
 const NavBar = ({ loggedIn }) => {
 
@@ -42,12 +43,7 @@ const NavBar = ({ loggedIn }) => {
 
                         {/* Brand */}
 
-                        <a href="/" className="flex">
-                            <div className="self-center mr-3">
-                                <img src= { logo } alt="Brand Logo" className="h-6"/>
-                            </div>
-                            <span className="self-center md:text-2xl font-semibold whitespace-nowrap text-blue-900 dark:text-white">EventTrace</span>
-                        </a>
+                        <Brand/>
 
                         {/* NavBar menu for small screen */}
 
