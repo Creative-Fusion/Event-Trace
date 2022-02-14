@@ -73,7 +73,7 @@ const NavBar = ({ loggedIn }) => {
 
                     {/* User Dropdown for small screen */}
 
-                    <div id="sm-user-menu" className="hidden absolute z-100 w-44 text-left bg-white shadow self-center" style={{ right:0, top:45 }}>
+                    <div id="sm-user-menu" className="hidden md:hidden absolute z-100 w-44 text-left bg-white shadow self-center" style={{ right:0, top:45 }}>
                         <ul className="py-1 px-2" aria-labelledby="sm-drop-down">
                             <li>
                                 {
