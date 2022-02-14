@@ -39,12 +39,17 @@ const NavBar = ({ loggedIn }) => {
 
                 <div className="flex flex-col items-center justify-between w-full md:w-auto md:justify-start md:flex-row">
                     <div className="flex justify-between w-full md:w-auto">
+
+                        {/* Brand */}
+
                         <a href="/" className="flex">
                             <div className="self-center mr-3">
                                 <img src= { logo } alt="Brand Logo" className="h-6"/>
                             </div>
                             <span className="self-center md:text-2xl font-semibold whitespace-nowrap text-blue-900 dark:text-white">EventTrace</span>
                         </a>
+
+                        {/* NavBar menu for small screen */}
 
                         <div className="inline-flex">
                             
@@ -65,72 +70,76 @@ const NavBar = ({ loggedIn }) => {
                         </div>
                         
                     </div>
-                        <div id="sm-user-menu" className="hidden absolute z-100 w-44 text-left bg-white shadow self-center" style={{ right:0, top:45 }}>
-                            <ul className="py-1 px-2" aria-labelledby="sm-drop-down">
-                                <li>
+
+                    {/* User Dropdown for small screen */}
+
+                    <div id="sm-user-menu" className="hidden absolute z-100 w-44 text-left bg-white shadow self-center" style={{ right:0, top:45 }}>
+                        <ul className="py-1 px-2" aria-labelledby="sm-drop-down">
+                            <li>
+                                {
+                                    loggedIn === true &&
+                                    <a href="#" className="block py-2 px-4 text-sm hover:text-black active:text-black text-gray-600">Account Setting</a>
+                                }
                                     {
-                                        loggedIn === true &&
-                                        <a href="#" className="block py-2 px-4 text-sm hover:text-black active:text-black text-gray-600">Account Setting</a>
-                                    }
-                                     {
-                                        loggedIn === false &&
-                                        <a href="#" className="block py-2 px-4 text-sm hover:text-black active:text-black text-gray-600">
-                                            <span className="inline-flex">
-                                                <IoLogInOutline className="self-center"/>
-                                                <span className="self-center pl-2">
-                                                  Sign in
-                                                </span>
+                                    loggedIn === false &&
+                                    <a href="#" className="block py-2 px-4 text-sm hover:text-black active:text-black text-gray-600">
+                                        <span className="inline-flex">
+                                            <IoLogInOutline className="self-center"/>
+                                            <span className="self-center pl-2">
+                                                Sign in
                                             </span>
-                                        </a>
-                                    }
-                                </li>
-                                <li>
-                                    {
-                                        loggedIn === true &&
-                                        <a href="#" className="block py-2 px-4 text-sm hover:text-black active:text-black text-gray-600">User Dashboard</a>
-                                    }
-                                    {
-                                        loggedIn === false &&
-                                        <a href="#" className="block py-2 px-4 text-sm hover:text-black active:text-black text-gray-600">
-                                            <span className="inline-flex">
-                                                <IoCalendarOutline className="self-center"/>
-                                                <span className="self-center pl-2">
-                                                   Organise Events
-                                                </span>
-                                            </span>
-                                        </a>
-                                    }
-                                </li>
-                                <li>
-                                    {
-                                        loggedIn === true &&
-                                        <span className="block py-2 px-4 text-sm hover:text-black active:text-black text-gray-600">
-                                            <button type="button" className="inline-flex p-0">
-                                                <IoIosLogOut className="self-center"/>
-                                                <span className="self-center pl-2">Logout</span>
-                                            </button>
                                         </span>
-                                    }
-                                    {
-                                        loggedIn===false &&
-                                        <a href="#" className="block py-2 px-4 text-sm hover:text-black active:text-black text-gray-600">
-                                            <span className="inline-flex">
-                                                <IoSearchOutline className="self-center"/>
-                                                <span className="self-center pl-2">
-                                                   Search Events
-                                                </span>
+                                    </a>
+                                }
+                            </li>
+                            <li>
+                                {
+                                    loggedIn === true &&
+                                    <a href="#" className="block py-2 px-4 text-sm hover:text-black active:text-black text-gray-600">User Dashboard</a>
+                                }
+                                {
+                                    loggedIn === false &&
+                                    <a href="#" className="block py-2 px-4 text-sm hover:text-black active:text-black text-gray-600">
+                                        <span className="inline-flex">
+                                            <IoCalendarOutline className="self-center"/>
+                                            <span className="self-center pl-2">
+                                                Organise Events
                                             </span>
-                                            
-                                        </a>
-                                    }
-                                   
-                                </li>
-                            </ul>
-                        </div> 
+                                        </span>
+                                    </a>
+                                }
+                            </li>
+                            <li>
+                                {
+                                    loggedIn === true &&
+                                    <span className="block py-2 px-4 text-sm hover:text-black active:text-black text-gray-600">
+                                        <button type="button" className="inline-flex p-0">
+                                            <IoIosLogOut className="self-center"/>
+                                            <span className="self-center pl-2">Logout</span>
+                                        </button>
+                                    </span>
+                                }
+                                {
+                                    loggedIn===false &&
+                                    <a href="#" className="block py-2 px-4 text-sm hover:text-black active:text-black text-gray-600">
+                                        <span className="inline-flex">
+                                            <IoSearchOutline className="self-center"/>
+                                            <span className="self-center pl-2">
+                                                Search Events
+                                            </span>
+                                        </span>
+                                        
+                                    </a>
+                                }
+                                
+                            </li>
+                        </ul>
+                    </div> 
+
+
+                    {/* NavBar Menu */}
 
                    
-
-                    
                     <div className=" hidden self-center md:mt-0 w-full md:block md:w-auto md:text-left bg-gray-300 md:bg-white md:ml-20 rounded-lg" id="nav-menu">
                         <ul className="flex flex-col text-left text-base font-medium md:flex-row md:space-x-9 md:mt-0 md:text-base md:font-medium">
                             <li>
@@ -148,6 +157,8 @@ const NavBar = ({ loggedIn }) => {
                         </ul>
                     </div>
                 </div>
+
+                {/* User Dropdown for large screen */}
                 
                 <div className="hidden md:block">
 
