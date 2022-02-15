@@ -1,14 +1,15 @@
-import logo from "../logo.jpg"
+import logo from "../logo.jpg";
+import { Link } from "react-router-dom";
 
 const Brand = () => {
-    return ( 
-        <a href="/" className="flex">
-            <div className="self-center mr-3">
-                <img src= { logo } alt="Brand Logo" className="h-6"/>
-            </div>
-            <span className="self-center md:text-2xl font-semibold whitespace-nowrap text-[#0A1C5C] dark:text-white">EventTrace</span>
-        </a>
-     );
-}
- 
+	return (
+		<Link to="/" className="items-center flex">
+			<img src={logo} alt="EventTrace" className="h-6 mr-3" />
+			<span className="md:text-2xl text-xl font-semibold whitespace-nowrap text-[#0A1C5C]">
+				EventTrace
+			</span>
+		</Link>
+	);
+};
+
 export default Brand;
