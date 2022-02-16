@@ -41,8 +41,8 @@ export const NavBar = ({ loggedIn = false }) => {
 	};
 
 	return (
-		<nav className="fixed flex md:flex-row flex-col w-full py-3 px-8 md:items-center md:justify-start justify-between bg-white">
-			<div className="flex flex-row justify-between ">
+		<nav className="fixed flex md:flex-row flex-col w-full px-8 justify-between ">
+			<div className="flex flex-row justify-between h-full">
 				<Brand />
 				<div className="inline-flex md:hidden self-center">
 					<Link to={"/"} className="mr-3">
@@ -62,7 +62,7 @@ export const NavBar = ({ loggedIn = false }) => {
 					<Link to="/" className="nav-link">
 						Events
 					</Link>
-					<Link to="/" className="nav-link">
+					<Link to="/events/create" className="nav-link">
 						Create Event
 					</Link>
 				</ul>
