@@ -2,7 +2,7 @@ import React from "react";
 
 export const Home = () => {
 	return (
-		<div>
+		<div className="">
 			<header className="App-header h-screen">
 				<p>
 					Edit <code>src/App.js</code> and save to reload.

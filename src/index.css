@@ -28,7 +28,15 @@ code {
 	@apply transition ease-out duration-500;
 }
 
+.App .content {
+	@apply absolute top-[60px] w-full;
+}
+
 /* Navbar */
+nav {
+	@apply bg-gradient-to-b from-secondary to-white opacity-95 h-[60px];
+}
+
 .nav-items .nav-link {
 	@apply md:px-4 px-6 md:py-0 py-2 h-full font-semibold text-base text-grey hover:text-primary hover:font-bold;
 }
