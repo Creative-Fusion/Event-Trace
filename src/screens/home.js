@@ -2,8 +2,8 @@ import React from "react";
 
 export const Home = () => {
 	return (
-		<div className="">
-			<header className="App-header h-screen">
+		<div className="grid grid-cols-2 w-screen">
+			<header className="App-header">
 				<p>
 					Edit <code>src/App.js</code> and save to reload.
 				</p>
@@ -17,7 +17,7 @@ export const Home = () => {
 				</a>
 				<span className="bg-gray-200">EventTrace Checked</span>
 			</header>
-			<header className="App-header h-screen">
+			<header className="App-header">
 				<p>
 					Edit <code>src/App.js</code> and save to reload.
 				</p>

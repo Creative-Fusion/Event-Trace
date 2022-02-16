@@ -41,11 +41,11 @@ export const NavBar = ({ loggedIn = false }) => {
 	};
 
 	return (
-		<nav className="fixed flex md:flex-row flex-col w-full px-8 justify-between ">
+		<nav className="fixed flex md:flex-row flex-col w-full md:items-center md:justify-start px-8 justify-between ">
 			<div className="flex flex-row justify-between h-full">
 				<Brand />
-				<div className="inline-flex md:hidden self-center">
-					<Link to={"/"} className="mr-3">
+				<div className="inline-flex md:hidden self-center h-[60px]">
+					<Link to={"/"} className="mr-3 self-center">
 						<FaUserCircle className="nav-icon group-hover:text-gray-500" />
 					</Link>
 					<button id="burger" onClick={showBurgerMenu}>
@@ -66,11 +66,11 @@ export const NavBar = ({ loggedIn = false }) => {
 						Create Event
 					</Link>
 				</ul>
-				<div className="md:grow h-2"></div>
+				<div className="md:grow h-[60px]"></div>
 				{!loggedIn && (
 					<Link
 						to="/"
-						className="btn justify-end md:flex-none border-primary text-primary border-2 hover:bg-primary hover:text-secondary ease-out-transition"
+						className="btn py-2 px-3 justify-end md:flex-none border-primary text-primary border-2 hover:bg-primary hover:text-secondary ease-out-transition"
 					>
 						Sign in
 					</Link>
