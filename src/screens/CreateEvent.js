@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import EventImage from "../app-images/event1.png";
 import { IoIosArrowDown } from "@react-icons/all-files/io/IoIosArrowDown";
 
 export const CreateEvent = () => {
 	const caption = "Create Your Own Event";
-	const categories = [
+	const availableCategories = [
 		"Adventure",
 		"Cosplay",
 		"Educational",
@@ -30,6 +30,17 @@ export const CreateEvent = () => {
 		}
 	};
 
+	const [name, setName] = useState("");
+	const [type, setType] = useState("Physical");
+	const [categories, setCategories] = useState([]);
+	const [eventLink, setEventLink] = useState("");
+	const [location, setLocation] = useState("");
+	const [participantLimit, setParticipantLimit] = useState("");
+	const [startDate, setStartDate] = useState("");
+	const [endDate, setEndDate] = useState("");
+	const [startTime, setStartTime] = useState("");
+	const [endTime, setEndTime] = useState("");
+
 	return (
 		<div className="lg:grid lg:grid-cols-2 w-screen mx-8 my-4">
 			<div className="lg:w-full lg:h-full h-0 w-0 flex p-6 order-last">
@@ -51,7 +62,9 @@ export const CreateEvent = () => {
 								className="form-input"
 								id="first-name"
 								type="text"
-								placeholder=""
+								placeholder="Full Name"
+								value={name}
+								onChange={(value) => setName(value.target.value)}
 							/>
 							{/* <p className ="text-red-500 text-xs italic">
 							Please fill out this field.
@@ -61,7 +74,12 @@ export const CreateEvent = () => {
 							<label className="form-label" htmlFor="type">
 								Type
 							</label>
-							<select className="form-input" id="type">
+							<select
+								className="form-input"
+								id="type"
+								value={type ? type : "Physical"}
+								onChange={(value) => setType(value.target.value)}
+							>
 								<option>Physical</option>
 								<option>Virtual</option>
 							</select>
@@ -72,14 +90,17 @@ export const CreateEvent = () => {
 							<label className="form-label" htmlFor="categories">
 								Categories <span className="text-red-600">*</span>
 							</label>
+							<div>{categories.join(", ")}</div>
 							<div
 								className="form-input relative cursor-pointer"
 								onClick={showCategoryList}
 							>
 								<input
-									id="categories cursor-pointer"
+									id="categories"
+									className="w-full cursor-pointer"
 									data-dropdown-toggle="dropdown"
 									placeholder="Select Your Categories"
+									value={categories.join(", ")}
 									disabled
 								/>
 								<IoIosArrowDown className="w-4 h-4 absolute inset-y-3.5 right-3" />
@@ -88,7 +109,7 @@ export const CreateEvent = () => {
 								className="w-full hidden h-fit pt-2 mb-4 flex-wrap flex-row gap-2"
 								id="category-list"
 							>
-								{categories.map((category) => {
+								{availableCategories.map((category) => {
 									return (
 										<div className="" key={category}>
 											<input
@@ -96,6 +117,14 @@ export const CreateEvent = () => {
 												name={category}
 												id={category}
 												className="w-4 h-4 bg-gray-300 rounded border-none"
+												onClick={() => {
+													let newList = categories;
+													if (categories.includes(category))
+														newList.splice(newList.indexOf(category), 1);
+													else newList.push(category);
+													setCategories(newList);
+													console.log(categories.join(", "));
+												}}
 											/>
 											<label
 												htmlFor={category}
@@ -112,9 +141,30 @@ export const CreateEvent = () => {
 					<div className="flex flex-wrap -mx-5 mb-1 sm:mb-2">
 						<div className="w-full sm:w-4/6 px-3 mb-1">
 							<label className="form-label" htmlFor="address">
-								Location/Event Link <span className="text-red-600">*</span>
+								{type === "Physical" && <span>Location</span>}
+								{type === "Virtual" && <span>Event Link</span>}
+								<span className="text-red-600">*</span>
 							</label>
-							<input className="form-input" id="address" type="text" />
+							{type === "Physical" && (
+								<input
+									className="form-input"
+									id="address"
+									type="text"
+									placeholder="Event Location"
+									value={location}
+									onChange={(value) => setLocation(value.target.value)}
+								/>
+							)}
+							{type === "Virtual" && (
+								<input
+									className="form-input"
+									id="address"
+									type="text"
+									placeholder="Event Link"
+									value={eventLink}
+									onChange={(value) => setEventLink(value.target.value)}
+								/>
+							)}
 						</div>
 						<div className="w-full sm:w-2/6 px-3 mb-1">
 							<label className="form-label" htmlFor="participant-limit">
@@ -123,7 +173,11 @@ export const CreateEvent = () => {
 							<input
 								className="form-input"
 								id="participant-limit"
-								type="text"
+								type="number"
+								min="0"
+								placeholder="Participation Limit"
+								value={participantLimit}
+								onChange={(value) => setParticipantLimit(value.target.value)}
 							/>
 						</div>
 					</div>
@@ -138,12 +192,17 @@ export const CreateEvent = () => {
 									id="start-date"
 									type="date"
 									placeholder="Start Date"
+									x
+									value={startDate}
+									onChange={(value) => setStartDate(value.target.value)}
 								/>
 								<input
 									className="form-input"
 									id="end-date"
 									type="date"
 									placeholder="End Date"
+									value={endDate}
+									onChange={(value) => setEndDate(value.target.value)}
 								/>
 							</div>
 						</div>
@@ -157,12 +216,16 @@ export const CreateEvent = () => {
 									id="start-time"
 									type="time"
 									placeholder="Start Time"
+									value={startTime}
+									onChange={(value) => setStartTime(value.target.value)}
 								/>
 								<input
 									className="form-input"
 									id="end-time"
 									type="time"
 									placeholder="End Time"
+									value={endTime}
+									onChange={(value) => setEndTime(value.target.value)}
 								/>
 							</div>
 						</div>
@@ -179,8 +242,9 @@ export const CreateEvent = () => {
 
 				<button
 					className="btn py-3 px-5 justify-self-center hover:border-primary hover:bg-transparent hover:text-primary hover:border-2 bg-primary text-secondary ease-out-transition mt-4"
-					type="submit"
-					onClick={() => console.log("Submit")}
+					onClick={() =>
+						console.log(`Submitting the data of the new event: ${name}`)
+					}
 				>
 					Create Event
 				</button>
