@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import EventImage from "../app-images/event1.png";
 import { IoIosArrowDown } from "@react-icons/all-files/io/IoIosArrowDown";
+import { eventSchema } from "../model/event";
+import { useDispatch } from "react-redux";
+import { createEvent } from "../features/eventsSlice";
 
 export const CreateEvent = () => {
 	const caption = "Create Your Own Event";
@@ -18,6 +21,8 @@ export const CreateEvent = () => {
 		"Other",
 	];
 
+	const dispatch = useDispatch();
+
 	const showCategoryList = () => {
 		const hiddenData = document.querySelector("#category-list");
 
@@ -30,6 +35,25 @@ export const CreateEvent = () => {
 		}
 	};
 
+	const saveEvent = () => {
+		const newEvent = eventSchema;
+		newEvent.id = Date.now();
+		newEvent.name = name;
+		newEvent.type = type;
+		newEvent.categories = categories;
+		newEvent.eventLink = eventLink;
+		newEvent.location = { location: location };
+		newEvent.participantLimit = parseInt(participantLimit);
+		newEvent.dateTime = {
+			startDate: startDate,
+			endDate: endDate,
+			startTime: startTime,
+			endTime: endTime,
+		};
+
+		dispatch(createEvent({ newEvent }));
+	};
+
 	const [name, setName] = useState("");
 	const [type, setType] = useState("Physical");
 	const [categories, setCategories] = useState([]);
@@ -40,6 +64,8 @@ export const CreateEvent = () => {
 	const [endDate, setEndDate] = useState("");
 	const [startTime, setStartTime] = useState("");
 	const [endTime, setEndTime] = useState("");
+
+	let [categoriesStr, setCategoriesStr] = useState("");
 
 	return (
 		<div className="lg:grid lg:grid-cols-2 w-screen mx-8 my-4">
@@ -77,7 +103,7 @@ export const CreateEvent = () => {
 							<select
 								className="form-input"
 								id="type"
-								value={type ? type : "Physical"}
+								value={type}
 								onChange={(value) => setType(value.target.value)}
 							>
 								<option>Physical</option>
@@ -90,7 +116,6 @@ export const CreateEvent = () => {
 							<label className="form-label" htmlFor="categories">
 								Categories <span className="text-red-600">*</span>
 							</label>
-							<div>{categories.join(", ")}</div>
 							<div
 								className="form-input relative cursor-pointer"
 								onClick={showCategoryList}
@@ -98,9 +123,9 @@ export const CreateEvent = () => {
 								<input
 									id="categories"
 									className="w-full cursor-pointer"
-									data-dropdown-toggle="dropdown"
+									// data-dropdown-toggle="dropdown"
 									placeholder="Select Your Categories"
-									value={categories.join(", ")}
+									value={categoriesStr}
 									disabled
 								/>
 								<IoIosArrowDown className="w-4 h-4 absolute inset-y-3.5 right-3" />
@@ -111,7 +136,7 @@ export const CreateEvent = () => {
 							>
 								{availableCategories.map((category) => {
 									return (
-										<div className="" key={category}>
+										<div key={category}>
 											<input
 												type="checkbox"
 												name={category}
@@ -123,7 +148,7 @@ export const CreateEvent = () => {
 														newList.splice(newList.indexOf(category), 1);
 													else newList.push(category);
 													setCategories(newList);
-													console.log(categories.join(", "));
+													setCategoriesStr(categories.join(", "));
 												}}
 											/>
 											<label
@@ -192,7 +217,6 @@ export const CreateEvent = () => {
 									id="start-date"
 									type="date"
 									placeholder="Start Date"
-									x
 									value={startDate}
 									onChange={(value) => setStartDate(value.target.value)}
 								/>
@@ -242,9 +266,8 @@ export const CreateEvent = () => {
 
 				<button
 					className="btn py-3 px-5 justify-self-center hover:border-primary hover:bg-transparent hover:text-primary hover:border-2 bg-primary text-secondary ease-out-transition mt-4"
-					onClick={() =>
-						console.log(`Submitting the data of the new event: ${name}`)
-					}
+					// type="submit"
+					onClick={saveEvent}
 				>
 					Create Event
 				</button>

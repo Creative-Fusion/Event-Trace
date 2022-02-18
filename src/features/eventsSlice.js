@@ -9,7 +9,8 @@ const eventSlice = createSlice({
 	initialState,
 	reducers: {
 		createEvent: (state, action) => {
-			console.log(action.payload);
+			state.eventsList.push(action.payload);
+			console.log(state.eventsList[0]);
 		},
 	},
 });

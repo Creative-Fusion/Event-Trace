@@ -7,9 +7,9 @@ export const eventSchema = {
 	type: String,
 	participantLimit: Number,
 	dateTime: {
-		startDate: Date,
+		startDate: String,
 		startTime: String,
-		endDate: Date,
+		endDate: String,
 		endTime: String,
 	},
 	location: {
