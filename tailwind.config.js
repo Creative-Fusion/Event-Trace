@@ -11,5 +11,10 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [require("@themesberg/flowbite/plugin")],
+	plugins: [
+		require("@themesberg/flowbite/plugin"),
+		require("@tailwindcss/forms")({
+			strategy: "class",
+		}),
+	],
 };

@@ -21,7 +21,7 @@ code {
 
 /* Global */
 .btn {
-	@apply rounded-full py-2 px-3 uppercase text-xs font-bold cursor-pointer tracking-wider;
+	@apply rounded-full uppercase text-xs font-bold cursor-pointer tracking-wider;
 }
 
 .ease-out-transition {
@@ -29,12 +29,12 @@ code {
 }
 
 .App .content {
-	@apply absolute top-[60px] w-full;
+	@apply absolute flex h-full w-screen top-[60px];
 }
 
 /* Navbar */
 nav {
-	@apply bg-gradient-to-b from-secondary to-white opacity-95 h-[60px];
+	@apply bg-gradient-to-b z-10 from-secondary to-white opacity-95;
 }
 
 .nav-items .nav-link {
@@ -51,4 +51,13 @@ nav {
 
 nav ul {
 	@apply cursor-pointer;
+}
+
+/* Form */
+.form-label {
+	@apply block uppercase tracking-wide text-gray-700 text-[0.70rem] font-semibold mb-2;
+}
+
+.form-input {
+	@apply appearance-none block w-full border-none font-semibold bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white;
 }
