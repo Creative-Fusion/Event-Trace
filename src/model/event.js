@@ -17,6 +17,7 @@ export const eventSchema = {
 		latitude: Number,
 		longitude: Number,
 	},
+	fee: Number,
 	eventLink: String,
 	publish: Boolean,
 	creator: {
