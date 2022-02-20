@@ -47,7 +47,7 @@ export const Tabs = ({ event }) => {
 				</div>
 				<div className="sm:hidden flex justify-center h-full">
 					<select
-						className="border-none h-full px-5 text-base font-semibold text-grey active-tab"
+						className="select-tabs shrink border-none h-full px-5 text-base font-semibold text-grey active-tab"
 						onChange={(v) => setActiveTab(v.target.value)}
 					>
 						{tabs.map((tab) => {

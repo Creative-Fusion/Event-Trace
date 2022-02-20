@@ -96,7 +96,7 @@ nav ul {
 	@apply bg-primary text-secondary;
 }
 
-select {
+.select-tabs {
 	appearance: none;
 	-webkit-appearance: none;
 	-moz-appearance: none;

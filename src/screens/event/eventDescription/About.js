@@ -40,7 +40,7 @@ export const About = ({ event }) => {
 							<p>
 								{trimmedDescription}{" "}
 								<span
-									className="text-blue-700 underline cursor-pointer underline-offset-1"
+									className="text-blue-700 underline cursor-pointer"
 									onClick={() => setSeeMore(!seeMore)}
 								>
 									See More ↓
@@ -51,7 +51,7 @@ export const About = ({ event }) => {
 							<p>
 								{event.description}{" "}
 								<span
-									className="text-blue-700 underline cursor-pointer underline-offset-1"
+									className="text-blue-700 underline cursor-pointer"
 									onClick={() => setSeeMore(!seeMore)}
 								>
 									See Less ↑
@@ -74,10 +74,10 @@ export const About = ({ event }) => {
 						/>
 					</div>
 				</div>
-				<div className="flex col-span-2 md:w-full w-[300px] max-h-[380px] mx-auto">
+				<div className="flex col-span-2 md:w-full xs:w-[300px] max-h-[380px] mx-auto">
 					<Container
 						content={
-							<div className="flex shrink h-full flex-col justify-between place-content-between content-between">
+							<div className="flex shrink h-full flex-col place-content-between">
 								<div>
 									<h5>Category</h5>
 									{event.categories.map((category) => {
