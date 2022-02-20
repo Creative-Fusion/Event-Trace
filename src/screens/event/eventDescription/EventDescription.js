@@ -2,7 +2,7 @@ import { Tabs } from "./Tabs";
 
 export const EventDescription = () => {
 	const event = {
-		name: "KU HackFest 2021",
+		name: "KU HackFest 2022",
 		description:
 			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 		dateTime: {
@@ -18,6 +18,36 @@ export const EventDescription = () => {
 			location: "Kathmandu University, Dhulikhel",
 		},
 		categories: ["Educational", "Social"],
+		creator: {
+			id: "1",
+			role: "Organization",
+		},
+	};
+
+	const organizer = {
+		id: "1",
+		name: "Kathmandu University Computer Club",
+		email: "kuhackfest2022@gmail.com",
+		description:
+			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
+		phone: "+977-9810101010",
+		website: "www.kuhackfest.com",
+		profileImage:
+			"https://dl.airtable.com/.attachmentThumbnails/92020239ebbd95f0a24cc87065621906/e020fe8e",
+		connect: [
+			{
+				media: "facebook",
+				url: "www.facebook.com",
+			},
+			{
+				media: "instagram",
+				url: "www.instagram.com",
+			},
+			{
+				media: "youtube",
+				url: "https://www.youtube.com",
+			},
+		],
 	};
 
 	return (
@@ -31,8 +61,8 @@ export const EventDescription = () => {
 					/>
 				</div>
 			</section>
-			<section className="md:w-4/6 w-9/12 mx-auto">
-				<Tabs event={event} />
+			<section className="">
+				<Tabs event={event} organizer={organizer} />
 			</section>
 		</div>
 	);

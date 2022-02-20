@@ -9,7 +9,7 @@ const TabButton = ({ tabName, activeTab, activate }) => {
 	const classes = `h-full px-5 text-base font-semibold text-grey ${active}`;
 
 	return (
-		<div className="mx-auto h-full">
+		<div className="lg:mx-10 md:mx-3 h-full">
 			<button className={classes} onClick={() => activate(tabName)}>
 				{tabName}
 			</button>
@@ -17,11 +17,15 @@ const TabButton = ({ tabName, activeTab, activate }) => {
 	);
 };
 
-export const Tabs = ({ event }) => {
-	const tabs = ["About", "Organizer", "Participants", "Update"];
+export const Tabs = ({ event, organizer }) => {
+	const currentUserId = "1";
+
+	const tabs =
+		event.creator.id === currentUserId
+			? ["About", "Organizer", "Participants", "Update"]
+			: ["About", "Organizer"];
 	const [activeTab, setActiveTab] = useState(tabs[0]);
 
-	const organizer = {};
 	const participants = {};
 
 	const displayTabs = [
@@ -32,35 +36,38 @@ export const Tabs = ({ event }) => {
 	];
 	return (
 		<div>
-			<div className="h-[50px] md:mx-5 border-b-2 border-gray-400">
-				<div className="md:mx-32 hidden sm:flex justify-around h-full">
-					{tabs.map((tab) => {
-						return (
-							<TabButton
-								tabName={tab}
-								key={tab}
-								activeTab={activeTab}
-								activate={setActiveTab}
-							/>
-						);
-					})}
-				</div>
-				<div className="sm:hidden flex justify-center h-full">
-					<select
-						className="select-tabs shrink border-none h-full px-5 text-base font-semibold text-grey active-tab"
-						onChange={(v) => setActiveTab(v.target.value)}
-					>
+			<div className="md:w-4/6 w-9/12 mx-auto">
+				<div className="h-[50px] md:mx-5 border-b-2 border-gray-400">
+					<div className="md:mx-32 hidden sm:flex justify-center h-full">
 						{tabs.map((tab) => {
 							return (
-								<option
-									className="bg-white text-grey font-semibold text-base"
-									value={tab}
-								>
-									{tab}
-								</option>
+								<TabButton
+									tabName={tab}
+									key={tab}
+									activeTab={activeTab}
+									activate={setActiveTab}
+								/>
 							);
 						})}
-					</select>
+					</div>
+					<div className="sm:hidden flex justify-center h-full">
+						<select
+							className="select-tabs shrink border-none h-full px-5 text-base font-semibold text-grey active-tab"
+							onChange={(v) => setActiveTab(v.target.value)}
+						>
+							{tabs.map((tab) => {
+								return (
+									<option
+										className="bg-white text-grey font-semibold text-base"
+										value={tab}
+										key={tab}
+									>
+										{tab}
+									</option>
+								);
+							})}
+						</select>
+					</div>
 				</div>
 			</div>
 			<div className="py-6">{displayTabs[tabs.indexOf(activeTab)]}</div>
