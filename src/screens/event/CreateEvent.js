@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import EventImage from "../app-images/event1.png";
+import EventImage from "../../app-images/event1.png";
 import { IoIosArrowDown } from "@react-icons/all-files/io/IoIosArrowDown";
-import { eventSchema } from "../model/event";
+import { eventSchema } from "../../model/event";
 import { useDispatch } from "react-redux";
-import { createEvent } from "../features/eventsSlice";
+import { createEvent } from "../../features/eventsSlice";
 
 export const CreateEvent = () => {
 	const caption = "Create Your Own Event";
@@ -78,7 +78,7 @@ export const CreateEvent = () => {
 
 			<form className="w-full lg:max-width-xl pl-16 lg:pr-0 pr-16 my-8">
 				<div className="text-left w-full">
-					<h2 className="text-2xl font-bold mb-6 -mx-2">Create an Event</h2>
+					<h2 className="mb-6 -mx-2">Create an Event</h2>
 					<div className="flex flex-wrap -mx-5 mb-1 sm:mb-2">
 						<div className="w-full sm:w-1/2 px-3 mb-1">
 							<label className="form-label" htmlFor="name">
@@ -128,6 +128,7 @@ export const CreateEvent = () => {
 									value={categoriesStr}
 									disabled
 								/>
+
 								<IoIosArrowDown className="w-4 h-4 absolute inset-y-3.5 right-3" />
 							</div>
 							<div
@@ -265,7 +266,7 @@ export const CreateEvent = () => {
 				</p>
 
 				<button
-					className="btn py-3 px-5 justify-self-center hover:border-primary hover:bg-transparent hover:text-primary hover:border-2 bg-primary text-secondary ease-out-transition mt-4"
+					className="filled-primary-btn justify-self-center mt-4"
 					// type="submit"
 					onClick={saveEvent}
 				>

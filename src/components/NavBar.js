@@ -16,7 +16,7 @@ export const NavBar = ({ loggedIn = false }) => {
 	const name = "Jason Mark";
 
 	let [bmClass, setBMClass] = useState(
-		"hidden md:inline-flex md:flex-grow pl-10 items-center md:justify-between"
+		"hidden md:inline-flex md:flex-grow pl-10 items-center md:justify-between md:h-full h-[160px]"
 	);
 
 	let [umClass, setUMClass] = useState(
@@ -59,19 +59,16 @@ export const NavBar = ({ loggedIn = false }) => {
 						Home
 					</Link>
 					{/* //TODO: Add Navigations */}
-					<Link to="/" className="nav-link">
+					<Link to="/events/1" className="nav-link">
 						Events
 					</Link>
 					<Link to="/events/create" className="nav-link">
 						Create Event
 					</Link>
 				</ul>
-				<div className="md:grow h-[60px]"></div>
+				<div className="md:grow md:h-[60px]"></div>
 				{!loggedIn && (
-					<Link
-						to="/"
-						className="btn py-2 px-3 justify-end md:flex-none border-primary text-primary border-2 hover:bg-primary hover:text-secondary ease-out-transition"
-					>
+					<Link to="/" className="outlined-primary-btn justify-end ">
 						Sign in
 					</Link>
 				)}
