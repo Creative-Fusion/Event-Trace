@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { EventRequest, EVENT_REQUESTS } from "../request/eventRequest";
 
 export const Home = () => {
+	// const callRequest = async () => {
+	// 	console.log("Calling");
+	// 	await EventRequest(EVENT_REQUESTS.CREATE_EVENT);
+	// };
+	// useEffect(() => {
+	// 	callRequest();
+	// });
+
 	return (
 		<div className="grid grid-cols-2 w-screen">
 			<header className="App-header">
