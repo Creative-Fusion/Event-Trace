@@ -4,7 +4,6 @@ import { BiCalendarEvent } from "@react-icons/all-files/bi/BiCalendarEvent";
 import { BiHeart } from "@react-icons/all-files/bi/BiHeart"
 import { BiPowerOff } from "@react-icons/all-files/bi/BiPowerOff"; 
 
-import Brand from './components/Brand';
 
 const SideBar = () => {
 
