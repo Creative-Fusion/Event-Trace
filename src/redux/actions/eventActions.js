@@ -2,14 +2,14 @@ import { ActionTypes } from "../constants/actionTypes";
 
 export const createEvent = (event) => {
 	return {
-		type: ActionTypes.ALL_EVENTS,
+		type: ActionTypes.CREATE_EVENT,
 		payload: event,
 	};
 };
 
-export const selectedEvent = (event) => {
+export const allEvents = (events) => {
 	return {
-		type: ActionTypes.SELECTED_EVENT,
-		payload: event,
+		type: ActionTypes.ALL_EVENTS,
+		payload: events,
 	};
 };

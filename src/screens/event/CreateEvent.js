@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import EventImage from "../../app-images/event1.png";
 import { IoIosArrowDown } from "@react-icons/all-files/io/IoIosArrowDown";
 import { eventSchema } from "../../model/event";
-
+import { EventRequest, EVENT_REQUESTS } from "../../request/eventRequest";
+import { useDispatch } from "react-redux";
+import { createEvent } from "../../redux/actions/eventActions";
 export const CreateEvent = () => {
 	const caption = "Create Your Own Event";
+	const dispatch = useDispatch();
+
 	const availableCategories = [
 		"Adventure",
 		"Cosplay",
@@ -46,9 +50,14 @@ export const CreateEvent = () => {
 			startTime: startTime,
 			endTime: endTime,
 		};
+		EventRequest(EVENT_REQUESTS.CREATE_EVENT, { data: newEvent }).then(
+			(createdEvent) => {
+				dispatch(createEvent(createdEvent));
+			}
+		);
 	};
 
-	const [name, setName] = useState("");
+	const [name, setName] = useState("KU HACKFEST 2021");
 	const [type, setType] = useState("Physical");
 	const [categories, setCategories] = useState([]);
 	const [eventLink, setEventLink] = useState("");
@@ -70,7 +79,7 @@ export const CreateEvent = () => {
 				</div>
 			</div>
 
-			<form className="w-full lg:max-width-xl px-6 xs:px-16 lg:pr-0 my-8 pb-4 shrink">
+			<div className="w-full lg:max-width-xl px-6 xs:px-16 lg:pr-0 my-8 pb-4 shrink">
 				<div className="text-left w-full">
 					<h2 className="mb-6 -mx-2">Create an Event</h2>
 					<div className="flex flex-wrap -mx-5 mb-1 sm:mb-2">
@@ -261,12 +270,11 @@ export const CreateEvent = () => {
 
 				<button
 					className="filled-primary-btn justify-self-center mt-4"
-					// type="submit"
-					onClick={saveEvent}
+					onClick={() => saveEvent()}
 				>
 					Create Event
 				</button>
-			</form>
+			</div>
 		</div>
 	);
 };
