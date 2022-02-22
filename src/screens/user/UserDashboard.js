@@ -1,4 +1,5 @@
 import SideBar from "../../components/SideBar";
+import UserProfile from "../UserProfile";
 import Userprofile from "./UserProfile";
 
 
@@ -9,8 +10,8 @@ const Userdashboard = () => {
                 <div className="hidden lg:block xl:basis-[21%] lg:basis-[19%]">
                     <SideBar/>
                 </div>
-                <div className="flex">
-                    <Userprofile/>
+                <div className="grow">
+                    <UserProfile/>
                 </div>
                 
             </div>

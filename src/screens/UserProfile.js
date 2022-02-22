@@ -10,8 +10,8 @@ const UserProfile = () => {
     const userImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_d3SP2vKOeGFVESn5rk6xnPiQ0naW2e-ldA&usqp=CAU"; 
 
     return ( 
-        <div className="flex flex-col items-center justify-center w-full">
-            <div className="flex flex-col items-start lg:w-3/5 w-5/6 justify-start md:p-10 pt-8">
+        <div className="flex flex-col xl:items-center xl:justify-center lg:items-start lg:justify-start items-center justify-center w-full">
+            <div className="flex flex-col items-start xl:w-3/5 w-5/6  justify-start p-10 pt-8">
                 <div className="flex flex-row w-full justify-between">
                     <div className="flex sm:w-auto w-full">
                         <div className="sm:w-auto lg:pr-16 pr-10">
@@ -50,7 +50,7 @@ const UserProfile = () => {
                     About
                 </div>
                 <hr className="text-[#858282C7] h-0.5 bg-[rgba(133,130,130,0.78)] w-full"/>
-                <div className="flex flex-row md:w-1/2 sm:w-3/5 w-full justify-between">
+                <div className="flex flex-row md:w-1/2 xl:w-3/5 w-full justify-between">
                     <div className=" flex flex-col md:text-[16px] text-[14px]  font-medium items-start justify-start pt-5 text-[#0A1C5CA3]">
                         <div className="pb-5">
                             Email
