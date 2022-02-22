@@ -10,7 +10,7 @@ function App() {
 	return (
 		<Router>
 			<div className="relative App">
-				<NavBar loggedIn={false} />
+				<NavBar loggedIn={true} />
 				<div className="content">
 					<Routes>
 						<Route path="/" element={<Home />} />
