@@ -2,8 +2,9 @@ import "./App.css";
 import { NavBar } from "./components/NavBar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Home } from "./screens/home";
-import { CreateEvent } from "./screens/CreateEvent";
-import UserProfile from "./screens/UserProfile";
+import { CreateEvent } from "./screens/event/CreateEvent";
+import { EventDescription } from "./screens/event/eventDescription/EventDescription";
+import Userdashboard from "./screens/user/UserDashboard";
 
 function App() {
 	return (
@@ -13,8 +14,9 @@ function App() {
 				<div className="content">
 					<Routes>
 						<Route path="/" element={<Home />} />
-						<Route path="/events/create" element={<CreateEvent />}></Route>
-						<Route path="/user/userprofile" element={<UserProfile />}></Route>
+						<Route path="/events/create" element={<CreateEvent />} />
+						<Route path="/events/1" element={<EventDescription />} />
+						<Route path="/user/id" element={<Userdashboard />} />
 					</Routes>
 				</div>
 			</div>
