@@ -6,10 +6,10 @@ const Userdashboard = () => {
     return ( 
         <div className="absoulte flex flex-wrap flex-row m-0 font-sans w-screen">
             <div className="flex flex-row w-screen gap-0">
-                <div className="xl:basis-[19.5%]">
+                <div className="hidden lg:block lg:basis-[18] basis-[20%]">
                     <SideBar/>
                 </div>
-                <div className="xl:grow">
+                <div className="">
                     <Userprofile/>
                 </div>
                 

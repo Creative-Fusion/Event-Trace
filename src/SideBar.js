@@ -12,33 +12,30 @@ const SideBar = () => {
     const userName = "John William";
     
     return ( 
-        <aside className="hidden sm:block sm:float-left sm:w-auto sm:bg-[#BCBBE57D] sm:fixed sm:h-full sm:pt-6">
-            <div className="pl-7">
-                <Brand className="ml-5"/>
-            </div>
+        <aside className="hidden lg:block lg:float-left lg:w-auto lg:bg-[#BCBBE57D] lg:fixed lg:h-full lg:pt-2">
             
             <div className="m-8 flex flex-col items-center justify-center">
                 <div>
-                    <img src={ userImage } alt="User Profile" className="self-center rounded-full h-20 w-20 md:h-24 md:w-24 flex items-center justify-center bg-slate-500"/>
+                    <img src={ userImage } alt="User Profile" className="self-center rounded-full h-20 w-20 xl:h-24 xl:w-24 flex items-center justify-center bg-slate-500"/>
                 </div>
-                <div className="block mt-3 text-sm md:text-lg lg:text-sm lg:font-medium text-[#0A1C5CBF]">{ userName }</div>
+                <div className="block mt-3 text-sm xl:text-lg lg:text-sm lg:font-medium text-[#0A1C5CBF]">{ userName }</div>
             </div>
 
 
             
             
-            <div className="w-auto text-sm md:text-md lg:w-50 lg:text-xl font-[649] text-[#0A1C5CCC]">
+            <div className="w-auto text-md xl:w-50 xl:text-xl font-[649] text-[#0A1C5CCC]">
                 <ul>
-                    <li className="sm:mb-3 sm:mt-2.5 md:mb-1.5 md:mt-1">
-                        <a href="#" className="inline-flex self-center md:self-start pr-3 pl-4 md:pl-7 md:pr-8 w-full hover:bg-[#858EDCFC] active:bg-[#858EDCFC] focus-visible:bg-[#858EDCFC]">
+                    <li className="lg:mb-3 lg:mt-2.5 xl:mb-1.5 xl:mt-1">
+                        <a href="#" className="inline-flex self-center xl:self-start pr-3 pl-4 xl:pl-7 xl:pr-8 w-full hover:bg-[#858EDCFC] active:bg-[#858EDCFC] focus-visible:bg-[#858EDCFC]">
                             <MdPermIdentity className="self-center"/>
                             <span className="self-center pl-2.5">
                                 My Profile
                             </span>
                         </a>
                     </li>
-                    <li className="sm:mb-3 sm:mt-2.5 md:mb-1.5 md:mt-1">
-                        <a className="inline-flex self-center md:self-start pr-3 pl-4 md:pl-7 md:pr-8 w-full hover:bg-[#858EDCFC]">
+                    <li className="lg:mb-3 lg:mt-2.5 xl:mb-1.5 xl:mt-1">
+                        <a className="inline-flex self-center xl:self-start pr-3 pl-4 xl:pl-7 xl:pr-8 w-full hover:bg-[#858EDCFC]">
                             <MdLockOutline className="self-center"/>
                             <span className="self-center pl-2.5">
                                 Password
@@ -46,10 +43,10 @@ const SideBar = () => {
                         </a>
                     </li>
 
-                    <hr className="text-[#858282C7] h-0.5 bg-[#858282C7] m-2 md:m-5 lg:m-6 "/>
+                    <hr className="text-[#858282C7] h-0.5 bg-[#858282C7] m-2 xl:m-5 lg:m-6 "/>
 
-                    <li className="sm:mb-3 sm:mt-2.5 md:mb-1.5 md:mt-1">
-                        <a className="inline-flex self-center md:self-start pr-3 pl-4 md:pl-7 md:pr-8 w-full hover:bg-[#858EDCFC]">
+                    <li className="lg:mb-3 lg:mt-2.5 xl:mb-1.5 xl:mt-1">
+                        <a className="inline-flex self-center xl:self-start pr-3 pl-4 xl:pl-7 xl:pr-8 w-full hover:bg-[#858EDCFC]">
                             <BiCalendarEvent className="self-center"/>
                             <span className="self-center pl-2.5">
                                 Registered Events
@@ -57,8 +54,8 @@ const SideBar = () => {
                         </a>
                     </li>
 
-                    <li className="sm:mb-3 sm:mt-2.5 md:mb-1.5 md:mt-1">
-                        <a className="inline-flex pr-3 pl-4 md:pl-7 md:pr-8 w-full hover:bg-[#858EDCFC]">
+                    <li className="lg:mb-3 lg:mt-2.5 xl:mb-1.5 xl:mt-1">
+                        <a className="inline-flex pr-3 pl-4 xl:pl-7 xl:pr-8 w-full hover:bg-[#858EDCFC]">
                             <BiHeart className="self-center"/>
                             <span className="self-center pl-2.5">
                                 Interested Events
@@ -66,10 +63,10 @@ const SideBar = () => {
                         </a>
                     </li>
 
-                    <hr className="text-[#858282C7] h-0.5 bg-[#858282C7] m-2 md:m-5 lg:m-6 "/>
+                    <hr className="text-[#858282C7] h-0.5 bg-[#858282C7] m-2 xl:m-5 lg:m-6 "/>
 
-                    <li className="sm:mb-3 sm:mt-2.5 md:mb-1.5 md:mt-1">
-                        <button className="inline-flex text-sm lg:text-xl font-[649] pr-3 pl-4 md:pl-7 md:pr-8 w-full hover:bg-[#858EDCFC]">
+                    <li className="lg:mb-3 lg:mt-2.5 xl:mb-1.5 xl:mt-1">
+                        <button className="inline-flex text-sm xl:text-xl font-[649] pr-3 pl-4 xl:pl-7 xl:pr-8 w-full hover:bg-[#858EDCFC]">
                             <BiPowerOff className="self-center"/>
                             <span className="self-center pl-2.5">
                               Log Out
@@ -77,7 +74,7 @@ const SideBar = () => {
                         </button>
                     </li>
                     
-                    <hr className="text-[#858282C7] h-0.5 bg-[#858282C7] m-2 md:m-5 lg:m-6 "/>
+                    <hr className="text-[#858282C7] h-0.5 bg-[#858282C7] m-2 xl:m-5 lg:m-6 "/>
 
                 </ul>
             </div>
