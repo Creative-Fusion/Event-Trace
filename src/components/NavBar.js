@@ -68,7 +68,9 @@ export const NavBar = ({ loggedIn = false }) => {
 					<Link to="/events/2" className="nav-link">
 						Organizer dashboard
 					</Link>
-
+					<Link to="/events/3" className="nav-link">
+						UserHomeScreen
+					</Link>
 				</ul>
 				<div className="md:grow md:h-[60px]"></div>
 				{!loggedIn && (

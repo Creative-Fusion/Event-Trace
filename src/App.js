@@ -5,6 +5,7 @@ import { Home } from "./screens/home";
 import { CreateEvent } from "./screens/event/CreateEvent";
 import { EventDescription } from "./screens/event/eventDescription/EventDescription";
 import { OrganizerDescription } from "./screens/Organizer/Organizerdash";
+import { UserHomeScreen } from "./screens/event/eventcards";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
 						<Route path="/events/create" element={<CreateEvent />} />
 						<Route path="/events/1" element={<EventDescription />} />
 						<Route path="/events/2" element={<OrganizerDescription />} />
+						<Route path="/events/3" element={<UserHomeScreen />} />
 
 					</Routes>
 				</div>
