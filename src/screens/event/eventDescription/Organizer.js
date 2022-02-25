@@ -54,9 +54,9 @@ export const Organizer = ({ organizer }) => {
 	return (
 		<div className="md:w-4/6 w-9/12 mx-auto">
 			<div className="md:grid md:grid-cols-5 gap-10">
-				<div className="md:block flex col-span-2 order-last w-fit mx-auto items-center">
-					<div className="rounded-full w-40 aspect-square bg-secondary mx-auto md:my-8 mb-3">
-						<img
+				<div className="md:block col-span-2 order-last w-fit mx-auto items-center">
+					<div className="rounded-full w-92  aspect-square bg-secondary mx-auto md:my-8 mb-3">
+						<img className="w-full"
 							src={organizer.profileImage}
 							alt={organizer.name + "'s Profile Picture"}
 						/>
@@ -80,8 +80,7 @@ export const Organizer = ({ organizer }) => {
 					</div>
 				</div>
 				<div className="col-span-3">
-					<Container
-						content={
+					
 							<div className="text-left">
 								<h2>{organizer.name}</h2>
 								<div className="text-grey font-normal pt-2 pb-5">
@@ -110,8 +109,8 @@ export const Organizer = ({ organizer }) => {
 								</div>
 								<IconedInfoList list={contactLinks} />
 							</div>
-						}
-					/>
+						
+				
 				</div>
 			</div>
 			<div className="block xs:hidden text-left mt-4">

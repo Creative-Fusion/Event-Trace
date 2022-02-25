@@ -65,6 +65,10 @@ export const NavBar = ({ loggedIn = false }) => {
 					<Link to="/events/create" className="nav-link">
 						Create Event
 					</Link>
+					<Link to="/events/2" className="nav-link">
+						Organizer dashboard
+					</Link>
+
 				</ul>
 				<div className="md:grow md:h-[60px]"></div>
 				{!loggedIn && (
