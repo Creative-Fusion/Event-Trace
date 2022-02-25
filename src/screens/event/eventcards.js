@@ -2,6 +2,7 @@ import React from "react";
 import { Cards } from "../../components/eventcards";
 
 
+
 export const UserHomeScreen = () => {
 return(
     <div class = "h-96 w-screen">
