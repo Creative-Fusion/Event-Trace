@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { IconedInfoList } from "./IconedInfoList";
-import { Container } from "../../components/container";
 import {
 	BsFacebook,
 	BsInstagram,
@@ -14,6 +13,7 @@ import {
 } from "react-icons/bs";
 
 import { SiTiktok } from "react-icons/si";
+import { Cards } from "../../components/eventcards";
 
 export const OrganizerDescription = () => {
 	const [seeMore, setSeeMore] = useState(false);
@@ -78,24 +78,48 @@ const connectIcons = {
 
 	return (
 		<figure class="md:flex bg-slate-100 rounded-xl p-8 md:p-0 dark:bg-slate-800">
-		<div className="rounded-full w-40 h-50  aspect-square bg-secondary  md:my-8 mb-3">
+			<div classname = 'pt-6 pl-20 ml-20'>
+
+		<div className="rounded-full w-40 h-50  aspect-square bg-secondary  md:my-8 mx-12 mb-3">
+
 			<img
 				src={organizerdash.profileImage}
 				alt={organizerdash.name + "'s Profile Picture"}
 			/>
-		</div>
+			</div>
+		<div class = "flex mx-12">
+		<IconedInfoList list={contactLinks} />
 
-{/* <div className="md:w-4/6 w-9/12 pl-20"> */}
-{/* <div className="md:grid md:grid-cols-5 gap-10">
-	<div className="md:block col-span-2 order-last w-fit  items-left">
-</div>
-</div> */}
+		</div>
+		
+		<div className="xs:block hidden text-left  mt-3 mx-9">
+						<h5 className="pl-2">Connect via:</h5>
+						{organizerdash.connect.map((media) => (
+							<a
+								href={
+									media.url.includes("https://")
+										? media.url
+										: `https://${media.url}`
+								}
+								className="inline-block p-2"
+								target="_blank"
+								rel="noreferrer"
+							>
+								{connectIcons[media.media]}
+							</a>
+						))}
+					</div>
+		</div>
+	
+
   <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
+
 <div className="col-span-3">
-					<Container
-						content={
+
 							<div className="text-left">
+
 								<h2>{organizerdash.name}</h2>
+							
 								<div className="text-grey font-normal pt-2 pb-5">
 									{!seeMore && (
 										<p>
@@ -120,12 +144,18 @@ const connectIcons = {
 										</p>
 									)}
 								</div>
-								<IconedInfoList list={contactLinks} />
+							
 							</div>
-						}
-					/>
+					
 				</div>
 				</div>
+				{/* {/* <div class = "flex mx-9 mt-64 ml-2 mr-96" >
+	<Cards/>
+	</div> */}
+	<div class = "flex mx-3 mt-64 ml-2 mr-82" >
+	<Cards/>
+	</div>
+
 </figure>
 
 

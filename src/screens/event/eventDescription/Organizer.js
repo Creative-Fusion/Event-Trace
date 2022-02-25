@@ -80,7 +80,8 @@ export const Organizer = ({ organizer }) => {
 					</div>
 				</div>
 				<div className="col-span-3">
-					
+				<Container
+						content={
 							<div className="text-left">
 								<h2>{organizer.name}</h2>
 								<div className="text-grey font-normal pt-2 pb-5">
@@ -109,7 +110,8 @@ export const Organizer = ({ organizer }) => {
 								</div>
 								<IconedInfoList list={contactLinks} />
 							</div>
-						
+						}
+						/>
 				
 				</div>
 			</div>
