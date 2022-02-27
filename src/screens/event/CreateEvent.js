@@ -4,22 +4,10 @@ import { IoIosArrowDown } from "@react-icons/all-files/io/IoIosArrowDown";
 import { eventSchema } from "../../model/event";
 import { useDispatch } from "react-redux";
 import { createEvent } from "../../features/eventsSlice";
+import { categories } from "../../data/data";
 
 export const CreateEvent = () => {
 	const caption = "Create Your Own Event";
-	const availableCategories = [
-		"Adventure",
-		"Cosplay",
-		"Educational",
-		"Festival",
-		"History",
-		"Literature",
-		"Science",
-		"Social",
-		"Sports",
-		"Technology",
-		"Other",
-	];
 
 	const dispatch = useDispatch();
 
@@ -40,7 +28,7 @@ export const CreateEvent = () => {
 		newEvent.id = Date.now();
 		newEvent.name = name;
 		newEvent.type = type;
-		newEvent.categories = categories;
+		newEvent.categories = selectedCategories;
 		newEvent.eventLink = eventLink;
 		newEvent.location = { location: location };
 		newEvent.participantLimit = parseInt(participantLimit);
@@ -56,7 +44,7 @@ export const CreateEvent = () => {
 
 	const [name, setName] = useState("");
 	const [type, setType] = useState("Physical");
-	const [categories, setCategories] = useState([]);
+	const [selectedCategories, setCategories] = useState([]);
 	const [eventLink, setEventLink] = useState("");
 	const [location, setLocation] = useState("");
 	const [participantLimit, setParticipantLimit] = useState("");
@@ -135,7 +123,7 @@ export const CreateEvent = () => {
 								className="w-full hidden h-fit pt-2 mb-4 flex-wrap flex-row gap-2"
 								id="category-list"
 							>
-								{availableCategories.map((category) => {
+								{categories.map((category) => {
 									return (
 										<div key={category}>
 											<input
@@ -144,12 +132,12 @@ export const CreateEvent = () => {
 												id={category}
 												className="w-4 h-4 bg-gray-300 rounded border-none"
 												onClick={() => {
-													let newList = categories;
-													if (categories.includes(category))
+													let newList = selectedCategories;
+													if (selectedCategories.includes(category))
 														newList.splice(newList.indexOf(category), 1);
 													else newList.push(category);
 													setCategories(newList);
-													setCategoriesStr(categories.join(", "));
+													setCategoriesStr(selectedCategories.join(", "));
 												}}
 											/>
 											<label
@@ -267,7 +255,6 @@ export const CreateEvent = () => {
 
 				<button
 					className="filled-primary-btn justify-self-center mt-4"
-					// type="submit"
 					onClick={saveEvent}
 				>
 					Create Event

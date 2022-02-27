@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { FiClock } from "@react-icons/all-files/fi/FiClock";
 import { FiBookmark } from "@react-icons/all-files/fi/FiBookmark";
 import { BiCalendarStar } from "@react-icons/all-files/bi/BiCalendarStar";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { Container } from "../../../components/container";
-import { IconedInfoList } from "./IconedInfoList";
+import { IconedInfoList } from "../../../components/IconedInfoList";
+import { TrimmedText } from "../../../components/trimmedText";
 
 const CategoryTag = ({ category }) => {
 	return (
@@ -15,41 +16,13 @@ const CategoryTag = ({ category }) => {
 };
 
 export const About = ({ event }) => {
-	const [seeMore, setSeeMore] = useState(false);
-
-	const trimmedDescription =
-		event.description.length > 380
-			? `${event.description.slice(0, 380)}...`
-			: event.description;
-
 	return (
 		<div className="md:w-4/6 w-9/12 mx-auto">
 			<div className="md:grid md:grid-cols-5 lg:gap-20 gap-10">
 				<div className="col-span-3 text-left">
 					<h2>{event.name}</h2>
 					<div className="text-grey font-normal pt-2 pb-5">
-						{!seeMore && (
-							<p>
-								{trimmedDescription}{" "}
-								<span
-									className="text-blue-700 underline cursor-pointer"
-									onClick={() => setSeeMore(!seeMore)}
-								>
-									See More ↓
-								</span>
-							</p>
-						)}
-						{seeMore && (
-							<p>
-								{event.description}{" "}
-								<span
-									className="text-blue-700 underline cursor-pointer"
-									onClick={() => setSeeMore(!seeMore)}
-								>
-									See Less ↑
-								</span>
-							</p>
-						)}
+						<TrimmedText text={event.description} />
 					</div>
 					<IconedInfoList
 						list={[

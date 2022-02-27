@@ -7,7 +7,6 @@ import { EventDescription } from "./screens/event/eventDescription/EventDescript
 import { OrganizerDescription } from "./screens/Organizer/Organizerdash";
 import { UserHomeScreen } from "./screens/event/eventcards";
 
-
 function App() {
 	return (
 		<Router>
@@ -18,9 +17,14 @@ function App() {
 						<Route path="/" element={<Home />} />
 						<Route path="/events/create" element={<CreateEvent />} />
 						<Route path="/events/1" element={<EventDescription />} />
-						<Route path="/events/2" element={<OrganizerDescription />} />
+						<Route path="/organizer/1" element={<OrganizerDescription />} />
 						<Route path="/events/3" element={<UserHomeScreen />} />
-
+						<Route
+							path="*"
+							element={
+								<h2 className="w-full text-center">404: Page Not Found.</h2>
+							}
+						/>
 					</Routes>
 				</div>
 			</div>

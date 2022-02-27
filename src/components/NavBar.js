@@ -16,7 +16,7 @@ export const NavBar = ({ loggedIn = false }) => {
 	const name = "Jason Mark";
 
 	let [bmClass, setBMClass] = useState(
-		"hidden md:inline-flex md:flex-grow pl-10 items-center md:justify-between md:h-full h-[160px]"
+		"hidden md:inline-flex md:flex-grow pl-10 md:pb-0 pb-5 items-center md:justify-between h-fit"
 	);
 
 	let [umClass, setUMClass] = useState(
@@ -65,7 +65,7 @@ export const NavBar = ({ loggedIn = false }) => {
 					<Link to="/events/create" className="nav-link">
 						Create Event
 					</Link>
-					<Link to="/events/2" className="nav-link">
+					<Link to="/organizer/1" className="nav-link">
 						Organizer dashboard
 					</Link>
 					<Link to="/events/3" className="nav-link">

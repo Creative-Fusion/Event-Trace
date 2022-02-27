@@ -38,7 +38,7 @@ h5 {
 }
 
 p {
-	@apply leading-relaxed;
+	@apply leading-relaxed tracking-wide;
 }
 
 .btn {
