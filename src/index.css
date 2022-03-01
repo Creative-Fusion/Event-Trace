@@ -33,12 +33,16 @@ h2 {
 	@apply text-2xl font-bold;
 }
 
+h3 {
+	@apply text-xl font-semibold;
+}
+
 h5 {
 	@apply font-bold text-[#6C6C6C] text-lg;
 }
 
 p {
-	@apply leading-relaxed tracking-wide;
+	@apply text-grey font-normal leading-relaxed tracking-wide;
 }
 
 .btn {

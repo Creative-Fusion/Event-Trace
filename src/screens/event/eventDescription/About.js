@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiClock } from "@react-icons/all-files/fi/FiClock";
-import { FiBookmark } from "@react-icons/all-files/fi/FiBookmark";
 import { BiCalendarStar } from "@react-icons/all-files/bi/BiCalendarStar";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { Container } from "../../../components/container";
 import { IconedInfoList } from "../../../components/IconedInfoList";
 import { TrimmedText } from "../../../components/trimmedText";
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { Badge } from "../../../components/Badge";
 
 const CategoryTag = ({ category }) => {
 	return (
@@ -16,12 +17,19 @@ const CategoryTag = ({ category }) => {
 };
 
 export const About = ({ event }) => {
+	const [interested, setInterested] = useState(false);
+
 	return (
 		<div className="md:w-4/6 w-9/12 mx-auto">
 			<div className="md:grid md:grid-cols-5 lg:gap-20 gap-10">
 				<div className="col-span-3 text-left">
-					<h2>{event.name}</h2>
-					<div className="text-grey font-normal pt-2 pb-5">
+					<h2 className="inline pr-3">{event.name}</h2>
+					<span className="inline-block">
+						{event.type === "Virtual" && (
+							<Badge text="virtual" bgColor="bg-green-700" absolute={false} />
+						)}
+					</span>
+					<div className="pt-2 pb-5">
 						<TrimmedText text={event.description} />
 					</div>
 					<IconedInfoList
@@ -57,10 +65,14 @@ export const About = ({ event }) => {
 										{!event.fee && <p>Free</p>}
 										<hr className="bg-gradient-to-r border-2 from-[#FBFBFB] via-[#6C6C6C] to-[#FBFBFB]" />
 									</div>
-									<button className="flex items-center place-content-center outlined-primary-btn w-full mt-4 mb-2">
+									<button
+										className="flex items-center place-content-center outlined-primary-btn w-full mt-4 mb-2"
+										onClick={() => setInterested(!interested)}
+									>
 										Add to Favourites{" "}
-										<span>
-											<FiBookmark className="w-5 h-5 pl-1" />
+										<span className="pl-1">
+											{!interested && <BsBookmark className="w-5 h-5" />}
+											{interested && <BsBookmarkFill className="w-5 h-5" />}
 										</span>
 									</button>
 									<button className="filled-primary-btn w-full">

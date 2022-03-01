@@ -16,7 +16,7 @@ export const NavBar = ({ loggedIn = false }) => {
 	const name = "Jason Mark";
 
 	let [bmClass, setBMClass] = useState(
-		"hidden md:inline-flex md:flex-grow pl-10 md:pb-0 pb-5 items-center md:justify-between h-fit"
+		"hidden md:inline-flex md:flex-grow pl-10 md:pb-0 pb-5 items-center md:justify-between text-center h-fit"
 	);
 
 	let [umClass, setUMClass] = useState(
@@ -54,7 +54,7 @@ export const NavBar = ({ loggedIn = false }) => {
 				</div>
 			</div>
 			<div className={bmClass} id="nav-menu">
-				<ul className="nav-items flex flex-col items-end md:flex-row md:items-start md:flex-none ">
+				<ul className="nav-items flex flex-col items-end md:flex-row md:items-start md:flex-none">
 					<Link to="/" className="nav-link">
 						Home
 					</Link>

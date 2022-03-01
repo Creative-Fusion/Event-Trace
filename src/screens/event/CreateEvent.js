@@ -60,11 +60,13 @@ export const CreateEvent = () => {
 			<div className="lg:w-full lg:h-full h-0 w-0 flex p-6 order-last">
 				<div className="my-auto">
 					<img src={EventImage} alt={caption} className="w-[95%] mx-auto" />
-					<h3 className="text-3xl font-bold text-primary pt-5">{caption}</h3>
+					<h3 className="text-3xl font-bold text-center text-primary pt-5">
+						{caption}
+					</h3>
 				</div>
 			</div>
 
-			<form className="w-full lg:max-width-xl pl-16 lg:pr-0 pr-16 my-8">
+			<form className="w-full lg:max-width-xl pl-16 lg:pr-0 pr-16 my-8 text-center">
 				<div className="text-left w-full">
 					<h2 className="mb-6 -mx-2">Create an Event</h2>
 					<div className="flex flex-wrap -mx-5 mb-1 sm:mb-2">

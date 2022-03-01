@@ -1,36 +1,15 @@
 import React from "react";
-
+import { EventCard } from "../components/eventcard";
+import { fakeEventList } from "../data/fakeDB";
 export const Home = () => {
+	const eventList = fakeEventList;
 	return (
-		<div className="grid grid-cols-2 w-screen">
-			<header className="App-header">
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</a>
-				<span className="bg-gray-200">EventTrace Checked</span>
-			</header>
-			<header className="App-header">
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</a>
-				<span className="bg-gray-200">EventTrace Checked</span>
-			</header>
+		<div className="w-5/6 my-5 mx-auto">
+			<div className="flex flex-wrap justify-start">
+				{eventList.map((event) => (
+					<EventCard event={event} key={event.name} />
+				))}
+			</div>
 		</div>
 	);
 };
