@@ -1,0 +1,33 @@
+[
+        {
+            "id": "1",
+            "name": "KU Hackfest 2021",
+            "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat corrupti accusantium, aliquam numquam rem consectetur, maiores hic quos obcaecati adipisci enim. Doloribus magnam quae praesentium natus. Beatae dolor non placeat?",
+            "location": "Dhulikhel, Nepal",
+            "categories": "Online",
+            "date": "Jan 30 2021",
+            "day": "Friday"
+        },
+
+        {
+            "id": "2",
+            "name": "Python Workshop",
+            "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat corrupti accusantium, aliquam numquam rem consectetur, maiores hic quos obcaecati adipisci enim. Doloribus magnam quae praesentium natus. Beatae dolor non placeat?",
+            "location": "Dhulikhel, Nepal",
+            "categories": "Online",
+            "date": "Jan 30 2021",
+            "day": "Friday"
+        },
+
+        {
+            "id": "3",
+            "name": "Music Festival",
+            "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat corrupti accusantium, aliquam numquam rem consectetur, maiores hic quos obcaecati adipisci enim. Doloribus magnam quae praesentium natus. Beatae dolor non placeat?",
+            "location": "Dhulikhel, Nepal",
+            "categories": "Entertainment",
+            "date": "Jan 30 2021",
+            "day": "Friday"
+        }
+        
+        
+]

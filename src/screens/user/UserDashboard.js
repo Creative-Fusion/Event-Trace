@@ -1,7 +1,7 @@
-import EventList from "../../components/EventList";
 import SideBar from "../../components/SideBar";
+import Events from "../../dummy data/events.json";
 import user from "../../dummy data/user";
-import UserProfile from "./UserProfile";
+import UserEvents from "./UserEvents";
 
 
 
@@ -19,7 +19,7 @@ const Userdashboard = () => {
                 </div> */}
 
                 <div className="grow">
-                    <EventList/>
+                    <UserEvents events = {Events}/>
                 </div>
                 
             </div>
