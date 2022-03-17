@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import EventImage from "../../app-images/event1.png";
 import { IoIosArrowDown } from "@react-icons/all-files/io/IoIosArrowDown";
 import { eventSchema } from "../../model/event";
+import { EventRequest, EVENT_REQUESTS } from "../../request/eventRequest";
 import { useDispatch } from "react-redux";
-import { createEvent } from "../../features/eventsSlice";
-
+import { createEvent } from "../../redux/actions/eventActions";
 export const CreateEvent = () => {
 	const caption = "Create Your Own Event";
+	const dispatch = useDispatch();
+
 	const availableCategories = [
 		"Adventure",
 		"Cosplay",
@@ -20,8 +22,6 @@ export const CreateEvent = () => {
 		"Technology",
 		"Other",
 	];
-
-	const dispatch = useDispatch();
 
 	const showCategoryList = () => {
 		const hiddenData = document.querySelector("#category-list");
@@ -50,11 +50,14 @@ export const CreateEvent = () => {
 			startTime: startTime,
 			endTime: endTime,
 		};
-
-		dispatch(createEvent({ newEvent }));
+		EventRequest(EVENT_REQUESTS.CREATE_EVENT, { data: newEvent }).then(
+			(createdEvent) => {
+				dispatch(createEvent(createdEvent));
+			}
+		);
 	};
 
-	const [name, setName] = useState("");
+	const [name, setName] = useState("KU HACKFEST 2021");
 	const [type, setType] = useState("Physical");
 	const [categories, setCategories] = useState([]);
 	const [eventLink, setEventLink] = useState("");
@@ -69,14 +72,14 @@ export const CreateEvent = () => {
 
 	return (
 		<div className="lg:grid lg:grid-cols-2 w-screen mx-8 my-4">
-			<div className="lg:w-full lg:h-full h-0 w-0 flex p-6 order-last">
+			<div className="lg:w-full lg:h-full hidden lg:flex p-6 order-last">
 				<div className="my-auto">
 					<img src={EventImage} alt={caption} className="w-[95%] mx-auto" />
 					<h3 className="text-3xl font-bold text-primary pt-5">{caption}</h3>
 				</div>
 			</div>
 
-			<form className="w-full lg:max-width-xl pl-16 lg:pr-0 pr-16 my-8">
+			<div className="w-full lg:max-width-xl px-6 xs:px-16 lg:pr-0 my-8 pb-4 shrink">
 				<div className="text-left w-full">
 					<h2 className="mb-6 -mx-2">Create an Event</h2>
 					<div className="flex flex-wrap -mx-5 mb-1 sm:mb-2">
@@ -267,12 +270,11 @@ export const CreateEvent = () => {
 
 				<button
 					className="filled-primary-btn justify-self-center mt-4"
-					// type="submit"
-					onClick={saveEvent}
+					onClick={() => saveEvent()}
 				>
 					Create Event
 				</button>
-			</form>
+			</div>
 		</div>
 	);
 };
