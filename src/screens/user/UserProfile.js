@@ -2,6 +2,11 @@ import { IoLocationOutline } from "@react-icons/all-files/io5/IoLocationOutline"
 import { MdEdit } from "@react-icons/all-files/md/MdEdit";
 
 const UserProfile = () => {
+
+    const user = {
+        name: "Shreya Shrestha"
+    }
+    
     const name = "John Williams";
     const email = "johnwilliam@gmail.com";
     const contactNo = "+977 9861252346"
@@ -19,7 +24,7 @@ const UserProfile = () => {
                         </div>
                         <div className="flex flex-col items-start justify-start">
                             <div className="pt-1 lg:text-[24px] text-[18px] font-bold whitespace-nowrap text-black">
-                                { name }
+                                { user.name }
                             </div>
                             <div className="lg:pt-2.5 pt-1.5 lg:text-[18px] text-[14px] font-semibold whitespace-nowrap text-[#0A1C5CA3]">
                                 { email }
