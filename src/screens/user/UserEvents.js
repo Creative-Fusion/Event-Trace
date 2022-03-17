@@ -2,11 +2,13 @@ import EventList from "../../components/EventList"
 
 const UserEvents = ({events}) => {
 
+
     return ( 
-        <div>
-            { events.map( (events)=>{
+        <div className="mx-28">
+            { events.map( (events, index)=>{
+
                 return (
-                    <EventList events = {events} key={events.id}/>
+                    <EventList events = {events} key={events.id} index={index}/>
                 )
             }) }
         </div>
