@@ -5,19 +5,16 @@ import { BiHeart } from "@react-icons/all-files/bi/BiHeart"
 import { BiPowerOff } from "@react-icons/all-files/bi/BiPowerOff"; 
 
 
-const SideBar = () => {
+const SideBar = ( {user} ) => {
 
-    const userImage = "https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=212"
-    const userName = "John William";
-    
     return ( 
         <aside className="hidden lg:block lg:float-left lg:w-auto lg:bg-[#BCBBE57D] lg:fixed lg:h-full lg:pt-2">
             
             <div className="m-8 flex flex-col items-center justify-center">
                 <div>
-                    <img src={ userImage } alt="User Profile" className="self-center rounded-full h-20 w-20 xl:h-24 xl:w-24 flex items-center justify-center bg-slate-500"/>
+                    <img src={ user.userImage } alt="User Profile" className="self-center rounded-full h-20 w-20 xl:h-24 xl:w-24 flex items-center justify-center bg-slate-500"/>
                 </div>
-                <div className="block mt-3 text-sm xl:text-lg lg:text-sm lg:font-medium text-[#0A1C5CBF]">{ userName }</div>
+                <div className="block mt-3 text-sm xl:text-lg lg:text-sm lg:font-medium text-[#0A1C5CBF]">{ user.name }</div>
             </div>
 
 

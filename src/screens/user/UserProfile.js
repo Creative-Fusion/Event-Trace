@@ -1,18 +1,7 @@
 import { IoLocationOutline } from "@react-icons/all-files/io5/IoLocationOutline";
 import { MdEdit } from "@react-icons/all-files/md/MdEdit";
 
-const UserProfile = () => {
-
-    const user = {
-        name: "Shreya Shrestha"
-    }
-    
-    const name = "John Williams";
-    const email = "johnwilliam@gmail.com";
-    const contactNo = "+977 9861252346"
-    const address = "Kathmandu, Nepal";
-    const gender = "Male";
-    const userImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_d3SP2vKOeGFVESn5rk6xnPiQ0naW2e-ldA&usqp=CAU"; 
+const UserProfile = ({ user }) => {
 
     return ( 
         <div className="flex flex-col xl:items-center xl:justify-center lg:items-start lg:justify-start items-center justify-center w-full">
@@ -20,19 +9,19 @@ const UserProfile = () => {
                 <div className="flex flex-row w-full justify-between">
                     <div className="flex sm:w-auto w-full">
                         <div className="sm:w-auto lg:pr-16 pr-10">
-                            <img src={userImage} className="w-[5rem] h-[5rem] lg:w-[9.5rem] lg:h-[9.5rem]" alt="" />
+                            <img src={user.userImage} className="w-[5rem] h-[5rem] lg:w-[9.5rem] lg:h-[9.5rem]" alt="" />
                         </div>
                         <div className="flex flex-col items-start justify-start">
                             <div className="pt-1 lg:text-[24px] text-[18px] font-bold whitespace-nowrap text-black">
                                 { user.name }
                             </div>
                             <div className="lg:pt-2.5 pt-1.5 lg:text-[18px] text-[14px] font-semibold whitespace-nowrap text-[#0A1C5CA3]">
-                                { email }
+                                { user.email }
                             </div>
                             <div className="pt-2.5 flex lg:text-[16px] text-[12px] font-regular text-black">
                                 <IoLocationOutline className="self-center" />
                                 <span className="px-1.5">
-                                    {address}
+                                    {user.address}
                                 </span>
                             </div>
                             <div className="hidden lg:block lg:mt-4 mt-2 md:p-0.5 md:w-24 w-20 rounded-md drop-shadow-lg bg-[#108B50]">
@@ -72,16 +61,16 @@ const UserProfile = () => {
                     </div>
                     <div className=" flex flex-col md:text-[16px] text-[14px] font-medium items-start justify-start pt-5 text-[#00040EA3]">
                         <div className="pb-5">
-                            {email}
+                            {user.email}
                         </div>
                         <div className="pb-5">
-                            {contactNo}
+                            {user.contactNo}
                         </div>
                         <div className="pb-5">
-                            {address}
+                            {user.address}
                         </div>
                         <div className="pb-5">
-                            {gender}
+                            {user.gender}
                         </div>
                     </div>
                 </div>
