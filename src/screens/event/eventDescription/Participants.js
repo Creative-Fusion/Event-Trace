@@ -2,9 +2,26 @@ import React from "react";
 
 export const Participants = () => {
 	return (
-		<div className="drop-shadow-md" h-80 w-80 ml-64>
-            <h2>"ParticipantsList"</h2>
-<table class="table-auto p-4 bg-white shadow rounded-lg ml-72">
+        <div class= " w-auto h-96   p-4 bg-white shadow rounded-lg ml-72 mr-72 ">
+            <div class = "text-left ml-2" >
+                <h2> Participantlist</h2>
+            </div>
+           
+                <select class="block-justify-center w-40 text-gray-800  border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 " >
+    <option value="">
+        name
+    </option>
+    <option value="dog">
+        Dog
+    </option>
+    <option value="cat">
+        Cat
+    </option>
+  
+</select>    
+     
+
+<table class="table-auto p-4 bg-white shadow rounded-lg ml-2  mb-12">
     <thead>
         <tr>
             <th class="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
@@ -126,5 +143,6 @@ export const Participants = () => {
     </tbody>
 </table>
 </div>
+// </div>
 	);
 };
