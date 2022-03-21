@@ -4,24 +4,12 @@ import { IoIosArrowDown } from "@react-icons/all-files/io/IoIosArrowDown";
 import { eventSchema } from "../../model/event";
 import { EventRequest, EVENT_REQUESTS } from "../../request/eventRequest";
 import { useDispatch } from "react-redux";
-import { createEvent } from "../../redux/actions/eventActions";
+import { categories } from "../../data/data";
+import { createEvent as create } from "../../redux/actions/eventActions";
+
 export const CreateEvent = () => {
 	const caption = "Create Your Own Event";
 	const dispatch = useDispatch();
-
-	const availableCategories = [
-		"Adventure",
-		"Cosplay",
-		"Educational",
-		"Festival",
-		"History",
-		"Literature",
-		"Science",
-		"Social",
-		"Sports",
-		"Technology",
-		"Other",
-	];
 
 	const showCategoryList = () => {
 		const hiddenData = document.querySelector("#category-list");
@@ -40,7 +28,7 @@ export const CreateEvent = () => {
 		newEvent.id = Date.now();
 		newEvent.name = name;
 		newEvent.type = type;
-		newEvent.categories = categories;
+		newEvent.categories = selectedCategories;
 		newEvent.eventLink = eventLink;
 		newEvent.location = { location: location };
 		newEvent.participantLimit = parseInt(participantLimit);
@@ -52,14 +40,14 @@ export const CreateEvent = () => {
 		};
 		EventRequest(EVENT_REQUESTS.CREATE_EVENT, { data: newEvent }).then(
 			(createdEvent) => {
-				dispatch(createEvent(createdEvent));
+				dispatch(create(createdEvent));
 			}
 		);
 	};
 
 	const [name, setName] = useState("KU HACKFEST 2021");
 	const [type, setType] = useState("Physical");
-	const [categories, setCategories] = useState([]);
+	const [selectedCategories, setCategories] = useState([]);
 	const [eventLink, setEventLink] = useState("");
 	const [location, setLocation] = useState("");
 	const [participantLimit, setParticipantLimit] = useState("");
@@ -75,11 +63,13 @@ export const CreateEvent = () => {
 			<div className="lg:w-full lg:h-full hidden lg:flex p-6 order-last">
 				<div className="my-auto">
 					<img src={EventImage} alt={caption} className="w-[95%] mx-auto" />
-					<h3 className="text-3xl font-bold text-primary pt-5">{caption}</h3>
+					<h3 className="text-3xl font-bold text-center text-primary pt-5">
+						{caption}
+					</h3>
 				</div>
 			</div>
 
-			<div className="w-full lg:max-width-xl px-6 xs:px-16 lg:pr-0 my-8 pb-4 shrink">
+			<div className="w-full lg:max-width-xl pl-16 lg:pr-0 pr-16 my-8 text-center">
 				<div className="text-left w-full">
 					<h2 className="mb-6 -mx-2">Create an Event</h2>
 					<div className="flex flex-wrap -mx-5 mb-1 sm:mb-2">
@@ -138,7 +128,7 @@ export const CreateEvent = () => {
 								className="w-full hidden h-fit pt-2 mb-4 flex-wrap flex-row gap-2"
 								id="category-list"
 							>
-								{availableCategories.map((category) => {
+								{categories.map((category) => {
 									return (
 										<div key={category}>
 											<input
@@ -147,12 +137,12 @@ export const CreateEvent = () => {
 												id={category}
 												className="w-4 h-4 bg-gray-300 rounded border-none"
 												onClick={() => {
-													let newList = categories;
-													if (categories.includes(category))
+													let newList = selectedCategories;
+													if (selectedCategories.includes(category))
 														newList.splice(newList.indexOf(category), 1);
 													else newList.push(category);
 													setCategories(newList);
-													setCategoriesStr(categories.join(", "));
+													setCategoriesStr(selectedCategories.join(", "));
 												}}
 											/>
 											<label
@@ -270,7 +260,7 @@ export const CreateEvent = () => {
 
 				<button
 					className="filled-primary-btn justify-self-center mt-4"
-					onClick={() => saveEvent()}
+					onClick={saveEvent}
 				>
 					Create Event
 				</button>
