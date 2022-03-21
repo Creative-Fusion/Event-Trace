@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import EventImage from "../../app-images/event1.png";
 import { IoIosArrowDown } from "@react-icons/all-files/io/IoIosArrowDown";
 import { eventSchema } from "../../model/event";
-import { EventRequest, EVENT_REQUESTS } from "../../request/eventRequest";
+import { EventRequest } from "../../request/eventRequest";
 import { useDispatch } from "react-redux";
 import { createEvent } from "../../redux/actions/eventActions";
+import { ActionTypes } from "../../redux/constants/actionTypes";
 export const CreateEvent = () => {
 	const caption = "Create Your Own Event";
 	const dispatch = useDispatch();
@@ -50,14 +51,14 @@ export const CreateEvent = () => {
 			startTime: startTime,
 			endTime: endTime,
 		};
-		EventRequest(EVENT_REQUESTS.CREATE_EVENT, { data: newEvent }).then(
+		EventRequest(ActionTypes.EVENT.CREATE_EVENT, { data: newEvent }).then(
 			(createdEvent) => {
 				dispatch(createEvent(createdEvent));
 			}
 		);
 	};
 
-	const [name, setName] = useState("KU HACKFEST 2021");
+	const [name, setName] = useState("");
 	const [type, setType] = useState("Physical");
 	const [categories, setCategories] = useState([]);
 	const [eventLink, setEventLink] = useState("");

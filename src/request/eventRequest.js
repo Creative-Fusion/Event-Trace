@@ -1,15 +1,15 @@
+import { ActionTypes } from "../redux/constants/actionTypes";
 import { REQUEST, request } from "./axios";
-export const EVENT_REQUESTS = {
-	CREATE_EVENT: "CREATE_EVENT",
-	ALL_EVENTS: "ALL_EVENTS",
-};
 
-export const EventRequest = async (requestType, { data }) => {
+/** If no data is to be passed, send an empty object
+ * Example: EventRequest(ActionTypes.EVENT.ALL_EVENTS, {data: {} });
+ * */
+export const EventRequest = async (actionType, { data }) => {
 	const initial = "events";
-	switch (requestType) {
-		case EVENT_REQUESTS.ALL_EVENTS:
+	switch (actionType) {
+		case ActionTypes.EVENT.ALL_EVENTS:
 			return await request(REQUEST.GET, { url: `${initial}` });
-		case EVENT_REQUESTS.CREATE_EVENT:
+		case ActionTypes.EVENT.CREATE_EVENT:
 			return await request(REQUEST.POST, {
 				url: `${initial}/create`,
 				data: !data ? {} : data,

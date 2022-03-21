@@ -26,25 +26,3 @@ export const eventSchema = {
 	},
 	soldTickets: [String],
 };
-
-// class EventSchema{
-// 	String id;
-
-// 	constructor({
-// 		id,
-// 	name,
-// 	desription,
-// 	coverImage,
-// 	categories,
-// 	type,
-// 	participantLimit,
-// 	dateTime,
-// 	location,
-// 	eventLink,
-// 	publish,
-// 	creator,
-// 	}){
-// 		id = id;
-
-// 	}
-// }
