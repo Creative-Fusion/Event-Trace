@@ -16,3 +16,5 @@ export const eventReducer = (state = initialState, { type, payload }) => {
 			return state;
 	}
 };
+
+export const getAllEvents = (state) => state.events;

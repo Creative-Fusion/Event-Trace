@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import EventImage from "../../app-images/event1.png";
 import { IoIosArrowDown } from "@react-icons/all-files/io/IoIosArrowDown";
 import { eventSchema } from "../../model/event";
-import { EventRequest, EVENT_REQUESTS } from "../../request/eventRequest";
+import { EventRequest } from "../../request/eventRequest";
 import { useDispatch } from "react-redux";
 import { categories } from "../../data/data";
 import { createEvent as create } from "../../redux/actions/eventActions";
+import { ActionTypes } from "../../redux/constants/actionTypes";
 
 export const CreateEvent = () => {
 	const caption = "Create Your Own Event";
@@ -37,7 +38,7 @@ export const CreateEvent = () => {
 			startTime: startTime,
 			endTime: endTime,
 		};
-		EventRequest(EVENT_REQUESTS.CREATE_EVENT, { data: newEvent }).then(
+		EventRequest(ActionTypes.EVENT.CREATE_EVENT, { data: newEvent }).then(
 			(createdEvent) => {
 				dispatch(create(createdEvent));
 			}
