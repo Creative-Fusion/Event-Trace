@@ -5,6 +5,7 @@ import { CreateEvent } from "./screens/event/CreateEvent";
 import { EventDescription } from "./screens/event/eventDescription/EventDescription";
 import { OrganizerDescription } from "./screens/Organizer/Organizerdash";
 import { HomeScreen } from "./screens/event/HomeScreen";
+import Userdashboard from "./screens/user/UserDashboard";
 
 export const EventTraceRouter = () => {
 	return (
@@ -14,6 +15,7 @@ export const EventTraceRouter = () => {
 
 			{/* USER */}
 			<Route path="u/home" element={<HomeScreen />} />
+			<Route path="u/id" element={<Userdashboard />} />
 
 			{/* EVENTS */}
 			<Route path="events" element={<Home />} />

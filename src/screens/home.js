@@ -1,7 +1,6 @@
 import React from "react";
 import { EventCard } from "../components/eventcard";
 import { fakeEventList } from "../data/fakeDB";
-import Link from "react-router-dom";
 
 export const Home = () => {
 	const eventList = fakeEventList;

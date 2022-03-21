@@ -25,7 +25,6 @@ export const CreateEvent = () => {
 
 	const saveEvent = () => {
 		const newEvent = eventSchema;
-		newEvent.id = Date.now();
 		newEvent.name = name;
 		newEvent.type = type;
 		newEvent.categories = selectedCategories;
@@ -45,7 +44,7 @@ export const CreateEvent = () => {
 		);
 	};
 
-	const [name, setName] = useState("KU HACKFEST 2021");
+	const [name, setName] = useState("");
 	const [type, setType] = useState("Physical");
 	const [selectedCategories, setCategories] = useState([]);
 	const [eventLink, setEventLink] = useState("");
