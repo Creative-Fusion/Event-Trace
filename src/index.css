@@ -29,6 +29,10 @@ h6 {
 	@apply tracking-wider;
 }
 
+h1 {
+	@apply text-2xl font-bold uppercase;
+}
+
 h2 {
 	@apply text-2xl font-bold;
 }
@@ -62,7 +66,7 @@ p {
 }
 
 .App .content {
-	@apply absolute flex h-full w-screen top-[60px];
+	@apply h-full w-full mt-[60px];
 }
 
 /* Navbar */
@@ -71,7 +75,7 @@ nav {
 }
 
 .nav-items .nav-link {
-	@apply md:px-4 px-6 md:py-0 py-2 h-full font-semibold text-base text-grey hover:text-primary hover:font-bold;
+	@apply md:px-4 px-6 md:py-0 py-2 h-full font-semibold md:text-base text-grey hover:text-primary hover:font-bold;
 }
 
 .nav-menu-text {

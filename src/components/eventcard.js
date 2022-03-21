@@ -9,12 +9,12 @@ export const EventCard = ({ event }) => {
 	const [interested, setInterested] = useState(false);
 
 	return (
-		<div className="shadow-lg max-w-xs rounded-sm overflow-hidden mx-8 my-5 shrink">
+		<div className="shadow-lg max-w-xs rounded-sm overflow-hidden mx-8 my-5 shrink hover:shadow-2xl ease-out-transition">
 			<div className="relative">
 				<img
 					src={event.coverImage}
 					alt={event.name + "'s Cover Image"}
-					className="h-52 object-cover"
+					className="h-52 object-cover cursor-pointer"
 					onClick={() => navigate("/events/1")}
 				/>
 				<Badge text="2 days" />
@@ -27,7 +27,7 @@ export const EventCard = ({ event }) => {
 					/>
 				)}
 				<div
-					className="absolute rounded-full w-10 h-10 flex items-center justify-center bg-white shadow-md text-primary -bottom-5 right-5 z-50"
+					className="absolute rounded-full w-10 h-10 flex items-center justify-center bg-white shadow-md text-primary -bottom-5 right-5 z-1 cursor-pointer"
 					onClick={() => setInterested(!interested)}
 				>
 					{!interested && <BsBookmark className="w-5 h-5" />}
@@ -35,8 +35,10 @@ export const EventCard = ({ event }) => {
 				</div>
 			</div>
 			<div className="px-4 py-2">
-				<div className="text-left" onClick={() => navigate("/events/1")}>
-					<h3>{event.name}</h3>
+				<div className="text-left">
+					<h3 className="cursor-pointer" onClick={() => navigate("/events/1")}>
+						{event.name}
+					</h3>
 					<p>{event.dateTime.startDate}</p>
 					{event.type === "Physical" && <p>{event.location.location}</p>}
 					{event.type === "Virtual" && <p>{event.eventLink}</p>}
@@ -46,7 +48,7 @@ export const EventCard = ({ event }) => {
 				{event.categories.slice(0, 3).map((category) => {
 					return (
 						<div
-							className="w-fit snap-start bg-secondary text-primary rounded-full py-1 px-3 text-sm font-semibold mr-2"
+							className="w-fit snap-start bg-secondary text-primary rounded-full py-1 px-3 text-sm font-semibold mr-2 hover:cursor-default"
 							key={category}
 						>
 							{category}

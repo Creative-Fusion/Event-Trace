@@ -1,76 +1,67 @@
 import React, { useState } from "react";
 import Brand from "./Brand";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 // Icons
-import { FaBars } from "@react-icons/all-files/fa/FaBars";
-import { FaBell } from "@react-icons/all-files/fa/FaBell";
-import { FaUserCircle } from "@react-icons/all-files/fa/FaUserCircle";
-import { IoIosArrowDown } from "@react-icons/all-files/io/IoIosArrowDown";
-import { IoSettingsOutline } from "@react-icons/all-files/io5/IoSettingsOutline";
-import { BiCalendarCheck } from "@react-icons/all-files/bi/BiCalendarCheck";
-import { BiCalendarHeart } from "@react-icons/all-files/bi/BiCalendarHeart";
-import { IoIosLogOut } from "@react-icons/all-files/io/IoIosLogOut";
+import { FaBars, FaBell, FaUserCircle } from "react-icons/fa";
+import {
+	IoSettingsOutline,
+	IoLogOutOutline,
+	IoCaretDown,
+} from "react-icons/io5";
+import { BiCalendarCheck, BiCalendarHeart } from "react-icons/bi";
+import { MdHome, MdEvent, MdAddCircleOutline } from "react-icons/md";
 
 export const NavBar = ({ loggedIn = false }) => {
 	const name = "Jason Mark";
 
-	let [bmClass, setBMClass] = useState(
-		"hidden md:inline-flex md:flex-grow pl-10 md:pb-0 pb-5 items-center md:justify-between text-center h-fit"
-	);
+	let [bmHidden, setBMHidden] = useState(true);
+	let [umHidden, setUMHidden] = useState(true);
 
-	let [umClass, setUMClass] = useState(
-		"hidden absolute z-1 w-fit bg-white opacity-75 rounded h-fit p-3  top-16 right-8"
-	);
-
-	const showUserMenu = () => {
-		console.log(umClass.includes("hidden"));
-		if (umClass.includes("hidden ")) {
-			setUMClass(umClass.replace("hidden ", ""));
-		} else {
-			setUMClass("hidden " + umClass);
-		}
-	};
-
-	const showBurgerMenu = () => {
-		if (bmClass.includes("hidden ")) {
-			setBMClass(bmClass.replace("hidden ", ""));
-		} else {
-			setBMClass("hidden " + bmClass);
-		}
-	};
+	const activeNav = ({ isActive }) => ({
+		color: isActive ? "#5B4DFF" : "black",
+		fontWeight: isActive ? "bold" : "600",
+	});
 
 	return (
-		<nav className="fixed flex md:flex-row flex-col w-full md:items-center md:justify-start px-8 justify-between ">
+		<nav className="fixed top-0 flex md:flex-row flex-col w-full md:items-center md:justify-start px-8 justify-between ">
 			<div className="flex flex-row justify-between h-full">
 				<Brand />
 				<div className="inline-flex md:hidden self-center h-[60px]">
 					<Link to={"/"} className="mr-3 self-center">
 						<FaUserCircle className="nav-icon group-hover:text-gray-500" />
 					</Link>
-					<button id="burger" onClick={showBurgerMenu}>
+					<button onClick={() => setBMHidden(!bmHidden)}>
 						<FaBars className="nav-icon" />
 					</button>
 				</div>
 			</div>
-			<div className={bmClass} id="nav-menu">
+			<div
+				className={`${
+					bmHidden ? "hidden" : ""
+				} md:inline-flex md:flex-grow pl-10 md:pb-0 pb-5 items-center md:justify-between text-center h-fit`}
+			>
 				<ul className="nav-items flex flex-col items-end md:flex-row md:items-start md:flex-none">
-					<Link to="/" className="nav-link">
-						Home
-					</Link>
+					<NavLink to="/" style={activeNav} className="nav-link">
+						<span className="pr-3">Home</span>
+						<MdHome className="md:hidden inline-block align-middle h-5 w-5 " />
+					</NavLink>
 					{/* //TODO: Add Navigations */}
-					<Link to="/events/1" className="nav-link">
-						Events
-					</Link>
-					<Link to="/events/create" className="nav-link">
-						Create Event
-					</Link>
-					<Link to="/organizer/1" className="nav-link">
+					<NavLink to="/events/1" style={activeNav} className="nav-link">
+						<span className="pr-3">Events</span>
+						<MdEvent className="md:hidden inline-block align-middle h-5 w-5" />
+					</NavLink>
+					<NavLink to="/events/create" style={activeNav} className="nav-link">
+						<span className="pr-3">Create Event</span>
+						<MdAddCircleOutline className="md:hidden inline-block align-middle h-5 w-5" />
+					</NavLink>
+					{/* TODO: Remove these two nav links */}
+					<NavLink to="/organizer/1" style={activeNav} className="nav-link">
 						Organizer dashboard
-					</Link>
-					<Link to="/events/3" className="nav-link">
+					</NavLink>
+					<NavLink to="/events/3" style={activeNav} className="nav-link">
 						UserHomeScreen
-					</Link>
+					</NavLink>
 				</ul>
 				<div className="md:grow md:h-[60px]"></div>
 				{!loggedIn && (
@@ -85,7 +76,7 @@ export const NavBar = ({ loggedIn = false }) => {
 						</button>
 						<button
 							className="ml-4 flex items-center group"
-							onClick={() => showUserMenu()}
+							onClick={() => setUMHidden(!umHidden)}
 						>
 							<FaUserCircle className="nav-icon group-hover:text-gray-500" />
 							<span className="px-1.5 nav-menu-text group-hover:text-gray-500">
@@ -96,10 +87,14 @@ export const NavBar = ({ loggedIn = false }) => {
 								<IoIosArrowUp className="nav-icon group-hover:text-gray-500" />
 							)}
 							{checkUserMenuHidden && ( */}
-							<IoIosArrowDown className="nav-icon group-hover:text-gray-500" />
+							<IoCaretDown className="nav-icon group-hover:text-gray-500" />
 							{/* )} */}
 						</button>
-						<ul className={umClass} id="user-menu">
+						<ul
+							className={`${
+								umHidden ? "hidden" : ""
+							} absolute z-1 w-fit bg-white opacity-75 rounded h-fit p-3  top-16 right-8`}
+						>
 							{/* //TODO: Add Navigations */}
 							<li>
 								<Link to={"/"} className="flex items-center group py-1.5">
@@ -127,7 +122,7 @@ export const NavBar = ({ loggedIn = false }) => {
 							</li>
 							<li>
 								<button className="flex items-center group py-1.5 border-t-2 mt-1 w-full">
-									<IoIosLogOut className="nav-icon group-hover:text-gray-500" />
+									<IoLogOutOutline className="nav-icon group-hover:text-gray-500" />
 									<span className="px-2 nav-menu-text group-hover:text-gray-500">
 										Logout
 									</span>
