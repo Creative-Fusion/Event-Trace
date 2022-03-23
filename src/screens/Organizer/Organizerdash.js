@@ -4,11 +4,30 @@ import { fake_organizer } from "../../data/fakeDB";
 import { checkContactLinks } from "../../data/functions";
 import { ConnectIcons } from "../../components/connectIcons";
 import { TrimmedText } from "../../components/trimmedText";
+import { Overview } from "../../components/overview";
+import { BsClipboardCheck } from "react-icons/bs";
+import { MdOutlineEventNote } from "react-icons/md";
 
 export const OrganizerDescription = () => {
 	const organizer = fake_organizer;
 
 	const contactLinks = checkContactLinks(organizer);
+	const overviewData = [
+		{
+			count: 4,
+			title: "Organized Events",
+			icon: (
+				<MdOutlineEventNote className="w-12 h-12 text-secondary opacity-50" />
+			),
+		},
+		{
+			count: 302,
+			title: "Total Participants",
+			icon: (
+				<BsClipboardCheck className="w-12 h-12 text-secondary opacity-50" />
+			),
+		},
+	];
 
 	return (
 		<div className="relative">
@@ -39,6 +58,7 @@ export const OrganizerDescription = () => {
 									<TrimmedText text={organizer.description} />
 								</div>
 							</div>
+							<Overview dataList={overviewData} />
 						</div>
 					</div>
 					<div className="block xs:hidden text-left md:mt-8">

@@ -70,7 +70,7 @@ p {
 }
 
 /* Navbar */
-nav {
+.App > nav {
 	@apply bg-gradient-to-b z-10 from-secondary to-white opacity-95;
 }
 
@@ -98,20 +98,12 @@ nav ul {
 .form-input {
 	@apply appearance-none block w-full border-none font-semibold bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white;
 }
-
-/* Event Description */
-.active-tab {
-	@apply bg-primary text-secondary;
+/* 
+.react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
+	display: none;
 }
 
-.select-tabs {
-	appearance: none;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	-ms-appearance: none;
-	border: 2px solid #fff;
-	background-image: url("https://api.iconify.design/ep/arrow-down-bold.svg?color=white");
-	background-repeat: no-repeat;
-	background-size: 16px 17px;
-	background-position: calc(100% - 8px) center;
-}
+.react-horizontal-scrolling-menu--scroll-container {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+} */

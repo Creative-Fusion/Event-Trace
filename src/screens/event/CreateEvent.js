@@ -59,7 +59,7 @@ export const CreateEvent = () => {
 	let [categoriesStr, setCategoriesStr] = useState("");
 
 	return (
-		<div className="lg:grid lg:grid-cols-2 w-screen mx-8 my-4">
+		<div className="lg:grid lg:grid-cols-2 w-full px-8 my-4">
 			<div className="lg:w-full lg:h-full hidden lg:flex p-6 order-last">
 				<div className="my-auto">
 					<img src={EventImage} alt={caption} className="w-[95%] mx-auto" />

@@ -7,6 +7,7 @@ import { IconedInfoList } from "../../../components/IconedInfoList";
 import { TrimmedText } from "../../../components/trimmedText";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { Badge } from "../../../components/Badge";
+import { fake_event } from "../../../data/fakeDB";
 
 const CategoryTag = ({ category }) => {
 	return (
@@ -16,9 +17,9 @@ const CategoryTag = ({ category }) => {
 	);
 };
 
-export const About = ({ event }) => {
+export const About = () => {
 	const [interested, setInterested] = useState(false);
-
+	const event = fake_event;
 	return (
 		<div className="md:w-4/6 w-9/12 mx-auto">
 			<div className="md:grid md:grid-cols-5 lg:gap-20 gap-10">
