@@ -1,48 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
-
+import { Menu } from "antd";
 export const Tabs = () => {
-	const [tmHidden, setTMHidden] = useState(true);
-
-	const activeTab = ({ isActive }) => ({
-		color: isActive ? "#E8E6FF" : "#515050",
-		background: isActive ? "#5B4DFF" : "white",
-	});
-
 	return (
 		<div>
-			<nav className="md:w-4/6 w-9/12 mx-auto mb-6">
-				<ul className="flex justify-around mx-10 border-b-2 border-gray-400">
-					<NavLink
-						to="about"
-						className="px-5 py-3 text-base font-semibold"
-						style={activeTab}
-					>
-						<span className="my-auto">About</span>
+			<Menu
+				mode="horizontal"
+				className="justify-center w-9/12 mx-auto border-b-2 mb-6"
+			>
+				<Menu.Item>
+					<NavLink to="about" className="px-5 py-3 text-base font-semibold">
+						About
 					</NavLink>
-					<NavLink
-						to="organizer"
-						className="px-5 py-3 text-base font-semibold"
-						style={activeTab}
-					>
+				</Menu.Item>
+				<Menu.Item>
+					<NavLink to="organizer" className="px-5 py-3 text-base font-semibold">
 						Organizer
 					</NavLink>
+				</Menu.Item>
+				<Menu.Item>
 					<NavLink
 						to="participants"
 						className="px-5 py-3 text-base font-semibold"
-						style={activeTab}
 					>
 						Participants
 					</NavLink>
-					<NavLink
-						to="update"
-						className="px-5 py-3 text-base font-semibold"
-						style={activeTab}
-					>
+				</Menu.Item>
+				<Menu.Item>
+					<NavLink to="update" className="px-5 py-3 text-base font-semibold">
 						Update
 					</NavLink>
-				</ul>
-			</nav>
+				</Menu.Item>
+			</Menu>
 			<Outlet />
 		</div>
 	);

@@ -1,7 +1,8 @@
 import React from "react";
 import { fakeEventList } from "../data/fakeDB";
-import { MultipleRowList } from "../components/eventList";
+import { EventList } from "../components/eventList";
 import HomePageImage from "../app-images/HomePage.jpg";
+
 export const Home = () => {
 	const eventList = fakeEventList;
 
@@ -29,14 +30,7 @@ export const Home = () => {
 					className="w-full object-cover h-full"
 				/>
 			</div>
-			<div className="w-5/6 my-5 mx-auto" id="new_events">
-				<div>
-					<div>
-						<h1>New Events</h1>
-					</div>
-					<MultipleRowList events={eventList} />
-				</div>
-			</div>
+			<EventList title={"New Events"} to={"/"} events={eventList} />
 		</div>
 	);
 };

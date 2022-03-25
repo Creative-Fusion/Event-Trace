@@ -3,8 +3,41 @@ import React from "react";
 import { ScrollMenu } from "react-horizontal-scrolling-menu";
 import { EventCard } from "./eventcard";
 // import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
-export const OneRowList = ({ events }) => {
+/**
+ * `type="h"` for horizontal list
+ */
+export const EventList = ({ title, to, icon, events, type }) => {
+	return (
+		<section className="py-4">
+			<div className="flex justify-between lg:mx-20 md:mx-10 mx-6  items-center">
+				<h2>{title}</h2>
+				<Link
+					to={to}
+					className="text-blue-500 font-medium text-sm underline underline-offset-2 hover:font-semibold hover:text-primary ease-out-transition"
+				>
+					See More
+				</Link>
+			</div>
+			{events && events.length > 0 ? (
+				<div>
+					{type === "h" ? (
+						<OneRowList events={events.slice(0, 8)} />
+					) : (
+						<MultipleRowList events={events} />
+					)}
+				</div>
+			) : (
+				<p className="text-center text-lg font-medium py-5">
+					No Events to display
+				</p>
+			)}
+		</section>
+	);
+};
+
+const OneRowList = ({ events }) => {
 	return (
 		<ScrollMenu
 			// LeftArrow={LeftArrow}
@@ -19,9 +52,9 @@ export const OneRowList = ({ events }) => {
 	);
 };
 
-export const MultipleRowList = ({ events }) => {
+const MultipleRowList = ({ events }) => {
 	return (
-		<div className="flex flex-wrap justify-start">
+		<div className="flex flex-wrap justify-start lg:pl-20 md:pl-14 pr-8">
 			{events.map((event) => (
 				<EventCard event={event} key={event.name} />
 			))}
