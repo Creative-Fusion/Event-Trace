@@ -7,6 +7,16 @@ import { useDispatch } from "react-redux";
 import { categories } from "../../data/data";
 import { createEvent as create } from "../../redux/actions/eventActions";
 import { ActionTypes } from "../../redux/constants/actionTypes";
+import {
+	Form,
+	Input,
+	Select,
+	Modal,
+	Checkbox,
+	DatePicker,
+	TimePicker,
+	Button,
+} from "antd";
 
 export const CreateEvent = () => {
 	const caption = "Create Your Own Event";
@@ -58,6 +68,8 @@ export const CreateEvent = () => {
 
 	let [categoriesStr, setCategoriesStr] = useState("");
 
+	const [categoryModalVisible, setCategoryModalVisible] = useState(false);
+
 	return (
 		<div className="lg:grid lg:grid-cols-2 w-full px-8 my-4">
 			<div className="lg:w-full lg:h-full hidden lg:flex p-6 order-last">
@@ -68,8 +80,10 @@ export const CreateEvent = () => {
 					</h3>
 				</div>
 			</div>
-
-			<div className="w-full lg:max-width-xl pl-16 lg:pr-0 pr-16 my-8 text-center">
+			{/*TODO: Add Condition
+				1. If the current user is not an organization.
+				2. If the current user is an organization but has not been verified. */}
+			{/* <div className="w-full lg:max-width-xl pl-16 lg:pr-0 pr-16 my-8 text-center">
 				<div className="text-left w-full">
 					<h2 className="mb-6 -mx-2">Create an Event</h2>
 					<div className="flex flex-wrap -mx-5 mb-1 sm:mb-2">
@@ -85,9 +99,6 @@ export const CreateEvent = () => {
 								value={name}
 								onChange={(value) => setName(value.target.value)}
 							/>
-							{/* <p className ="text-red-500 text-xs italic">
-							Please fill out this field.
-						</p> */}
 						</div>
 						<div className="w-full sm:w-1/2 px-3 mb-1">
 							<label className="form-label" htmlFor="type">
@@ -116,7 +127,6 @@ export const CreateEvent = () => {
 								<input
 									id="categories"
 									className="w-full cursor-pointer"
-									// data-dropdown-toggle="dropdown"
 									placeholder="Select Your Categories"
 									value={categoriesStr}
 									disabled
@@ -250,9 +260,6 @@ export const CreateEvent = () => {
 					</div>
 				</div>
 
-				{/*TODO: Add Condition
-				1. If the current user is not an organization.
-				2. If the current user is an organization but has not been verified. */}
 				<p className="text-center text-red-600 italic">
 					***This event will be sent for review before publishing. <br />
 					It may take upto 48 hours.***
@@ -264,7 +271,64 @@ export const CreateEvent = () => {
 				>
 					Create Event
 				</button>
-			</div>
+			</div> */}
+			<Form
+				name="createEvent"
+				layout="vertical"
+				autoComplete="off"
+				initialValues={{ type: "Physical" }}
+			>
+				<h2 className="mb-6 -mx-2">Create an Event</h2>
+				<div className="flex flex-wrap">
+					<div className="w-full sm:w-1/2 px-3">
+						<Form.Item label="Name" name={"name"}>
+							<Input className="form-input" placeholder="Full Name" />
+						</Form.Item>
+					</div>
+					<div className="w-full sm:w-1/2 px-3">
+						<Form.Item label="Type" name={"type"}>
+							<Select className="form-input py-2" bordered={false}>
+								<Select.Option value="Physical">Physical</Select.Option>
+								<Select.Option value="Virtual">Virtual</Select.Option>
+							</Select>
+						</Form.Item>
+					</div>
+					<div className="w-full px-3">
+						<Form.Item label="Categories" name={"categories"}>
+							{/* <Button
+								className="form-input text-left my-auto  hover:bg-gray-200 hover:text-gray-500"
+								onClick={() => console.log("clicked")}
+							>
+								<span>Select Your Categories</span>
+							</Button> */}
+							<div
+								className="form-input"
+								onClick={() => setCategoryModalVisible(true)}
+							>
+								<input
+									className="w-full bg-transparent border-none h-full cursor-pointer"
+									placeholder="Select Your Categories"
+									disabled
+								></input>
+							</div>
+						</Form.Item>
+						<Modal
+							title="Select Your Categories"
+							visible={categoryModalVisible}
+							centered
+							onOk={() => setCategoryModalVisible(false)}
+							onCancel={() => setCategoryModalVisible(false)}
+							okText={"Done"}
+							cancelText={"Clear"}
+							okButtonProps={{ type: "primary" }}
+						>
+							<p>Some contents...</p>
+							<p>Some contents...</p>
+							<p>Some contents...</p>
+						</Modal>
+					</div>
+				</div>
+			</Form>
 		</div>
 	);
 };

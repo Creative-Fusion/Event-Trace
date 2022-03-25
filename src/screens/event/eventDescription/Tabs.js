@@ -3,7 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { Menu } from "antd";
 export const Tabs = () => {
 	return (
-		<div>
+		<div className="pb-6">
 			<Menu
 				mode="horizontal"
 				className="justify-center w-9/12 mx-auto border-b-2 mb-6"

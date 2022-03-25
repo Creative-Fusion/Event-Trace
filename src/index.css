@@ -91,18 +91,19 @@ nav ul {
 }
 
 /* Form */
-.form-label {
-	@apply block uppercase tracking-wide text-gray-700 text-[0.70rem] font-semibold mb-2;
+label {
+	@apply block uppercase tracking-wide text-gray-600 text-[0.70rem] font-semibold mb-2;
 }
 
 .form-input {
-	@apply appearance-none block w-full border-none font-semibold bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white;
+	@apply appearance-none block w-full border-none font-semibold bg-gray-200 text-gray-700 rounded px-4 align-middle h-12 leading-tight focus:outline-none focus:bg-white;
 }
 
 /* Overview Bar */
 .overview-icon {
 	@apply w-12 h-12 text-secondary opacity-50 sm:block xs:hidden block;
 }
+
 /* 
 .react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
 	display: none;
