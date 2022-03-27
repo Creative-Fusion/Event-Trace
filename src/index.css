@@ -104,6 +104,24 @@ label {
 	@apply w-12 h-12 text-secondary opacity-50 sm:block xs:hidden block;
 }
 
+/* ANT Design Modified */
+label span {
+	@apply capitalize;
+}
+
+.ant-checkbox-group label {
+	@apply p-2;
+}
+
+.ant-modal-footer button:first-child {
+	@apply hidden;
+}
+
+.ant-input-number-input,
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+	@apply p-0;
+}
+
 /* 
 .react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
 	display: none;

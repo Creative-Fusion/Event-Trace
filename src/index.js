@@ -4,7 +4,7 @@ import App from "./App";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import "@themesberg/flowbite";
-import "antd/dist/antd.css";
+import "./App.less";
 import "./index.css";
 
 ReactDOM.render(
