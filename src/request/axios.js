@@ -17,7 +17,6 @@ const getRequest = async (url, { params }) => {
 		const res = await axiosInstance.get(url, {
 			params: params,
 		});
-		console.log(res);
 		return res.data;
 	} catch (err) {
 		console.log(err);

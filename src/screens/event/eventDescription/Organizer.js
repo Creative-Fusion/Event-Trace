@@ -5,8 +5,10 @@ import { checkContactLinks } from "../../../data/functions";
 import { connectIcons } from "../../../data/data";
 import { ConnectIcons } from "../../../components/connectIcons";
 import { TrimmedText } from "../../../components/trimmedText";
+import { fake_organizer } from "../../../data/fakeDB";
 
-export const Organizer = ({ organizer }) => {
+export const Organizer = () => {
+	const organizer = fake_organizer;
 	const contactLinks = checkContactLinks(organizer);
 
 	return (
@@ -38,21 +40,7 @@ export const Organizer = ({ organizer }) => {
 				</div>
 			</div>
 			<div className="block xs:hidden text-left mt-4">
-				<h5 className="pl-2">Connect via:</h5>
-				{organizer.connect.map((media) => (
-					<a
-						href={
-							media.url.includes("https://")
-								? media.url
-								: `https://${media.url}`
-						}
-						className="inline-block p-2"
-						target="_blank"
-						rel="noreferrer"
-					>
-						{connectIcons[media.media]}
-					</a>
-				))}
+				<ConnectIcons connectLinks={organizer.connect} />
 			</div>
 		</div>
 	);

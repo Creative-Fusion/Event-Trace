@@ -9,13 +9,13 @@ export const EventCard = ({ event }) => {
 	const [interested, setInterested] = useState(false);
 
 	return (
-		<div className="shadow-lg max-w-xs rounded-sm overflow-hidden mx-8 my-5 shrink hover:shadow-2xl ease-out-transition">
+		<div className="shadow-lg max-w-xs min-w-[280px] rounded-sm overflow-hidden md:mr-8 mr-5 my-5 shrink hover:shadow-2xl ease-out-transition">
 			<div className="relative">
 				<img
 					src={event.coverImage}
 					alt={event.name + "'s Cover Image"}
 					className="h-52 object-cover cursor-pointer"
-					onClick={() => navigate("/events/1")}
+					onClick={() => navigate(`/e/${event.name}/about`)}
 				/>
 				<Badge text="2 days" />
 
@@ -36,7 +36,10 @@ export const EventCard = ({ event }) => {
 			</div>
 			<div className="px-4 py-2">
 				<div className="text-left">
-					<h3 className="cursor-pointer" onClick={() => navigate("/events/1")}>
+					<h3
+						className="cursor-pointer"
+						onClick={() => navigate(`/e/${event.name}/about`)}
+					>
 						{event.name}
 					</h3>
 					<p>{event.dateTime.startDate}</p>

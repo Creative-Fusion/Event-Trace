@@ -6,6 +6,10 @@ import { EventDescription } from "./screens/event/eventDescription/EventDescript
 import { OrganizerDescription } from "./screens/Organizer/Organizerdash";
 import { HomeScreen } from "./screens/event/HomeScreen";
 import Userdashboard from "./screens/user/UserDashboard";
+import { About } from "./screens/event/eventDescription/About";
+import { Organizer } from "./screens/event/eventDescription/Organizer";
+import { Participants } from "./screens/event/eventDescription/Participants";
+import { Update } from "./screens/event/eventDescription/Update";
 
 export const EventTraceRouter = () => {
 	return (
@@ -18,12 +22,17 @@ export const EventTraceRouter = () => {
 			<Route path="u/id" element={<Userdashboard />} />
 
 			{/* EVENTS */}
-			<Route path="events" element={<Home />} />
-			<Route path="events/create" element={<CreateEvent />} />
-			<Route path="events/:eventId" element={<EventDescription />} />
+			<Route path="e" element={<Home />} />
+			<Route path="e/create" element={<CreateEvent />} />
+			<Route path="e/:eventId" element={<EventDescription />}>
+				<Route path="about" element={<About />} />
+				<Route path="organizer" element={<Organizer />} />
+				<Route path="participants" element={<Participants />} />
+				<Route path="update" element={<Update />} />
+			</Route>
 
 			{/* ORGANIZER */}
-			<Route path="organizer/:id" element={<OrganizerDescription />} />
+			<Route path="o/:id" element={<OrganizerDescription />} />
 		</Routes>
 	);
 };

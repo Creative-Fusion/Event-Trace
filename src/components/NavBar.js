@@ -41,25 +41,25 @@ export const NavBar = ({ loggedIn = false }) => {
 					bmHidden ? "hidden" : ""
 				} md:inline-flex md:flex-grow pl-10 md:pb-0 pb-5 items-center md:justify-between text-center h-fit`}
 			>
-				<ul className="nav-items flex flex-col items-end md:flex-row md:items-start md:flex-none">
+				<ul className="nav-items flex flex-col items-end md:flex-row md:items-start md:flex-none m-0">
 					<NavLink to="/" style={activeNav} className="nav-link">
 						<span className="pr-3">Home</span>
 						<MdHome className="md:hidden inline-block align-middle h-5 w-5 " />
 					</NavLink>
 					{/* //TODO: Add Navigations */}
-					<NavLink to="/events/1" style={activeNav} className="nav-link">
+					<NavLink to="/e/1/about" style={activeNav} className="nav-link">
 						<span className="pr-3">Events</span>
 						<MdEvent className="md:hidden inline-block align-middle h-5 w-5" />
 					</NavLink>
-					<NavLink to="/events/create" style={activeNav} className="nav-link">
+					<NavLink to="/e/create" style={activeNav} className="nav-link">
 						<span className="pr-3">Create Event</span>
 						<MdAddCircleOutline className="md:hidden inline-block align-middle h-5 w-5" />
 					</NavLink>
 					{/* TODO: Remove these two nav links */}
-					<NavLink to="/organizer/1" style={activeNav} className="nav-link">
+					<NavLink to="/o/1" style={activeNav} className="nav-link">
 						Organizer dashboard
 					</NavLink>
-					<NavLink to="/events/3" style={activeNav} className="nav-link">
+					<NavLink to="/u/home" style={activeNav} className="nav-link">
 						UserHomeScreen
 					</NavLink>
 				</ul>

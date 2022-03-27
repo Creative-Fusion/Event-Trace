@@ -10,17 +10,17 @@ import {
 import { SiTiktok } from "react-icons/si";
 
 export const categories = [
-	"Adventure",
-	"Cosplay",
-	"Educational",
-	"Festival",
-	"History",
-	"Literature",
-	"Science",
-	"Social",
-	"Sports",
-	"Technology",
-	"Other",
+	{ label: "Adventure", value: "Adventure" },
+	{ label: "Cosplay", value: "Cosplay" },
+	{ label: "Educational", value: "Educational" },
+	{ label: "Festival", value: "Festival" },
+	{ label: "History", value: "History" },
+	{ label: "Literature", value: "Literature" },
+	{ label: "Science", value: "Science" },
+	{ label: "Social", value: "Social" },
+	{ label: "Sports", value: "Sports" },
+	{ label: "Technology", value: "Technology" },
+	{ label: "Other", value: "Other" },
 ];
 
 export const connectIcons = {
