@@ -28,6 +28,7 @@ const postRequest = async (url, { data }) => {
 		const res = await axiosInstance.post(url, {
 			data: data,
 		});
+		console.log(res);
 		return res.data;
 	} catch (err) {
 		console.log(err);

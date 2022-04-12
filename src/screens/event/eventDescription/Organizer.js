@@ -2,7 +2,6 @@ import React from "react";
 import { Container } from "../../../components/container";
 import { IconedInfoList } from "../../../components/IconedInfoList";
 import { checkContactLinks } from "../../../data/functions";
-import { connectIcons } from "../../../data/data";
 import { ConnectIcons } from "../../../components/connectIcons";
 import { TrimmedText } from "../../../components/trimmedText";
 import { fake_organizer } from "../../../data/fakeDB";
@@ -26,17 +25,15 @@ export const Organizer = () => {
 					</div>
 				</div>
 				<div className="col-span-3">
-					<Container
-						content={
-							<div className="text-left">
-								<h2>{organizer.name}</h2>
-								<div className="text-grey font-normal pt-2 pb-5">
-									<TrimmedText text={organizer.description} />
-								</div>
-								<IconedInfoList list={contactLinks} />
+					<Container>
+						<div className="text-left">
+							<h2>{organizer.name}</h2>
+							<div className="text-grey font-normal pt-2 pb-5">
+								<TrimmedText text={organizer.description} />
 							</div>
-						}
-					/>
+							<IconedInfoList list={contactLinks} />
+						</div>
+					</Container>
 				</div>
 			</div>
 			<div className="block xs:hidden text-left mt-4">

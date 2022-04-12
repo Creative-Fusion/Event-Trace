@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Brand from "./Brand";
 import { Link, NavLink } from "react-router-dom";
+import firebase from "firebase/compat/app";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import { uiConfig } from "../services/firebase";
 
 // Icons
 import { FaBars, FaBell, FaUserCircle } from "react-icons/fa";
@@ -12,7 +15,7 @@ import {
 import { BiCalendarCheck, BiCalendarHeart } from "react-icons/bi";
 import { MdHome, MdEvent, MdAddCircleOutline } from "react-icons/md";
 
-export const NavBar = ({ loggedIn = false }) => {
+export const NavBar = () => {
 	const name = "Jason Mark";
 
 	let [bmHidden, setBMHidden] = useState(true);
@@ -22,6 +25,19 @@ export const NavBar = ({ loggedIn = false }) => {
 		color: isActive ? "#5B4DFF" : "black",
 		fontWeight: isActive ? "bold" : "600",
 	});
+
+	const [loggedIn, setLoggedIn] = useState(false); // Local signed-in state.
+
+	// Listen to the Firebase Auth state and set the local state.
+	useEffect(() => {
+		const unregisterAuthObserver = firebase
+			.auth()
+			.onAuthStateChanged((user) => {
+				console.log(firebase.auth().currentUser);
+				setLoggedIn(!!user);
+			});
+		return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
+	}, []);
 
 	return (
 		<nav className="fixed top-0 flex md:flex-row flex-col w-full md:items-center md:justify-start px-8 justify-between ">
@@ -65,9 +81,14 @@ export const NavBar = ({ loggedIn = false }) => {
 				</ul>
 				<div className="md:grow md:h-[60px]"></div>
 				{!loggedIn && (
-					<Link to="/" className="outlined-primary-btn justify-end ">
-						Sign in
-					</Link>
+					// <Link to="/" className="outlined-primary-btn justify-end py-2">
+					// 	Sign in
+					// </Link>
+					<StyledFirebaseAuth
+						uiConfig={uiConfig}
+						className = "m-0"
+						firebaseAuth={firebase.auth()}
+					/>
 				)}
 				{loggedIn && (
 					<div className="hidden md:flex">
@@ -80,7 +101,7 @@ export const NavBar = ({ loggedIn = false }) => {
 						>
 							<FaUserCircle className="nav-icon group-hover:text-gray-500" />
 							<span className="px-1.5 nav-menu-text group-hover:text-gray-500">
-								{name}
+								{firebase.auth().currentUser.displayName}
 							</span>
 
 							{/* {!checkUserMenuHidden && (
@@ -121,7 +142,10 @@ export const NavBar = ({ loggedIn = false }) => {
 								</Link>
 							</li>
 							<li>
-								<button className="flex items-center group py-1.5 border-t-2 mt-1 w-full">
+								<button
+									className="flex items-center group py-1.5 border-t-2 mt-1 w-full"
+									onClick={() => firebase.auth().signOut()}
+								>
 									<IoLogOutOutline className="nav-icon group-hover:text-gray-500" />
 									<span className="px-2 nav-menu-text group-hover:text-gray-500">
 										Logout

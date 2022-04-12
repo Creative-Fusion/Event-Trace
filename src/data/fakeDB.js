@@ -1,10 +1,10 @@
 export const fake_event = {
-	name: "KU HackFest 2022",
+	name: "KU HackFest 2023",
 	description:
 		"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 	dateTime: {
-		startDate: "22 February, 2022",
-		endDate: "24 February, 2022",
+		startDate: "2023-02-22",
+		endDate: "2023-02-24",
 		startTime: "09:00",
 		endTime: "18:00",
 	},
@@ -24,7 +24,7 @@ export const fake_event = {
 export const fake_organizer = {
 	id: "1",
 	name: "Kathmandu University Computer Club",
-	email: "kuhackfest2022@gmail.com",
+	email: "kuhackfest2023@gmail.com",
 	description:
 		"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 	phone: "+977-9810101010",
@@ -53,8 +53,8 @@ export const fakeEventList = [
 		description:
 			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 		dateTime: {
-			startDate: "22 February, 2022",
-			endDate: "24 February, 2022",
+			startDate: "2023-02-22",
+			endDate: "2023-02-24",
 			startTime: "09:00",
 			endTime: "18:00",
 		},
@@ -75,8 +75,8 @@ export const fakeEventList = [
 		description:
 			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 		dateTime: {
-			startDate: "22 February, 2022",
-			endDate: "24 February, 2022",
+			startDate: "2023-02-22",
+			endDate: "2023-02-24",
 			startTime: "09:00",
 			endTime: "18:00",
 		},
@@ -97,8 +97,8 @@ export const fakeEventList = [
 		description:
 			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 		dateTime: {
-			startDate: "22 February, 2022",
-			endDate: "24 February, 2022",
+			startDate: "2023-02-22",
+			endDate: "2023-02-24",
 			startTime: "09:00",
 			endTime: "18:00",
 		},
@@ -120,8 +120,8 @@ export const fakeEventList = [
 		description:
 			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 		dateTime: {
-			startDate: "22 February, 2022",
-			endDate: "24 February, 2022",
+			startDate: "2023-02-22",
+			endDate: "2023-02-24",
 			startTime: "09:00",
 			endTime: "18:00",
 		},
@@ -142,8 +142,8 @@ export const fakeEventList = [
 		description:
 			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 		dateTime: {
-			startDate: "22 February, 2022",
-			endDate: "24 February, 2022",
+			startDate: "2023-02-22",
+			endDate: "2023-02-24",
 			startTime: "09:00",
 			endTime: "18:00",
 		},
@@ -164,8 +164,8 @@ export const fakeEventList = [
 		description:
 			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 		dateTime: {
-			startDate: "22 February, 2022",
-			endDate: "24 February, 2022",
+			startDate: "2023-02-22",
+			endDate: "2023-02-24",
 			startTime: "09:00",
 			endTime: "18:00",
 		},
@@ -186,8 +186,8 @@ export const fakeEventList = [
 		description:
 			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 		dateTime: {
-			startDate: "22 February, 2022",
-			endDate: "24 February, 2022",
+			startDate: "2023-02-22",
+			endDate: "2023-02-24",
 			startTime: "09:00",
 			endTime: "18:00",
 		},
@@ -209,8 +209,8 @@ export const fakeEventList = [
 		description:
 			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 		dateTime: {
-			startDate: "22 February, 2022",
-			endDate: "24 February, 2022",
+			startDate: "2023-02-22",
+			endDate: "2023-02-24",
 			startTime: "09:00",
 			endTime: "18:00",
 		},
@@ -231,8 +231,8 @@ export const fakeEventList = [
 		description:
 			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 		dateTime: {
-			startDate: "22 February, 2022",
-			endDate: "24 February, 2022",
+			startDate: "2023-02-22",
+			endDate: "2023-02-24",
 			startTime: "09:00",
 			endTime: "18:00",
 		},
@@ -253,8 +253,8 @@ export const fakeEventList = [
 		description:
 			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 		dateTime: {
-			startDate: "22 February, 2022",
-			endDate: "24 February, 2022",
+			startDate: "2023-02-22",
+			endDate: "2023-02-24",
 			startTime: "09:00",
 			endTime: "18:00",
 		},
@@ -276,8 +276,8 @@ export const fakeEventList = [
 		description:
 			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 		dateTime: {
-			startDate: "22 February, 2022",
-			endDate: "24 February, 2022",
+			startDate: "2023-02-22",
+			endDate: "2023-02-24",
 			startTime: "09:00",
 			endTime: "18:00",
 		},
@@ -298,8 +298,8 @@ export const fakeEventList = [
 		description:
 			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 		dateTime: {
-			startDate: "22 February, 2022",
-			endDate: "24 February, 2022",
+			startDate: "2023-02-22",
+			endDate: "2023-02-24",
 			startTime: "09:00",
 			endTime: "18:00",
 		},
@@ -320,8 +320,8 @@ export const fakeEventList = [
 		description:
 			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 		dateTime: {
-			startDate: "22 February, 2022",
-			endDate: "24 February, 2022",
+			startDate: "2023-02-22",
+			endDate: "2023-02-24",
 			startTime: "09:00",
 			endTime: "18:00",
 		},
@@ -343,8 +343,8 @@ export const fakeEventList = [
 		description:
 			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 		dateTime: {
-			startDate: "22 February, 2022",
-			endDate: "24 February, 2022",
+			startDate: "2023-02-22",
+			endDate: "2023-02-24",
 			startTime: "09:00",
 			endTime: "18:00",
 		},
@@ -365,8 +365,8 @@ export const fakeEventList = [
 		description:
 			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 		dateTime: {
-			startDate: "22 February, 2022",
-			endDate: "24 February, 2022",
+			startDate: "2023-02-22",
+			endDate: "2023-02-24",
 			startTime: "09:00",
 			endTime: "18:00",
 		},
@@ -387,8 +387,8 @@ export const fakeEventList = [
 		description:
 			"Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. Culpa eiusmod irure consectetur cillum amet dolor veniam non sunt labore laboris ipsum non reprehenderit. Proident officia cillum sint magna tempor sunt nostrud sint duis incididunt nostrud eu duis deserunt. Elit fugiat anim minim ullamco consectetur proident proident Lorem eiusmod eiusmod exercitation laborum dolor id. ",
 		dateTime: {
-			startDate: "22 February, 2022",
-			endDate: "24 February, 2022",
+			startDate: "2023-02-22",
+			endDate: "2023-02-24",
 			startTime: "09:00",
 			endTime: "18:00",
 		},

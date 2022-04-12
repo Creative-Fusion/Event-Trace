@@ -32,3 +32,40 @@ export const connectIcons = {
 	github: <BsGithub className="w-7 h-7 text-[#171515]" />,
 	tiktok: <SiTiktok className="w-7 h-7 text-[#010101]" />,
 };
+
+// const columns = [
+// 	{
+// 		title: "Name",
+// 		dataIndex: "name",
+// 		sorter: true,
+// 		width: "20%",
+// 	},
+// 	{
+// 		title: "Email",
+// 		dataIndex: "email",
+// 		sorter: true,
+// 		width: "20%",
+// 	},
+// 	{
+// 		title: "Gender",
+// 		dataIndex: "gender",
+// 		filters: [
+// 			{ text: "Male", value: "male" },
+// 			{ text: "Female", value: "female" },
+// 			{ text: "Unknown", value: "-" },
+// 		],
+// 		width: "20%",
+// 	},
+// 	{
+// 		title: "Phone",
+// 		dataIndex: "phone",
+// 		sorter: true,
+// 		width: "20%",
+// 	},
+// 	{
+// 		title: "Address",
+// 		dataIndex: "address",
+// 		sorter: true,
+// 		width: "20%",
+// 	},
+// ];
