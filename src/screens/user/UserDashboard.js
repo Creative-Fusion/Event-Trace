@@ -15,14 +15,14 @@ const Userdashboard = () => {
                 <div className="hidden lg:block xl:basis-[21%] lg:basis-[19%]">
                     <SideBar user= { user }/>
                 </div>
-                {/* <div className="grow">
-                    <UserProfile user={ user }/>
-                </div> */}
-
                 <div className="grow">
+                    <UserProfile user={ user }/>
+                </div>
+
+                {/* <div className="grow">
                     <UserEvents events = {Events}/>
                 </div>
-                
+                 */}
             </div>
             
         </div>
