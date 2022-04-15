@@ -10,10 +10,9 @@ import {
 	TimePicker,
 	Button,
 } from "antd";
-import { disabledDate } from "../../../data/functions";
 import { categories } from "../../../data/data";
 import { fake_event } from "../../../data/fakeDB";
-import moment from "moment";
+import { DateTime } from "../../../data/classes";
 
 export const Update = () => {
 	const event = fake_event;
@@ -40,12 +39,12 @@ export const Update = () => {
 						? event.participantLimit
 						: null,
 					dates: [
-						moment(event.dateTime.startDate),
-						moment(event.dateTime.endDate),
+						DateTime.toMomentDate(event.dateTime.startDate),
+						DateTime.toMomentDate(event.dateTime.endDate),
 					],
 					times: [
-						moment(event.dateTime.startDate + " " + event.dateTime.startTime),
-						moment(event.dateTime.endDate + " " + event.dateTime.endTime),
+						DateTime.toMomentTime(event.dateTime.startTime),
+						DateTime.toMomentTime(event.dateTime.endTime),
 					],
 				}}
 				onFinish={(e) => console.log(e)}
@@ -146,7 +145,7 @@ export const Update = () => {
 						<Form.Item label="Date" name={"dates"} rules={[rules]}>
 							<DatePicker.RangePicker
 								className="form-input"
-								disabledDate={disabledDate}
+								disabledDate={DateTime.disabledDate}
 								renderExtraFooter={() => (
 									<em>**Select same dates if it is a one day event.</em>
 								)}

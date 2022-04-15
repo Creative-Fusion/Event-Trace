@@ -1,4 +1,8 @@
 export const ActionTypes = {
+	USER: {
+		SET_LOGIN: "SET_LOGIN",
+		LOGOUT: "LOGOUT",
+	},
 	EVENT: {
 		CREATE_EVENT: "CREATE_EVENT",
 		ALL_EVENTS: "ALL_EVENTS",

@@ -38,7 +38,7 @@ export class Participants extends TableFilter {
 	fake_participants = [
 		{
 			key: "1",
-			name: "John Brown",
+			name: "Jopn Brown",
 			phone: 32,
 			gender: "Male",
 			email: "abcd@gmail.com",
@@ -46,21 +46,21 @@ export class Participants extends TableFilter {
 		},
 		{
 			key: "2",
-			name: "Joe Black",
+			name: "Moe Black",
 			email: "abcd@gmail.com",
 			gender: "Female",
 			phone: 42,
 		},
 		{
 			key: "3",
-			name: "Jim Green",
+			name: "Bim Green",
 			email: "abcd@gmail.com",
 			phone: 32,
 			address: "Sidney No. 1 Lake Park",
 		},
 		{
 			key: "4",
-			name: "Jim Red",
+			name: "Pim Red",
 			email: "abcd@gmail.com",
 			address: "London No. 2 Lake Park",
 		},
@@ -77,8 +77,8 @@ export class Participants extends TableFilter {
 				dataIndex: "name",
 				key: "name",
 				ellipsis: true,
-				sorter: (a, b) => a.name.length - b.name.length,
-				sortOrder: sortedInfo.columnKey === "name" && sortedInfo.order,
+				sorter: (a, b) => a.name.localeCompare(b.name),
+				// sortOrder: sortedInfo.columnKey === "name" && sortedInfo.order,
 				...this.getColumnSearchProps("name"),
 			},
 			{
@@ -103,9 +103,8 @@ export class Participants extends TableFilter {
 				filters: [
 					{ text: "Male", value: "Male" },
 					{ text: "Female", value: "Female" },
-					{ text: "Unknown", value: "---" },
 				],
-				filteredValue: filteredInfo.gender || null,
+				// filteredValue: filteredInfo.gender || null,
 				onFilter: (value, record) =>
 					record.gender ? record.gender.indexOf(value) === 0 : null,
 				render: (value) => (value ? value : "---"),
@@ -115,6 +114,8 @@ export class Participants extends TableFilter {
 				dataIndex: "address",
 				key: "address",
 				ellipsis: true,
+				sorter: (a, b) =>
+					a.address ? a.address.localeCompare(b.address) : null,
 				render: (value) => (value ? value : "---"),
 				...this.getColumnSearchProps("address"),
 			},
@@ -136,7 +137,7 @@ export class Participants extends TableFilter {
 		return (
 			<div className="md:w-4/6 w-9/12 mx-auto">
 				<Container>
-					<div className="pb-2">
+					<div className="pb-3">
 						<h2>Participants' List</h2>
 					</div>
 					<Table

@@ -17,7 +17,8 @@ import {
 	TimePicker,
 	Button,
 } from "antd";
-import { disabledDate } from "../../data/functions";
+import { DateTime } from "../../data/classes";
+import { createEvent } from "../../services/crud/events";
 
 export const CreateEvent = () => {
 	const caption = "Create Your Own Event";
@@ -25,7 +26,7 @@ export const CreateEvent = () => {
 
 	const [loading, setLoading] = useState(false);
 
-	const saveEvent = (e) => {
+	const saveEvent = async (e) => {
 		// setLoading(true);
 		const newEvent = {
 			name: e.name,
@@ -36,19 +37,21 @@ export const CreateEvent = () => {
 			participantLimit: e.participantLimit,
 			eventLink: e.type === "Virtual" ? e.eventLink : undefined,
 			dateTime: {
-				startDate: e.dates[0],
-				endDate: e.dates[1],
-				startTime: e.times[0],
-				endTime: e.times[1],
+				startDate: DateTime.toStringDate(e.dates[0]),
+				endDate: DateTime.toStringDate(e.dates[1]),
+				startTime: DateTime.toStringTime(e.times[0]),
+				endTime: DateTime.toStringTime(e.times[1]),
 			},
 		};
-		EventRequest(ActionTypes.EVENT.CREATE_EVENT, { data: newEvent }).then(
-			(createdEvent) => {
-				// dispatch(create(createdEvent));
-				setLoading(false);
-				console.log(createdEvent);
-			}
-		);
+
+		await createEvent(newEvent, dispatch);
+		// EventRequest(ActionTypes.EVENT.CREATE_EVENT, { data: newEvent }).then(
+		// 	(createdEvent) => {
+		// 		// dispatch(create(createdEvent));
+		// 		setLoading(false);
+		// 		console.log(createdEvent);
+		// 	}
+		// );
 	};
 
 	const rules = { required: true, message: "Invalid Detail." };
@@ -107,7 +110,7 @@ export const CreateEvent = () => {
 					</Form.Item>
 				</div>
 				<div className="w-full px-3">
-					<Form.Item label="Categories" name={"categories"} rules={[rules]}>
+					<Form.Item label="Categories" name={"categories"}>
 						<div
 							className="form-input"
 							onClick={() => setCategoryModalVisible(true)}
@@ -166,7 +169,7 @@ export const CreateEvent = () => {
 						<Form.Item label="Date" name={"dates"} rules={[rules]}>
 							<DatePicker.RangePicker
 								className="form-input"
-								disabledDate={disabledDate}
+								disabledDate={DateTime.disabledDate}
 								renderExtraFooter={() => (
 									<em>**Select same dates if it is a one day event.</em>
 								)}
