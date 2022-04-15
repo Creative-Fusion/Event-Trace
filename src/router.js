@@ -10,6 +10,9 @@ import { About } from "./screens/event/eventDescription/About";
 import { Organizer } from "./screens/event/eventDescription/Organizer";
 import { Participants } from "./screens/event/eventDescription/Participants";
 import { Update } from "./screens/event/eventDescription/Update";
+import { EditProfile } from "./screens/user/editProfile";
+import { UserProfile } from "./screens/user/UserProfile";
+import { UserEvents } from "./screens/user/UserEvents";
 
 export const EventTraceRouter = () => {
 	return (
@@ -19,7 +22,11 @@ export const EventTraceRouter = () => {
 
 			{/* USER */}
 			<Route path="u/home" element={<HomeScreen />} />
-			<Route path="u/id" element={<Userdashboard />} />
+			<Route path="u/id" element={<Userdashboard />}>
+				<Route path="profile" element={<UserProfile />} />
+				<Route path="edit-profile" element={<EditProfile />} />
+				<Route path="interested" element={<UserEvents />} />
+			</Route>
 
 			{/* EVENTS */}
 			<Route path="e" element={<Home />} />
