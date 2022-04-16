@@ -14,6 +14,9 @@ import App from "./App";
 import { AdminOverview } from "./screens/admin/overview";
 import { useSelector } from "react-redux";
 import { Redirect } from "./redirect";
+import { EditProfile } from "./screens/user/editProfile";
+import { UserProfile } from "./screens/user/UserProfile";
+import { UserEvents } from "./screens/user/UserEvents";
 
 export const EventTraceRouter = () => {
 	// const { loggedIn, currentUser } = useSelector((state) => state.users);
@@ -26,11 +29,13 @@ export const EventTraceRouter = () => {
 					{/* <Route path="/redirect" element={<Redirect />} /> */}
 					<Route index element={<Navigate to="u/home" />} />
 					{/* INDEX */}
-					<Route path="/home" element={<Home />} />
 					{/* USER */}
 					<Route path="u/home" element={<HomeScreen />} />
-					<Route path="u/:id" element={<Userdashboard />} />
-
+					<Route path="u/id" element={<Userdashboard />}>
+						<Route path="profile" element={<UserProfile />} />
+						<Route path="edit-profile" element={<EditProfile />} />
+						<Route path="interested" element={<UserEvents />} />
+					</Route>
 					{/* EVENTS */}
 					<Route path="e" element={<Home />} />
 					<Route path="e/create" element={<CreateEvent />} />
