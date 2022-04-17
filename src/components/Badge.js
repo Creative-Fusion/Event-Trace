@@ -5,12 +5,13 @@ export const Badge = ({
 	absolute = true,
 	position = "top-5 right-5",
 	bgColor = "bg-primary",
+	className,
 }) => {
 	return (
 		<div
 			className={`${
 				absolute ? `absolute ${position}` : ""
-			} rounded-full py-1 px-3 text-base font-semibold text-white opacity-80 uppercase cursor-default ${bgColor}`}
+			} rounded-full py-1 px-3 text-base font-semibold text-white opacity-80 uppercase cursor-default ${bgColor} ${className}`}
 		>
 			{text}
 		</div>
