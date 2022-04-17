@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EventImage from "../../app-images/event1.png";
 import { EventRequest } from "../../request/eventRequest";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { categories } from "../../data/data";
 import { BsInfoCircle } from "react-icons/bs";
 import { createEvent as create } from "../../redux/actions/eventActions";
@@ -16,6 +16,7 @@ import {
 	DatePicker,
 	TimePicker,
 	Button,
+	message,
 } from "antd";
 import { DateTime } from "../../data/classes";
 import { createEvent } from "../../services/crud/events";
@@ -25,6 +26,24 @@ export const CreateEvent = () => {
 	const dispatch = useDispatch();
 
 	const [loading, setLoading] = useState(false);
+	const { loggedIn, currentUser } = useSelector((state) => state.users);
+
+	const createEventWarning = () => {
+		let warn = false;
+		if (!loggedIn) {
+			warn = true;
+			message.warning("Please login to create an event.");
+		}
+		if (currentUser.role === "user") {
+			warn = true;
+			message.warning(
+				"Please verify your account as an organizer to create an event"
+			);
+		}
+		return warn;
+	};
+
+	useEffect(() => createEventWarning());
 
 	const saveEvent = async (e) => {
 		// setLoading(true);
@@ -33,25 +52,24 @@ export const CreateEvent = () => {
 			type: e.type,
 			description: e.description,
 			categories: selectedCategories,
+			coverImage: null,
 			location: e.type === "Physical" ? { location: e.location } : null,
 			participantLimit: e.participantLimit,
 			eventLink: e.type === "Virtual" ? e.eventLink : undefined,
+			publish: true,
 			dateTime: {
 				startDate: DateTime.toStringDate(e.dates[0]),
 				endDate: DateTime.toStringDate(e.dates[1]),
 				startTime: DateTime.toStringTime(e.times[0]),
 				endTime: DateTime.toStringTime(e.times[1]),
 			},
+			creator: {
+				id: null,
+				role: "Organization",
+			},
+			registeredUsers: [],
 		};
-
-		await createEvent(newEvent, dispatch);
-		// EventRequest(ActionTypes.EVENT.CREATE_EVENT, { data: newEvent }).then(
-		// 	(createdEvent) => {
-		// 		// dispatch(create(createdEvent));
-		// 		setLoading(false);
-		// 		console.log(createdEvent);
-		// 	}
-		// );
+		if (!createEventWarning) await createEvent(newEvent, dispatch);
 	};
 
 	const rules = { required: true, message: "Invalid Detail." };

@@ -6,9 +6,11 @@ import user from "../dummy data/user";
 import { Layout, Menu, Divider } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 const { Sider } = Layout;
 const SideBar = () => {
 	const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+	const { currentUser } = useSelector((state) => state.users);
 	const navigate = useNavigate();
 	return (
 		<div>
@@ -31,12 +33,12 @@ const SideBar = () => {
 					<div>
 						<div className="m-8 flex flex-col items-center justify-center">
 							<img
-								src={user.userImage}
+								src={currentUser.profileImage}
 								alt="User Profile"
 								className="rounded-full aspect-square w-24"
 							/>
 							<div className="block mt-3 text-lg font-medium text-secondary uppercase">
-								{user.name}
+								{currentUser.name}
 							</div>
 						</div>
 						<Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
@@ -51,7 +53,7 @@ const SideBar = () => {
 							<Menu.Item
 								key="1"
 								icon={<MdPermIdentity className="w-5 h-5" />}
-								onClick={() => navigate("/u/id/profile")}
+								onClick={() => navigate("/u/0/profile")}
 								className="font-medium"
 							>
 								My Profile
@@ -59,7 +61,7 @@ const SideBar = () => {
 							<Menu.Item
 								key="2"
 								icon={<AiOutlineEdit className="w-5 h-5" />}
-								onClick={() => navigate("/u/id/edit-profile")}
+								onClick={() => navigate("/u/0/edit-profile")}
 								className="font-medium"
 							>
 								Edit Profile
@@ -76,7 +78,7 @@ const SideBar = () => {
 							<Menu.Item
 								key="3"
 								icon={<BiCalendarEvent className="w-5 h-5" />}
-								onClick={() => navigate("/u/id/interested")}
+								onClick={() => navigate("/u/0/interested")}
 								className="font-medium"
 							>
 								Registered Events
@@ -84,7 +86,7 @@ const SideBar = () => {
 							<Menu.Item
 								key="4"
 								icon={<BiHeart className="w-5 h-5" />}
-								onClick={() => navigate("/u/id/interested")}
+								onClick={() => navigate("/u/0/interested")}
 								className="font-medium"
 							>
 								Interested Events

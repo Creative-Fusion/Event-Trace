@@ -8,6 +8,13 @@ export const signIn = async (user, dispatch) => {
 		email: user.email,
 		phone: user.phoneNumber,
 		profileImage: user.photoURL,
+		address: null,
+		bio: null,
+		gender: null,
+		dob: null,
+		role: "user",
+		interestedEvents: [],
+		registeredEvents: [],
 	};
 	let loggedUser = await queryUser(user.email);
 	if (!loggedUser) loggedUser = await createUser(currentUser);

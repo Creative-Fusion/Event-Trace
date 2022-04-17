@@ -8,13 +8,14 @@ import {
 	query,
 	where,
 } from "firebase/firestore";
+import { updateCurrentUser } from "../../redux/actions/userActions";
 import { db } from "../firebase";
 
 const usersCollectionRef = collection(db, "users");
 
 export const readUsers = async (user, dispatch) => {
 	const data = await getDocs(usersCollectionRef);
-	console.log(data);
+	return data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 };
 
 export const queryUser = async (email) => {
@@ -23,7 +24,7 @@ export const queryUser = async (email) => {
 		query(usersCollectionRef, where("email", "==", email))
 	);
 	users.forEach((doc) => {
-		user = doc.data();
+		user = { ...doc.data(), id: doc.id };
 	});
 	return user;
 };
@@ -37,5 +38,6 @@ export const createUser = async (user) => {
 export const updateUser = async (data, id, dispatch) => {
 	const document = doc(db, "users", id);
 	await updateDoc(document, data);
-	console.log("Updated");
+	const updatedUser = queryUser(data.email);
+	dispatch(updateCurrentUser(updatedUser));
 };

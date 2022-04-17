@@ -7,6 +7,13 @@ export const setLogin = (user) => {
 	};
 };
 
+export const updateCurrentUser = (user) => {
+	return {
+		type: ActionTypes.USER.UPDATE_USER,
+		payload: user,
+	};
+};
+
 export const setLogout = () => {
 	return {
 		type: ActionTypes.USER.LOGOUT,

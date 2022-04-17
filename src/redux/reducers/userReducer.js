@@ -2,7 +2,7 @@ import { ActionTypes } from "../constants/actionTypes";
 
 const initialState = {
 	loggedIn: false,
-	currentUser: null,
+	currentUser: {},
 };
 
 export const userReducer = (state = initialState, { type, payload }) => {

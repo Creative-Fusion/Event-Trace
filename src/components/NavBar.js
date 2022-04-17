@@ -14,7 +14,12 @@ import {
 	IoCaretDown,
 } from "react-icons/io5";
 import { BiCalendarCheck, BiCalendarHeart } from "react-icons/bi";
-import { MdHome, MdEvent, MdAddCircleOutline } from "react-icons/md";
+import {
+	MdHome,
+	MdEvent,
+	MdAddCircleOutline,
+	MdPermIdentity,
+} from "react-icons/md";
 import { Popover } from "antd";
 
 export const NavBar = () => {
@@ -36,7 +41,6 @@ export const NavBar = () => {
 			.onAuthStateChanged(async (user) => {
 				if (user) {
 					await signIn(user, dispatch);
-					console.log(user);
 					setLoggedIn(true);
 				}
 			});
@@ -49,15 +53,18 @@ export const NavBar = () => {
 		return (
 			<ul className={`w-fit bg-white opacity-75 rounded h-fit`}>
 				<li>
-					<Link to={"/"} className="flex items-center group py-1.5">
-						<IoSettingsOutline className="nav-icon group-hover:text-gray-500" />
+					<Link to={"/u/0/profile"} className="flex items-center group py-1.5">
+						<MdPermIdentity className="nav-icon group-hover:text-gray-500" />
 						<span className="px-2 nav-menu-text group-hover:text-gray-500">
-							Settings
+							My Profile
 						</span>
 					</Link>
 				</li>
 				<li>
-					<Link to={"/"} className="flex items-center group py-1.5">
+					<Link
+						to={"/u/0/interested"}
+						className="flex items-center group py-1.5"
+					>
 						<BiCalendarCheck className="nav-icon group-hover:text-gray-500" />
 						<span className="px-2 nav-menu-text group-hover:text-gray-500">
 							Registered Events
@@ -65,10 +72,21 @@ export const NavBar = () => {
 					</Link>
 				</li>
 				<li>
-					<Link to={"/"} className="flex items-center group py-1.5">
+					<Link
+						to={"/u/0/interested"}
+						className="flex items-center group py-1.5"
+					>
 						<BiCalendarHeart className="nav-icon group-hover:text-gray-500" />
 						<span className="px-2 nav-menu-text group-hover:text-gray-500">
-							Favourite Events
+							Interested Events
+						</span>
+					</Link>
+				</li>
+				<li>
+					<Link to={"/"} className="flex items-center group py-1.5">
+						<IoSettingsOutline className="nav-icon group-hover:text-gray-500" />
+						<span className="px-2 nav-menu-text group-hover:text-gray-500">
+							Settings
 						</span>
 					</Link>
 				</li>
@@ -113,22 +131,16 @@ export const NavBar = () => {
 						<span className="pr-3">Home</span>
 						<MdHome className="md:hidden inline-block align-middle h-5 w-5 " />
 					</NavLink>
-					{/* //TODO: Add Navigations */}
-					<NavLink to="/e/1/about" style={activeNav} className="nav-link">
+					<NavLink to="/u/home" style={activeNav} className="nav-link">
 						<span className="pr-3">Events</span>
 						<MdEvent className="md:hidden inline-block align-middle h-5 w-5" />
 					</NavLink>
-					<NavLink to="/e/create" style={activeNav} className="nav-link">
-						<span className="pr-3">Create Event</span>
-						<MdAddCircleOutline className="md:hidden inline-block align-middle h-5 w-5" />
-					</NavLink>
-					{/* TODO: Remove these two nav links */}
-					<NavLink to="/o/1" style={activeNav} className="nav-link">
-						Organizer dashboard
-					</NavLink>
-					<NavLink to="/u/home" style={activeNav} className="nav-link">
-						UserHomeScreen
-					</NavLink>
+					{loggedIn && (
+						<NavLink to="/e/create" style={activeNav} className="nav-link">
+							<span className="pr-3">Create Event</span>
+							<MdAddCircleOutline className="md:hidden inline-block align-middle h-5 w-5" />
+						</NavLink>
+					)}
 				</ul>
 				<div className="md:grow md:h-[60px]"></div>
 				{!loggedIn && (

@@ -30,8 +30,10 @@ export const EventTraceRouter = () => {
 					<Route index element={<Navigate to="u/home" />} />
 					{/* INDEX */}
 					{/* USER */}
+					<Route path="home" element={<Home />} />
 					<Route path="u/home" element={<HomeScreen />} />
-					<Route path="u/id" element={<Userdashboard />}>
+					<Route path="u/0" element={<Userdashboard />}>
+						<Route index element={<Navigate to={"profile"} />} />
 						<Route path="profile" element={<UserProfile />} />
 						<Route path="edit-profile" element={<EditProfile />} />
 						<Route path="interested" element={<UserEvents />} />
