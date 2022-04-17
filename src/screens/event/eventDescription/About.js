@@ -51,38 +51,36 @@ export const About = () => {
 					/>
 				</div>
 				<div className="flex col-span-2 md:w-full xs:w-[300px] max-h-[380px] mx-auto">
-					<Container
-						content={
-							<div className="flex shrink h-full flex-col place-content-between">
-								<div>
-									<h5>Category</h5>
-									{event.categories.map((category) => {
-										return <CategoryTag key={category} category={category} />;
-									})}
-								</div>
-								<div className="w-full my-3">
-									<div className="text-center text-[#6C6C6C] font-semibold text-sm opacity-70">
-										{event.fee && <p>Nrs. {event.fee} per entry</p>}
-										{!event.fee && <p>Free</p>}
-										<hr className="bg-gradient-to-r border-2 from-[#FBFBFB] via-[#6C6C6C] to-[#FBFBFB]" />
-									</div>
-									<button
-										className="flex items-center place-content-center outlined-primary-btn w-full mt-4 mb-2"
-										onClick={() => setInterested(!interested)}
-									>
-										Add to Favourites{" "}
-										<span className="pl-1">
-											{!interested && <BsBookmark className="w-5 h-5" />}
-											{interested && <BsBookmarkFill className="w-5 h-5" />}
-										</span>
-									</button>
-									<button className="filled-primary-btn w-full">
-										Register
-									</button>
-								</div>
+					<Container>
+						<div className="flex shrink h-full flex-col place-content-between">
+							<div>
+								<h5>Category</h5>
+								{event.categories.map((category) => {
+									return <CategoryTag key={category} category={category} />;
+								})}
 							</div>
-						}
-					/>
+							<div className="w-full my-3">
+								<div className="text-center text-[#6C6C6C] font-semibold text-sm opacity-70">
+									{event.fee && <p>Nrs. {event.fee} per entry</p>}
+									{!event.fee && <p>Free</p>}
+									<hr className="bg-gradient-to-r border-2 from-[#FBFBFB] via-[#6C6C6C] to-[#FBFBFB]" />
+								</div>
+								<button
+									className="flex items-center place-content-center outlined-primary-btn w-full mt-4 mb-2 py-2"
+									onClick={() => setInterested(!interested)}
+								>
+									Add to Favourites{" "}
+									<span className="pl-1">
+										{!interested && <BsBookmark className="w-5 h-5" />}
+										{interested && <BsBookmarkFill className="w-5 h-5" />}
+									</span>
+								</button>
+								<button className="filled-primary-btn py-3 w-full">
+									Register
+								</button>
+							</div>
+						</div>
+					</Container>
 				</div>
 			</div>
 		</div>

@@ -1,81 +1,118 @@
-import { MdPermIdentity } from "@react-icons/all-files/md/MdPermIdentity";
-import { MdLockOutline } from "@react-icons/all-files/md/MdLockOutline";
-import { BiCalendarEvent } from "@react-icons/all-files/bi/BiCalendarEvent";
-import { BiHeart } from "@react-icons/all-files/bi/BiHeart"
-import { BiPowerOff } from "@react-icons/all-files/bi/BiPowerOff"; 
+import { MdPermIdentity } from "react-icons/md";
+import { BiPowerOff, BiHeart, BiCalendarEvent } from "react-icons/bi";
+import { IoSettingsOutline } from "react-icons/io5";
+import { AiOutlineMenuUnfold, AiOutlineEdit } from "react-icons/ai";
+import user from "../dummy data/user";
+import { Layout, Menu, Divider } from "antd";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+const { Sider } = Layout;
+const SideBar = () => {
+	const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+	const { currentUser } = useSelector((state) => state.users);
+	const navigate = useNavigate();
+	return (
+		<div>
+			<Sider
+				breakpoint="lg"
+				trigger={null}
+				collapsible
+				collapsed={sidebarCollapsed}
+				collapsedWidth="0"
+				width={225}
+				style={{
+					overflow: "auto",
+					position: "fixed",
+					left: 0,
+					top: 60,
+					bottom: 0,
+				}}
+			>
+				<div className="h-full flex flex-col justify-between">
+					<div>
+						<div className="m-8 flex flex-col items-center justify-center">
+							<img
+								src={currentUser.profileImage}
+								alt="User Profile"
+								className="rounded-full aspect-square w-24"
+							/>
+							<div className="block mt-3 text-lg font-medium text-secondary uppercase">
+								{currentUser.name}
+							</div>
+						</div>
+						<Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+							<Divider
+								orientation="left"
+								className="text-secondary"
+								style={{ color: "#E8E6FF", borderColor: "white" }}
+								orientationMargin={15}
+							>
+								Profile
+							</Divider>
+							<Menu.Item
+								key="1"
+								icon={<MdPermIdentity className="w-5 h-5" />}
+								onClick={() => navigate("/u/0/profile")}
+								className="font-medium"
+							>
+								My Profile
+							</Menu.Item>
+							<Menu.Item
+								key="2"
+								icon={<AiOutlineEdit className="w-5 h-5" />}
+								onClick={() => navigate("/u/0/edit-profile")}
+								className="font-medium"
+							>
+								Edit Profile
+							</Menu.Item>
 
+							<Divider
+								orientation="left"
+								className="text-secondary"
+								style={{ color: "#E8E6FF", borderColor: "white" }}
+								orientationMargin={15}
+							>
+								Events
+							</Divider>
+							<Menu.Item
+								key="3"
+								icon={<BiCalendarEvent className="w-5 h-5" />}
+								onClick={() => navigate("/u/0/interested")}
+								className="font-medium"
+							>
+								Registered Events
+							</Menu.Item>
+							<Menu.Item
+								key="4"
+								icon={<BiHeart className="w-5 h-5" />}
+								onClick={() => navigate("/u/0/interested")}
+								className="font-medium"
+							>
+								Interested Events
+							</Menu.Item>
+						</Menu>
+					</div>
+					<div className="px-6 py-5">
+						<div className="flex text-secondary font-semibold text-base justify-start items-center py-1.5">
+							<IoSettingsOutline className="w-5 h-5 mr-2" />
+							Settings and Privacy
+						</div>
+						<div className="flex text-secondary font-semibold text-base justify-start items-center py-1.5">
+							<BiPowerOff className="w-5 h-5 mr-2" />
+							Logout
+						</div>
+					</div>
+				</div>
+			</Sider>
+			<div
+				className="lg:hidden absolute top-[65px] left-2 bg-grey text-white opacity-70 p-2 rounded"
+				onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+			>
+				<AiOutlineMenuUnfold className="h-8 w-8" />
+			</div>
+		</div>
+	);
+};
 
-const SideBar = ( {user} ) => {
-
-    return ( 
-        <aside className="hidden lg:block lg:float-left lg:w-auto lg:bg-[#BCBBE57D] lg:fixed lg:h-full lg:pt-2">
-            
-            <div className="m-8 flex flex-col items-center justify-center">
-                <div>
-                    <img src={ user.userImage } alt="User Profile" className="self-center rounded-full h-20 w-20 xl:h-24 xl:w-24 flex items-center justify-center bg-slate-500"/>
-                </div>
-                <div className="block mt-3 text-sm xl:text-lg lg:text-sm lg:font-medium text-[#0A1C5CBF]">{ user.name }</div>
-            </div>
-
-
-            
-            
-            <div className="w-auto text-md xl:w-50 xl:text-xl font-[649] text-[#0A1C5CCC]">
-                <ul>
-                    <li className="lg:mb-3 lg:mt-2.5 xl:mb-1.5 xl:mt-1">
-                        <a href="#" className="inline-flex self-center xl:self-start pr-3 pl-4 xl:pl-7 xl:pr-8 w-full hover:bg-[#858EDCFC] active:bg-[#858EDCFC] focus-visible:bg-[#858EDCFC]">
-                            <MdPermIdentity className="self-center"/>
-                            <span className="self-center pl-2.5">
-                                My Profile
-                            </span>
-                        </a>
-                    </li>
-                    <li className="lg:mb-3 lg:mt-2.5 xl:mb-1.5 xl:mt-1">
-                        <a className="inline-flex self-center xl:self-start pr-3 pl-4 xl:pl-7 xl:pr-8 w-full hover:bg-[#858EDCFC]">
-                            <MdLockOutline className="self-center"/>
-                            <span className="self-center pl-2.5">
-                                Password
-                            </span>
-                        </a>
-                    </li>
-
-                    <hr className="text-[#858282C7] h-0.5 bg-[#858282C7] m-2 xl:m-5 lg:m-6 "/>
-
-                    <li className="lg:mb-3 lg:mt-2.5 xl:mb-1.5 xl:mt-1">
-                        <a className="inline-flex self-center xl:self-start pr-3 pl-4 xl:pl-7 xl:pr-8 w-full hover:bg-[#858EDCFC]">
-                            <BiCalendarEvent className="self-center"/>
-                            <span className="self-center pl-2.5">
-                                Registered Events
-                            </span>
-                        </a>
-                    </li>
-
-                    <li className="lg:mb-3 lg:mt-2.5 xl:mb-1.5 xl:mt-1">
-                        <a className="inline-flex pr-3 pl-4 xl:pl-7 xl:pr-8 w-full hover:bg-[#858EDCFC]">
-                            <BiHeart className="self-center"/>
-                            <span className="self-center pl-2.5">
-                                Interested Events
-                            </span>
-                        </a>
-                    </li>
-
-                    <hr className="text-[#858282C7] h-0.5 bg-[#858282C7] m-2 xl:m-5 lg:m-6 "/>
-
-                    <li className="lg:mb-3 lg:mt-2.5 xl:mb-1.5 xl:mt-1">
-                        <button className="inline-flex text-sm xl:text-xl font-[649] pr-3 pl-4 xl:pl-7 xl:pr-8 w-full hover:bg-[#858EDCFC]">
-                            <BiPowerOff className="self-center"/>
-                            <span className="self-center pl-2.5">
-                              Log Out
-                            </span>
-                        </button>
-                    </li>
-                    
-                    <hr className="text-[#858282C7] h-0.5 bg-[#858282C7] m-2 xl:m-5 lg:m-6 "/>
-
-                </ul>
-            </div>
-        </aside>
-     );
-}
- 
 export default SideBar;

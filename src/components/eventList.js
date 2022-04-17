@@ -54,7 +54,7 @@ const OneRowList = ({ events }) => {
 
 const MultipleRowList = ({ events }) => {
 	return (
-		<div className="flex flex-wrap justify-start lg:pl-20 md:pl-14 pr-8">
+		<div className="flex flex-wrap justify-start lg:pl-20 md:pl-14 gap-x-10 gap-y-5">
 			{events.map((event) => (
 				<EventCard event={event} key={event.name} />
 			))}
