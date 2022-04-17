@@ -1,11 +1,51 @@
 import { IoLocationOutline } from "@react-icons/all-files/io5/IoLocationOutline";
 import { MdEdit } from "@react-icons/all-files/md/MdEdit";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { BecomeOrganizerModal } from "./becomeOrganizer";
+import { BsExclamationTriangle } from "react-icons/bs";
+import { message, Modal } from "antd";
+import { UserRole, updateUser } from "../../services/crud/user";
+import { Badge } from "../../components/Badge";
 export const UserProfile = () => {
 	const { currentUser } = useSelector((state) => state.users);
 	const navigate = useNavigate();
+	const [modalVisible, setModalVisible] = useState(false);
+	const dispatch = useDispatch();
+	const becomeOrganizer = async (data) => {
+		const updatedUser = {
+			email: currentUser.email,
+			address: data.address,
+			phone: data.phone,
+			bio: data.bio,
+			website: data.website,
+			gender: null,
+			role: UserRole.ORGANIZATION,
+			createdEvents: [],
+		};
+
+		await updateUser(updatedUser, currentUser.id, dispatch);
+		message.success("Your account has been promoted to an Organizer.");
+	};
+
+	const becomeOrganizerConfirm = (data) => {
+		Modal.confirm({
+			title: "Are you sure you want to complete this process?",
+			icon: (
+				<BsExclamationTriangle className="w-8 h-8 text-yellow-400 pb-2 mx-auto" />
+			),
+			centered: true,
+			content: "You will not be able to undo this action.",
+			okText: "Yes",
+			okType: "danger",
+			cancelText: "No",
+			onOk: async () => {
+				await becomeOrganizer(data);
+				setModalVisible(false);
+			},
+		});
+	};
 	return (
 		<div className="flex flex-col xl:items-center xl:justify-center h-full lg:items-start lg:justify-start items-center justify-center w-full">
 			<div className="flex flex-col items-start xl:w-3/5 w-5/6  justify-start p-10 pt-8">
@@ -19,8 +59,17 @@ export const UserProfile = () => {
 							/>
 						</div>
 						<div className="flex flex-col items-start justify-start">
-							<div className="pt-1 lg:text-[24px] text-[18px] font-bold whitespace-nowrap text-black">
-								{currentUser.name}
+							<div className="flex flex-row gap-3">
+								<div className="pt-1 lg:text-[24px] text-[18px] font-bold whitespace-nowrap text-black">
+									{currentUser.name}
+								</div>
+								{currentUser.role === UserRole.ORGANIZATION && (
+									<Badge
+										text="Organizer"
+										absolute={false}
+										className="h-fit my-auto text-xs"
+									/>
+								)}
 							</div>
 							<a
 								href={`mailto:${currentUser.email}`}
@@ -36,10 +85,17 @@ export const UserProfile = () => {
 							</div>
 							<div
 								className="mt-3 p-3 w-32 sm:w-fit text-center rounded-md drop-shadow-lg font-medium text-white bg-[#108B50] cursor-pointer"
-								onClick={() => console.log("Organizer")}
+								onClick={() => setModalVisible(true)}
 							>
 								Become an Organizer
 							</div>
+							<BecomeOrganizerModal
+								visible={modalVisible}
+								onCreate={(data) => becomeOrganizerConfirm(data)}
+								onCancel={() => {
+									setModalVisible(false);
+								}}
+							/>
 						</div>
 					</div>
 					<div className="block">
@@ -66,12 +122,17 @@ export const UserProfile = () => {
 					About
 				</div>
 				<hr className="text-[#858282C7] h-0.5 bg-[rgba(133,130,130,0.78)] w-full" />
-				<div className="flex flex-row md:w-1/2 xl:w-3/5 w-full justify-between">
-					<div className=" flex flex-col md:text-[16px] text-[14px]  font-medium items-start justify-start pt-5 text-[#0A1C5CA3]">
+				<div className="flex flex-row w-full">
+					<div className=" flex flex-col md:text-[16px] text-[14px]  font-medium items-start justify-start pt-5 pr-20 text-[#0A1C5CA3]">
 						<div className="pb-5">Email</div>
 						<div className="pb-5">Contact No</div>
 						<div className="pb-5">Address</div>
-						<div className="pb-5">Gender</div>
+						{currentUser.role !== UserRole.ORGANIZATION && (
+							<div className="pb-5">Gender</div>
+						)}
+						{currentUser.role === UserRole.ORGANIZATION && (
+							<div className="pb-5">Website</div>
+						)}
 					</div>
 					<div className=" flex flex-col md:text-[16px] text-[14px] font-medium items-start justify-start pt-5 text-[#00040EA3]">
 						<div className="pb-5">{currentUser.email}</div>
@@ -81,9 +142,16 @@ export const UserProfile = () => {
 						<div className="pb-5">
 							{currentUser.address ? currentUser.address : "UNKNOWN"}
 						</div>
-						<div className="pb-5">
-							{currentUser.gender ? currentUser.gender : "UNKNOWN"}
-						</div>
+						{currentUser.role !== UserRole.ORGANIZATION && (
+							<div className="pb-5">
+								{currentUser.gender ? currentUser.gender : "UNKNOWN"}
+							</div>
+						)}
+						{currentUser.role === UserRole.ORGANIZATION && (
+							<div className="pb-5">
+								{currentUser.website ? currentUser.website : "UNKNOWN"}
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

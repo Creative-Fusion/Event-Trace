@@ -2,11 +2,11 @@ import { MdPermIdentity } from "react-icons/md";
 import { BiPowerOff, BiHeart, BiCalendarEvent } from "react-icons/bi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { AiOutlineMenuUnfold, AiOutlineEdit } from "react-icons/ai";
-import user from "../dummy data/user";
 import { Layout, Menu, Divider } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { UserRole } from "../services/crud/user";
 const { Sider } = Layout;
 const SideBar = () => {
 	const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -75,8 +75,18 @@ const SideBar = () => {
 							>
 								Events
 							</Divider>
+							{currentUser.role === UserRole.ORGANIZATION && (
+								<Menu.Item
+									key="3"
+									icon={<BiCalendarEvent className="w-5 h-5" />}
+									onClick={() => navigate("/u/0/interested")}
+									className="font-medium"
+								>
+									Created Events
+								</Menu.Item>
+							)}
 							<Menu.Item
-								key="3"
+								key="4"
 								icon={<BiCalendarEvent className="w-5 h-5" />}
 								onClick={() => navigate("/u/0/interested")}
 								className="font-medium"
@@ -84,7 +94,7 @@ const SideBar = () => {
 								Registered Events
 							</Menu.Item>
 							<Menu.Item
-								key="4"
+								key="5"
 								icon={<BiHeart className="w-5 h-5" />}
 								onClick={() => navigate("/u/0/interested")}
 								className="font-medium"

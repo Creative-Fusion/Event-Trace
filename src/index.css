@@ -113,10 +113,6 @@ label span {
 	@apply p-2;
 }
 
-.ant-modal-footer button:first-child {
-	@apply hidden;
-}
-
 .ant-input-number-input,
 .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
 	@apply p-0;
@@ -147,6 +143,12 @@ label span {
 .ant-table-wrapper .ant-table-pagination{
 	@apply hidden;
 }
+.ant-modal-footer button:first-child {
+	@apply inline
+}
+.ant-modal-footer button.ant-btn-primary {
+	@apply text-primary hover:text-white
+} 
 /* .ant-btn.ant-btn-primary {
 	@apply text-primary font-semibold hover:text-white;
 } */

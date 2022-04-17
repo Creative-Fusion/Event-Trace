@@ -1,6 +1,6 @@
 import firebase from "firebase/compat/app";
 import { setLogin, setLogout } from "../redux/actions/userActions";
-import { createUser, queryUser } from "./crud/user";
+import { createUser, queryUser, UserRole } from "./crud/user";
 
 export const signIn = async (user, dispatch) => {
 	let currentUser = {
@@ -12,7 +12,7 @@ export const signIn = async (user, dispatch) => {
 		bio: null,
 		gender: null,
 		dob: null,
-		role: "user",
+		role: UserRole.USER,
 		interestedEvents: [],
 		registeredEvents: [],
 	};

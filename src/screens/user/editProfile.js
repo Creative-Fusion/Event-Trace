@@ -2,26 +2,28 @@ import React from "react";
 import { Avatar, Badge, Form, Input, Select, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { MdEdit } from "@react-icons/all-files/md/MdEdit";
-import { async } from "@firebase/util";
-import { updateUser } from "../../services/crud/user";
+import { updateUser, UserRole } from "../../services/crud/user";
+import { useNavigate } from "react-router-dom";
 
 export const EditProfile = () => {
 	const { currentUser } = useSelector((state) => state.users);
 	const rules = { required: true, message: "Invalid Detail." };
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const saveUser = async (u) => {
 		const updatedUser = {
 			name: `${u.firstName} ${u.lastName}`,
-			gender: u.gender,
 			email: currentUser.email,
 			address: u.address,
 			phone: u.phone,
 			bio: u.bio,
 		};
-		console.log(updatedUser);
+		if (currentUser.role === UserRole.USER) updatedUser.gender = u.gender;
+		if (currentUser.role === UserRole.ORGANIZATION)
+			updatedUser.website = u.website;
 		await updateUser(updatedUser, currentUser.id, dispatch);
-
-		message.success("User Updated");
+		message.success("Updated your account.");
+		navigate("/u/0/profile");
 	};
 
 	return (
@@ -40,6 +42,7 @@ export const EditProfile = () => {
 						: null,
 					email: `${currentUser.email}`,
 					gender: currentUser.gender ? `${currentUser.gender}` : null,
+					website: currentUser.website ? `${currentUser.website}` : null,
 					address: currentUser.address ? `${currentUser.address}` : null,
 					phone: currentUser.phone ? `${currentUser.phone}` : null,
 					bio: currentUser.bio ? `${currentUser.bio}` : null,
@@ -87,16 +90,23 @@ export const EditProfile = () => {
 						</Form.Item>
 					</div>
 					<div className="w-full sm:w-1/3 px-3">
-						<Form.Item label="Gender" name={"gender"} rules={[rules]}>
-							<Select
-								className="form-input py-2"
-								bordered={false}
-								placeholder="Gender"
-							>
-								<Select.Option value="Male">Male</Select.Option>
-								<Select.Option value="Female">Female</Select.Option>
-							</Select>
-						</Form.Item>
+						{currentUser.role === UserRole.USER && (
+							<Form.Item label="Gender" name={"gender"} rules={[rules]}>
+								<Select
+									className="form-input py-2"
+									bordered={false}
+									placeholder="Gender"
+								>
+									<Select.Option value="Male">Male</Select.Option>
+									<Select.Option value="Female">Female</Select.Option>
+								</Select>
+							</Form.Item>
+						)}
+						{currentUser.role === UserRole.ORGANIZATION && (
+							<Form.Item label="Website" name={"website"} rules={[rules]}>
+								<Input className="form-input" placeholder="Website" />
+							</Form.Item>
+						)}
 					</div>
 				</div>
 				<div className="flex flex-wrap">
