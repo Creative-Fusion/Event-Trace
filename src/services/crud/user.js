@@ -4,6 +4,7 @@ import {
 	getDocs,
 	addDoc,
 	updateDoc,
+	getDoc,
 	doc,
 	query,
 	where,
@@ -21,6 +22,11 @@ export const UserRole = {
 export const readUsers = async (user, dispatch) => {
 	const data = await getDocs(usersCollectionRef);
 	return data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+};
+
+export const readUserById = async (id) => {
+	const user = await getDoc(doc(usersCollectionRef, id));
+	return user.data();
 };
 
 export const queryUser = async (email) => {

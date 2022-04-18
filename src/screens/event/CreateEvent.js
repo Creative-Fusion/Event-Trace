@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import EventImage from "../../app-images/event1.png";
-import { EventRequest } from "../../request/eventRequest";
 import { useDispatch, useSelector } from "react-redux";
 import { categories } from "../../data/data";
-import { BsInfoCircle } from "react-icons/bs";
-import { createEvent as create } from "../../redux/actions/eventActions";
-import { ActionTypes } from "../../redux/constants/actionTypes";
 import {
 	Form,
 	Input,
@@ -15,18 +11,25 @@ import {
 	Checkbox,
 	DatePicker,
 	TimePicker,
-	Button,
 	message,
 } from "antd";
 import { DateTime } from "../../data/classes";
 import { createEvent } from "../../services/crud/events";
+import { useNavigate } from "react-router-dom";
 
 export const CreateEvent = () => {
 	const caption = "Create Your Own Event";
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const [loading, setLoading] = useState(false);
 	const { loggedIn, currentUser } = useSelector((state) => state.users);
+
+	const rules = { required: true, message: "Invalid Detail." };
+
+	const [selectedCategories, setCategories] = useState([]);
+	const [type, setType] = useState("Physical");
+	const [categoryModalVisible, setCategoryModalVisible] = useState(false);
 
 	const createEventWarning = () => {
 		let warn = false;
@@ -46,7 +49,7 @@ export const CreateEvent = () => {
 	useEffect(() => createEventWarning());
 
 	const saveEvent = async (e) => {
-		// setLoading(true);
+		setLoading(true);
 		const newEvent = {
 			name: e.name,
 			type: e.type,
@@ -54,29 +57,29 @@ export const CreateEvent = () => {
 			categories: selectedCategories,
 			coverImage: null,
 			location: e.type === "Physical" ? { location: e.location } : null,
-			participantLimit: e.participantLimit,
-			eventLink: e.type === "Virtual" ? e.eventLink : undefined,
+			participantLimit: e.participantLimit ? e.participantLimit : null,
+			eventLink: e.type === "Virtual" ? e.eventLink : null,
 			publish: true,
 			dateTime: {
-				startDate: DateTime.toStringDate(e.dates[0]),
-				endDate: DateTime.toStringDate(e.dates[1]),
+				startDate: DateTime.timestampDate(e.dates[0]),
+				endDate: DateTime.timestampDate(e.dates[1]),
 				startTime: DateTime.toStringTime(e.times[0]),
 				endTime: DateTime.toStringTime(e.times[1]),
 			},
+			createdAt: DateTime.timestampDate(DateTime.today(true)),
 			creator: {
-				id: null,
-				role: "Organization",
+				id: currentUser.id,
+				role: currentUser.role,
 			},
 			registeredUsers: [],
 		};
-		if (!createEventWarning) await createEvent(newEvent, dispatch);
+		if (!createEventWarning()) {
+			await createEvent(newEvent, dispatch);
+			message.success("Event Successfully created.");
+			setLoading(false);
+			navigate(`/e/${newEvent.name}/about`);
+		}
 	};
-
-	const rules = { required: true, message: "Invalid Detail." };
-
-	const [selectedCategories, setCategories] = useState([]);
-	const [type, setType] = useState("Physical");
-	const [categoryModalVisible, setCategoryModalVisible] = useState(false);
 
 	return (
 		<div className="lg:grid lg:grid-cols-2 w-full p-8">
@@ -200,25 +203,26 @@ export const CreateEvent = () => {
 						</Form.Item>
 					</div>
 				</div>
-				<p className="text-center text-red-600 italic">
+				{/* <p className="text-center text-red-600 italic">
 					***This event will be sent for review before publishing. <br />
 					It may take upto 48 hours.***
-				</p>
+				</p> */}
 				<div className="flex p-4">
-					{/* <button
-						className="filled-primary-btn justify-content-center m-auto"
-						disabled={disabled}
+					<button
+						className="filled-primary-btn justify-content-center m-auto py-3"
+						disabled={loading}
+						type="submit"
 					>
-						Create Event
-					</button> */}
-					<Button
+						{loading ? "Creating" : "Create Event"}
+					</button>
+					{/* <Button
 						type="primary"
-						className="filled-primary-btn m-auto"
-						loading={loading}
+						className="filled-primary-btn m-auto py-2"
+						disabled={loading}
 						htmlType={"submit"}
 					>
 						{loading ? "Creating" : "Create Event"}
-					</Button>
+					</Button> */}
 				</div>{" "}
 			</Form>
 		</div>

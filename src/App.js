@@ -1,21 +1,38 @@
 import { NavBar } from "./components/NavBar";
-import { Outlet, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { firebaseLoggedInUser, onAuthStateChanged } from "./services/firebase";
-import { signIn } from "./services/auth";
+import { Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { readEvents } from "./services/crud/events";
+import { SplashScreen } from "./splash";
+import { signIn } from "./services/auth";
+import firebase from "firebase/compat/app";
 
 function App() {
-	// useEffect(() => {
-	// 	onAuthStateChanged();
-	// 	const user = firebaseLoggedInUser();
-	// 	console.log(`USER: ${JSON.stringify(user)}`);
-	// 	user
-	// 		? signIn(user, dispatch).then(() => navigate("u/home"))
-	// 		: navigate("/home");
-	// 	// navigate("/admin");
-	// });
+	const dispatch = useDispatch();
+	const [loading1, setLoading1] = useState(true);
+	const [loading2, setLoading2] = useState(true);
 
+	useEffect(() => {
+		const unregisterAuthObserver = firebase
+			.auth()
+			.onAuthStateChanged(async (user) => {
+				if (user) {
+					await signIn(user, dispatch);
+				}
+				setLoading1(false);
+			});
+		console.log("Auth State");
+		return () => unregisterAuthObserver();
+	});
+
+	useEffect(() => {
+		readEvents(dispatch).then((events) => {
+			setLoading2(false);
+		});
+		console.log("Read Events");
+	});
+
+	if (loading1 && loading2) return <SplashScreen />;
 	return (
 		<div className="App">
 			<NavBar />

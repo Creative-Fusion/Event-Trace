@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { Badge } from "./Badge";
-
+import DefaultCover from "../app-images/DefaultCover.png";
+import { DateTime } from "../data/classes";
 export const EventCard = ({ event }) => {
 	const navigate = useNavigate();
 
 	const [interested, setInterested] = useState(false);
-
 	return (
 		<div className="shadow-lg max-w-xs min-w-[280px] rounded-sm overflow-hidden md:mr-8 mr-5 my-5 shrink hover:shadow-2xl ease-out-transition">
 			<div className="relative">
 				<img
-					src={event.coverImage}
+					src={event.coverImage ?? DefaultCover}
 					alt={event.name + "'s Cover Image"}
 					className="h-52 object-cover cursor-pointer"
 					onClick={() => navigate(`/e/${event.name}/about`)}
@@ -37,12 +37,15 @@ export const EventCard = ({ event }) => {
 			<div className="px-4 py-2">
 				<div className="text-left">
 					<h3
-						className="cursor-pointer"
+						className="cursor-pointer truncate"
 						onClick={() => navigate(`/e/${event.name}/about`)}
 					>
 						{event.name}
 					</h3>
-					<p>{event.dateTime.startDate}</p>
+					<p>
+						{DateTime.toStringDate(event.dateTime.startDate)} -{" "}
+						{DateTime.toStringDate(event.dateTime.endDate)}
+					</p>
 					{event.type === "Physical" && <p>{event.location.location}</p>}
 					{event.type === "Virtual" && <p>{event.eventLink}</p>}
 				</div>

@@ -1,13 +1,13 @@
 import React from "react";
-import { fakeEventList } from "../../data/fakeDB";
 import { EventList } from "../../components/eventList";
 import { useSelector } from "react-redux";
 
 export const HomeScreen = () => {
 	const { loggedIn } = useSelector((state) => state.users);
-	const allEvents = fakeEventList;
-	const interestedEvents = fakeEventList.slice(4, 10);
-	const registeredEvents = fakeEventList.slice(1, 5);
+	const { events, registeredEvents, interestedEvents } = useSelector(
+		(state) => state.events
+	);
+	console.log(events, registeredEvents, interestedEvents);
 	return (
 		<div className="h-full">
 			{loggedIn && (
@@ -26,7 +26,7 @@ export const HomeScreen = () => {
 					type="h"
 				/>
 			)}
-			<EventList title={"All Events"} to="/" events={allEvents} />
+			<EventList title={"All Events"} to="/" events={events} />
 		</div>
 	);
 };

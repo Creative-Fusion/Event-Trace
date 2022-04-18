@@ -8,7 +8,6 @@ import {
 	Checkbox,
 	DatePicker,
 	TimePicker,
-	Button,
 } from "antd";
 import { categories } from "../../../data/data";
 import { fake_event } from "../../../data/fakeDB";
@@ -163,14 +162,13 @@ export const Update = () => {
 					</div>
 				</div>
 				<div className="flex p-4">
-					<Button
-						type="primary"
-						className="filled-primary-btn w-24 mx-auto"
-						loading={loading}
-						htmlType={"submit"}
+					<button
+						className="filled-primary-btn justify-content-center m-auto py-3"
+						disabled={loading}
+						type="submit"
 					>
-						{loading ? "Saving" : "Save"}
-					</Button>
+						{loading ? "Creating" : "Create Event"}
+					</button>
 				</div>{" "}
 			</Form>
 		</div>

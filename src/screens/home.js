@@ -1,11 +1,9 @@
 import React from "react";
-import { fakeEventList } from "../data/fakeDB";
 import { EventList } from "../components/eventList";
 import HomePageImage from "../app-images/HomePage.jpg";
-
+import { useSelector } from "react-redux";
 export const Home = () => {
-	const eventList = fakeEventList;
-
+	const eventList = useSelector((state) => state.events.events);
 	return (
 		<div className="w-full">
 			<div className="relative w-full lg:h-[36rem] md:h-[32rem] h-[24rem]">
