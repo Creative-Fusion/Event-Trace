@@ -47,7 +47,7 @@ export const EditProfile = () => {
 					phone: currentUser.phone ? `${currentUser.phone}` : null,
 					bio: currentUser.bio ? `${currentUser.bio}` : null,
 				}}
-				onFinish={saveUser}
+				onFinish={(u) => saveUser(u)}
 			>
 				{/* //TODO: Upload Image */}
 				<Form.Item name={"profileImage"} className="w-fit mx-auto">

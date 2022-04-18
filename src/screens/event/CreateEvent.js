@@ -20,13 +20,21 @@ import {
 } from "antd";
 import { DateTime } from "../../data/classes";
 import { createEvent } from "../../services/crud/events";
+import { useNavigate } from "react-router-dom";
 
 export const CreateEvent = () => {
 	const caption = "Create Your Own Event";
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const [loading, setLoading] = useState(false);
 	const { loggedIn, currentUser } = useSelector((state) => state.users);
+
+	const rules = { required: true, message: "Invalid Detail." };
+
+	const [selectedCategories, setCategories] = useState([]);
+	const [type, setType] = useState("Physical");
+	const [categoryModalVisible, setCategoryModalVisible] = useState(false);
 
 	const createEventWarning = () => {
 		let warn = false;
@@ -46,7 +54,7 @@ export const CreateEvent = () => {
 	useEffect(() => createEventWarning());
 
 	const saveEvent = async (e) => {
-		// setLoading(true);
+		setLoading(true);
 		const newEvent = {
 			name: e.name,
 			type: e.type,
@@ -54,8 +62,8 @@ export const CreateEvent = () => {
 			categories: selectedCategories,
 			coverImage: null,
 			location: e.type === "Physical" ? { location: e.location } : null,
-			participantLimit: e.participantLimit,
-			eventLink: e.type === "Virtual" ? e.eventLink : undefined,
+			participantLimit: e.participantLimit ? e.participantLimit : null,
+			eventLink: e.type === "Virtual" ? e.eventLink : null,
 			publish: true,
 			dateTime: {
 				startDate: DateTime.toStringDate(e.dates[0]),
@@ -64,19 +72,18 @@ export const CreateEvent = () => {
 				endTime: DateTime.toStringTime(e.times[1]),
 			},
 			creator: {
-				id: null,
-				role: "Organization",
+				id: currentUser.id,
+				role: currentUser.role,
 			},
 			registeredUsers: [],
 		};
-		if (!createEventWarning) await createEvent(newEvent, dispatch);
+		if (!createEventWarning()) {
+			await createEvent(newEvent, dispatch);
+			message.success("Event Successfully created.");
+			setLoading(false);
+			navigate(`/e/${newEvent.name}/about`);
+		}
 	};
-
-	const rules = { required: true, message: "Invalid Detail." };
-
-	const [selectedCategories, setCategories] = useState([]);
-	const [type, setType] = useState("Physical");
-	const [categoryModalVisible, setCategoryModalVisible] = useState(false);
 
 	return (
 		<div className="lg:grid lg:grid-cols-2 w-full p-8">
@@ -200,25 +207,26 @@ export const CreateEvent = () => {
 						</Form.Item>
 					</div>
 				</div>
-				<p className="text-center text-red-600 italic">
+				{/* <p className="text-center text-red-600 italic">
 					***This event will be sent for review before publishing. <br />
 					It may take upto 48 hours.***
-				</p>
+				</p> */}
 				<div className="flex p-4">
-					{/* <button
-						className="filled-primary-btn justify-content-center m-auto"
-						disabled={disabled}
+					<button
+						className="filled-primary-btn justify-content-center m-auto py-3"
+						disabled={loading}
+						type="submit"
 					>
-						Create Event
-					</button> */}
-					<Button
+						{loading ? "Creating" : "Create Event"}
+					</button>
+					{/* <Button
 						type="primary"
-						className="filled-primary-btn m-auto"
-						loading={loading}
+						className="filled-primary-btn m-auto py-2"
+						disabled={loading}
 						htmlType={"submit"}
 					>
 						{loading ? "Creating" : "Create Event"}
-					</Button>
+					</Button> */}
 				</div>{" "}
 			</Form>
 		</div>

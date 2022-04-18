@@ -33,21 +33,7 @@ export const NavBar = () => {
 
 	const dispatch = useDispatch();
 
-	const [loggedIn, setLoggedIn] = useState(false);
-
-	useEffect(() => {
-		const unregisterAuthObserver = firebase
-			.auth()
-			.onAuthStateChanged(async (user) => {
-				if (user) {
-					await signIn(user, dispatch);
-					setLoggedIn(true);
-				}
-			});
-		return () => unregisterAuthObserver();
-	});
-
-	const { currentUser } = useSelector((state) => state.users);
+	const { loggedIn, currentUser } = useSelector((state) => state.users);
 
 	const userMenuContent = () => {
 		return (
@@ -93,9 +79,9 @@ export const NavBar = () => {
 				<li>
 					<button
 						className="flex items-center group py-1.5 border-t-2 mt-1 w-full"
-						onClick={() => {
+						onClick={async () => {
 							setUMVisible(false);
-							signOut(dispatch).then(() => setLoggedIn(false));
+							await signOut(dispatch);
 						}}
 					>
 						<IoLogOutOutline className="nav-icon group-hover:text-gray-500" />
@@ -147,6 +133,7 @@ export const NavBar = () => {
 					<StyledFirebaseAuth
 						uiConfig={uiConfig}
 						className="m-0"
+						// !Check
 						firebaseAuth={firebase.auth()}
 					/>
 				)}
@@ -156,7 +143,7 @@ export const NavBar = () => {
 							<FaBell className="nav-icon" />
 						</button>
 						<Popover
-							content={userMenuContent}
+							content={() => userMenuContent()}
 							trigger="click"
 							visible={umVisible}
 							onVisibleChange={(value) => setUMVisible(value)}

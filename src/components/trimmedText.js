@@ -12,12 +12,14 @@ export const TrimmedText = ({ text, length = 380 }) => {
 			{!seeMore && (
 				<p>
 					{trimmedText}{" "}
-					<span
-						className="text-blue-700 underline cursor-pointer"
-						onClick={() => setSeeMore(!seeMore)}
-					>
-						See More ↓
-					</span>
+					{text.length > length && (
+						<span
+							className="text-blue-700 underline cursor-pointer"
+							onClick={() => setSeeMore(!seeMore)}
+						>
+							See More ↓
+						</span>
+					)}
 				</p>
 			)}
 			{seeMore && (

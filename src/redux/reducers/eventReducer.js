@@ -2,6 +2,9 @@ import { ActionTypes } from "../constants/actionTypes";
 
 const initialState = {
 	events: [],
+	createdEvents: [],
+	registeredEvents: [],
+	interestedEvents: [],
 };
 
 export const eventReducer = (state = initialState, { type, payload }) => {
@@ -11,6 +14,7 @@ export const eventReducer = (state = initialState, { type, payload }) => {
 			return state;
 		case ActionTypes.EVENT.CREATE_EVENT:
 			state.events.push(payload);
+			state.createdEvents.push(payload);
 			return state;
 		default:
 			return state;

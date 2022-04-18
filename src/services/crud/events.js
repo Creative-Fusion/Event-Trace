@@ -6,13 +6,16 @@ import {
 	deleteDoc,
 	doc,
 } from "firebase/firestore";
+import { allEvents } from "../../redux/actions/eventActions";
 import { db } from "../firebase";
 
 const eventsCollectionRef = collection(db, "events");
 
-export const readEvents = async (event, dispatch) => {
+export const readEvents = async (dispatch) => {
 	const data = await getDocs(eventsCollectionRef);
-	console.log(data);
+	const events = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+	dispatch(allEvents(events));
+	return events;
 };
 
 export const createEvent = async (event, dispatch) => {

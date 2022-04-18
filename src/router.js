@@ -12,8 +12,6 @@ import { Participants } from "./screens/event/eventDescription/Participants";
 import { Update } from "./screens/event/eventDescription/Update";
 import App from "./App";
 import { AdminOverview } from "./screens/admin/overview";
-import { useSelector } from "react-redux";
-import { Redirect } from "./redirect";
 import { EditProfile } from "./screens/user/editProfile";
 import { UserProfile } from "./screens/user/UserProfile";
 import { UserEvents } from "./screens/user/UserEvents";

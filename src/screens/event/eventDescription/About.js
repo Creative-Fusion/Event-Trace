@@ -5,9 +5,9 @@ import { MdOutlineLocationOn } from "react-icons/md";
 import { Container } from "../../../components/container";
 import { IconedInfoList } from "../../../components/IconedInfoList";
 import { TrimmedText } from "../../../components/trimmedText";
-import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { BsBookmark, BsBookmarkFill, BsGlobe2 } from "react-icons/bs";
 import { Badge } from "../../../components/Badge";
-import { fake_event } from "../../../data/fakeDB";
+import { useGetEvent } from "./eventFunctions";
 
 const CategoryTag = ({ category }) => {
 	return (
@@ -19,7 +19,35 @@ const CategoryTag = ({ category }) => {
 
 export const About = () => {
 	const [interested, setInterested] = useState(false);
-	const event = fake_event;
+	// !Check
+	const event = useGetEvent();
+
+	const infoList = () => {
+		const list = [
+			{
+				value: `${event.dateTime.startDate} - ${event.dateTime.endDate}`,
+				icon: <BiCalendarStar className="w-6 h-6" />,
+			},
+			{
+				value: `${event.dateTime.startTime} - ${event.dateTime.endTime}`,
+				icon: <FiClock className="w-6 h-6" />,
+			},
+		];
+		if (event.type === "Physical")
+			list.push({
+				value: event.location.location,
+				icon: <MdOutlineLocationOn className="w-6 h-6" />,
+			});
+		else {
+			if (event.website)
+				list.push({
+					value: event.website,
+					icon: <BsGlobe2 className="w-6 h-6" />,
+				});
+		}
+		return list;
+	};
+
 	return (
 		<div className="md:w-4/6 w-9/12 mx-auto">
 			<div className="md:grid md:grid-cols-5 lg:gap-20 gap-10">
@@ -33,22 +61,7 @@ export const About = () => {
 					<div className="pt-2 pb-5">
 						<TrimmedText text={event.description} />
 					</div>
-					<IconedInfoList
-						list={[
-							{
-								value: `${event.dateTime.startDate} - ${event.dateTime.endDate}`,
-								icon: <BiCalendarStar className="w-6 h-6" />,
-							},
-							{
-								value: `${event.dateTime.startTime} - ${event.dateTime.endTime}`,
-								icon: <FiClock className="w-6 h-6" />,
-							},
-							{
-								value: event.location.location,
-								icon: <MdOutlineLocationOn className="w-6 h-6" />,
-							},
-						]}
-					/>
+					<IconedInfoList list={() => infoList()} />
 				</div>
 				<div className="flex col-span-2 md:w-full xs:w-[300px] max-h-[380px] mx-auto">
 					<Container>
