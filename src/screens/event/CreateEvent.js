@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import EventImage from "../../app-images/event1.png";
-import { EventRequest } from "../../request/eventRequest";
 import { useDispatch, useSelector } from "react-redux";
 import { categories } from "../../data/data";
-import { BsInfoCircle } from "react-icons/bs";
-import { createEvent as create } from "../../redux/actions/eventActions";
-import { ActionTypes } from "../../redux/constants/actionTypes";
 import {
 	Form,
 	Input,
@@ -15,7 +11,6 @@ import {
 	Checkbox,
 	DatePicker,
 	TimePicker,
-	Button,
 	message,
 } from "antd";
 import { DateTime } from "../../data/classes";
@@ -66,11 +61,12 @@ export const CreateEvent = () => {
 			eventLink: e.type === "Virtual" ? e.eventLink : null,
 			publish: true,
 			dateTime: {
-				startDate: DateTime.toStringDate(e.dates[0]),
-				endDate: DateTime.toStringDate(e.dates[1]),
+				startDate: DateTime.timestampDate(e.dates[0]),
+				endDate: DateTime.timestampDate(e.dates[1]),
 				startTime: DateTime.toStringTime(e.times[0]),
 				endTime: DateTime.toStringTime(e.times[1]),
 			},
+			createdAt: DateTime.timestampDate(DateTime.today(true)),
 			creator: {
 				id: currentUser.id,
 				role: currentUser.role,

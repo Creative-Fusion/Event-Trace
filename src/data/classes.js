@@ -1,9 +1,23 @@
+import { Timestamp } from "firebase/firestore";
 import moment from "moment";
 
 // ------------------DateTime
 export class DateTime {
+	static today = (inMoment) => {
+		if (!inMoment) return this.toStringDate(moment());
+		else return moment();
+	};
+
+	static formattedDate = (date) => {
+		return moment(date.seconds * 1000).format("dddd, MMMM DD, YYYY");
+	};
+
+	static timestampDate = (date) => {
+		return Timestamp.fromDate(new Date(date));
+	};
+
 	static toStringDate = (date) => {
-		return date.format("YYYY-MM-DD");
+		return moment(date.seconds * 1000).format("D MMM, YYYY");
 	};
 
 	static toStringTime = (time) => {
@@ -11,11 +25,25 @@ export class DateTime {
 	};
 
 	static toMomentDate = (date) => {
-		return moment(date);
+		return moment(date.seconds * 1000);
 	};
 
 	static toMomentTime = (time) => {
 		return moment(moment().format("YYYY-MM-DD") + " " + time);
+	};
+
+	/**
+	 *
+	 * @param {String} date Date to be checked
+	 * @param {String} pivot checkpoint - Defaults to today
+	 * @returns Boolean
+	 */
+	static isBefore = (date, pivot = this.today()) => {
+		return moment(date.seconds * 1000).isBefore(pivot);
+	};
+
+	static isSame = (date1, date2) => {
+		return moment(date1.seconds * 1000).isSame(date2.seconds * 1000);
 	};
 
 	static disabledDate(current) {

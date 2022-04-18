@@ -3,12 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { Badge } from "./Badge";
 import DefaultCover from "../app-images/DefaultCover.png";
-
+import { DateTime } from "../data/classes";
 export const EventCard = ({ event }) => {
 	const navigate = useNavigate();
 
 	const [interested, setInterested] = useState(false);
-
 	return (
 		<div className="shadow-lg max-w-xs min-w-[280px] rounded-sm overflow-hidden md:mr-8 mr-5 my-5 shrink hover:shadow-2xl ease-out-transition">
 			<div className="relative">
@@ -43,7 +42,10 @@ export const EventCard = ({ event }) => {
 					>
 						{event.name}
 					</h3>
-					<p>{event.dateTime.startDate}</p>
+					<p>
+						{DateTime.toStringDate(event.dateTime.startDate)} -{" "}
+						{DateTime.toStringDate(event.dateTime.endDate)}
+					</p>
 					{event.type === "Physical" && <p>{event.location.location}</p>}
 					{event.type === "Virtual" && <p>{event.eventLink}</p>}
 				</div>

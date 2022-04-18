@@ -5,9 +5,17 @@ import { MdOutlineLocationOn } from "react-icons/md";
 import { Container } from "../../../components/container";
 import { IconedInfoList } from "../../../components/IconedInfoList";
 import { TrimmedText } from "../../../components/trimmedText";
-import { BsBookmark, BsBookmarkFill, BsGlobe2 } from "react-icons/bs";
+import {
+	BsBookmark,
+	BsBookmarkFill,
+	BsGlobe2,
+	BsStarFill,
+} from "react-icons/bs";
 import { Badge } from "../../../components/Badge";
 import { useGetEvent } from "./eventFunctions";
+import { useSelector } from "react-redux";
+import { DateTime } from "../../../data/classes";
+import { message } from "antd";
 
 const CategoryTag = ({ category }) => {
 	return (
@@ -19,13 +27,26 @@ const CategoryTag = ({ category }) => {
 
 export const About = () => {
 	const [interested, setInterested] = useState(false);
-	// !Check
 	const event = useGetEvent();
+	const { loggedIn, currentUser } = useSelector((state) => state.users);
+
+	const conditions = () => {
+		let state = { disabled: true, message: "" };
+		if (!loggedIn) state.message = "Please login to perform this action.";
+		else if (currentUser.id === event.creator.id)
+			state.message = "You cannot perform this action.";
+		else if (DateTime.isBefore(event.dateTime.startDate))
+			state.message = "This event has already been conducted.";
+		else state.disabled = false;
+		return state;
+	};
 
 	const infoList = () => {
 		const list = [
 			{
-				value: `${event.dateTime.startDate} - ${event.dateTime.endDate}`,
+				value: `${DateTime.formattedDate(
+					event.dateTime.startDate
+				)} - ${DateTime.formattedDate(event.dateTime.endDate)}`,
 				icon: <BiCalendarStar className="w-6 h-6" />,
 			},
 			{
@@ -47,6 +68,21 @@ export const About = () => {
 		}
 		return list;
 	};
+	let avail = conditions();
+
+	const addToInterested = () => {
+		if (avail.disabled) message.error(avail.message);
+		else {
+			console.log("Add TO INTERESTED");
+		}
+	};
+
+	const addToRegistered = () => {
+		if (avail.disabled) message.error(avail.message);
+		else {
+			console.log("Add TO REGISTERED");
+		}
+	};
 
 	return (
 		<div className="md:w-4/6 w-9/12 mx-auto">
@@ -61,7 +97,7 @@ export const About = () => {
 					<div className="pt-2 pb-5">
 						<TrimmedText text={event.description} />
 					</div>
-					<IconedInfoList list={() => infoList()} />
+					<IconedInfoList list={infoList()} />
 				</div>
 				<div className="flex col-span-2 md:w-full xs:w-[300px] max-h-[380px] mx-auto">
 					<Container>
@@ -78,19 +114,37 @@ export const About = () => {
 									{!event.fee && <p>Free</p>}
 									<hr className="bg-gradient-to-r border-2 from-[#FBFBFB] via-[#6C6C6C] to-[#FBFBFB]" />
 								</div>
-								<button
-									className="flex items-center place-content-center outlined-primary-btn w-full mt-4 mb-2 py-2"
-									onClick={() => setInterested(!interested)}
-								>
-									Add to Favourites{" "}
-									<span className="pl-1">
-										{!interested && <BsBookmark className="w-5 h-5" />}
-										{interested && <BsBookmarkFill className="w-5 h-5" />}
-									</span>
-								</button>
-								<button className="filled-primary-btn py-3 w-full">
-									Register
-								</button>
+								{currentUser.id !== event.creator.id && (
+									<div>
+										<button
+											className="flex items-center place-content-center outlined-primary-btn w-full mt-4 mb-2 py-2"
+											onClick={() => addToInterested()}
+											disabled={avail.disabled}
+										>
+											Add to Favourites{" "}
+											<span className="pl-1">
+												{!interested && <BsBookmark className="w-5 h-5" />}
+												{interested && <BsBookmarkFill className="w-5 h-5" />}
+											</span>
+										</button>
+										<button
+											disabled={avail.disabled}
+											className="filled-primary-btn py-3 w-full"
+											onClick={() => addToRegistered()}
+										>
+											Register
+										</button>
+									</div>
+								)}
+								{currentUser.id === event.creator.id && (
+									<Badge
+										text="Organizer"
+										absolute={false}
+										icon={<BsStarFill className="w-4 h-4" />}
+										bgColor="bg-green-700"
+										className="h-fit my-auto mt-4 py-2.5"
+									/>
+								)}
 							</div>
 						</div>
 					</Container>

@@ -8,7 +8,6 @@ import {
 	Checkbox,
 	DatePicker,
 	TimePicker,
-	Button,
 } from "antd";
 import { categories } from "../../../data/data";
 import { fake_event } from "../../../data/fakeDB";

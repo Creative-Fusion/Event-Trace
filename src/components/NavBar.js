@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Brand from "./Brand";
 import { Link, NavLink } from "react-router-dom";
 import firebase from "firebase/compat/app";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { uiConfig } from "../services/firebase";
-import { signIn, signOut } from "../services/auth";
+import { signOut } from "../services/auth";
 import { useDispatch, useSelector } from "react-redux";
 // Icons
 import { FaBars, FaBell, FaUserCircle } from "react-icons/fa";

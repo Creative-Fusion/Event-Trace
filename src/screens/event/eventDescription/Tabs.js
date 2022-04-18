@@ -6,7 +6,6 @@ import { useGetEvent } from "./eventFunctions";
 
 export const Tabs = () => {
 	const { currentUser } = useSelector((state) => state.users);
-	// !Check
 	const event = useGetEvent();
 	const isOrganizer = currentUser.id === event.creator.id;
 	return (

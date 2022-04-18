@@ -1,3 +1,4 @@
+import { message } from "antd";
 import {
 	collection,
 	getDocs,
@@ -5,8 +6,14 @@ import {
 	updateDoc,
 	deleteDoc,
 	doc,
+	arrayUnion,
+	query,
+	where,
 } from "firebase/firestore";
-import { allEvents } from "../../redux/actions/eventActions";
+import {
+	allEvents,
+	createEvent as create,
+} from "../../redux/actions/eventActions";
 import { db } from "../firebase";
 
 const eventsCollectionRef = collection(db, "events");
@@ -17,10 +24,32 @@ export const readEvents = async (dispatch) => {
 	dispatch(allEvents(events));
 	return events;
 };
+export const readEventByName = async (name) => {
+	let event = null;
+	const events = await getDocs(
+		query(eventsCollectionRef, where("name", "==", name))
+	);
+	events.forEach((doc) => {
+		event = { ...doc.data(), id: doc.id };
+	});
+	return event;
+};
 
 export const createEvent = async (event, dispatch) => {
-	await addDoc(eventsCollectionRef, event);
-	console.log("Added");
+	try {
+		const existingEvent = await readEventByName(event.name);
+		console.log(existingEvent);
+		if (existingEvent) {
+			throw Error(`Event with name ${event.name} already exists`);
+		}
+		const userRef = doc(db, "users", event.creator.id);
+		const createdEvent = await addDoc(eventsCollectionRef, event);
+		await updateDoc(userRef, { createdEvents: arrayUnion(createdEvent.id) });
+		dispatch(create({ ...event, id: createdEvent.id }));
+	} catch (e) {
+		console.log(e);
+		message.error(e);
+	}
 };
 
 export const updateEvent = async (data, id, dispatch) => {

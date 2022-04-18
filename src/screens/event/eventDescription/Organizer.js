@@ -1,21 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Container } from "../../../components/container";
 import { IconedInfoList } from "../../../components/IconedInfoList";
 import { checkContactLinks } from "../../../data/functions";
 import { ConnectIcons } from "../../../components/connectIcons";
 import { TrimmedText } from "../../../components/trimmedText";
-import { useGetEvent, getOrganizer } from "./eventFunctions";
+import { useGetEvent } from "./eventFunctions";
 import { SplashScreen } from "../../../splash";
 import { Avatar } from "antd";
-
+import { readUserById } from "../../../services/crud/user";
 export const Organizer = () => {
 	const [organizer, setOrganizer] = useState(null);
-	//!Check
 	const event = useGetEvent();
-	//*Updated
-	useEffect(() =>
-		getOrganizer(event.creator.id).then((value) => setOrganizer(value))
-	);
+
+	const getOrganizer = useCallback(async (id) => {
+		const data = await readUserById(id);
+		setOrganizer(data);
+	}, []);
+
+	useEffect(() => {
+		getOrganizer(event.creator.id).catch(console.error);
+	}, [getOrganizer, event]);
+
 	if (!organizer) return <SplashScreen />;
 
 	const contactLinks = checkContactLinks(organizer);

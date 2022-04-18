@@ -9,7 +9,8 @@ import firebase from "firebase/compat/app";
 
 function App() {
 	const dispatch = useDispatch();
-	const [loading, setLoading] = useState(0);
+	const [loading1, setLoading1] = useState(true);
+	const [loading2, setLoading2] = useState(true);
 
 	useEffect(() => {
 		const unregisterAuthObserver = firebase
@@ -18,18 +19,20 @@ function App() {
 				if (user) {
 					await signIn(user, dispatch);
 				}
-				setLoading((prev) => prev + 1);
+				setLoading1(false);
 			});
+		console.log("Auth State");
 		return () => unregisterAuthObserver();
 	});
 
 	useEffect(() => {
 		readEvents(dispatch).then((events) => {
-			setLoading((prev) => prev + 1);
+			setLoading2(false);
 		});
+		console.log("Read Events");
 	});
 
-	if (loading < 2) return <SplashScreen />;
+	if (loading1 && loading2) return <SplashScreen />;
 	return (
 		<div className="App">
 			<NavBar />
