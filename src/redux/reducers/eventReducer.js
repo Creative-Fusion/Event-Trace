@@ -16,6 +16,10 @@ export const eventReducer = (state = initialState, { type, payload }) => {
 			state.events.push(payload);
 			state.createdEvents.push(payload);
 			return state;
+		case ActionTypes.EVENT.UPDATE_EVENT:
+			state.events = state.events.filter((event) => event.id !== payload.id);
+			state.events.unshift(payload);
+			return state;
 		default:
 			return state;
 	}

@@ -19,7 +19,7 @@ export const uiConfig = {
 	signInFlow: "popup",
 	// We will display Google and Facebook as auth providers.
 	signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
-	// signInSuccessUrl: "http://facebook.com",
+	signInSuccessUrl: "http://localhost:3000/u/home",
 	callbacks: {
 		signInSuccessWithAuthResult: () => false,
 	},

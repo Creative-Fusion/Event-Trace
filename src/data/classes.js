@@ -39,7 +39,7 @@ export class DateTime {
 	 * @returns Boolean
 	 */
 	static isBefore = (date, pivot = this.today()) => {
-		return moment(date.seconds * 1000).isBefore(pivot);
+		return moment(date.seconds * 1000).isSameOrBefore(pivot);
 	};
 
 	static isSame = (date1, date2) => {

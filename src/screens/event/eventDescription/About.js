@@ -110,8 +110,10 @@ export const About = () => {
 							</div>
 							<div className="w-full my-3">
 								<div className="text-center text-[#6C6C6C] font-semibold text-sm opacity-70">
-									{event.fee && <p>Nrs. {event.fee} per entry</p>}
-									{!event.fee && <p>Free</p>}
+									{event.fee !== null && event.fee !== 0 && (
+										<p>{`Nrs. ${event.fee} per entry`}</p>
+									)}
+									{(event.fee === null || event.fee === 0) && <p>Free</p>}
 									<hr className="bg-gradient-to-r border-2 from-[#FBFBFB] via-[#6C6C6C] to-[#FBFBFB]" />
 								</div>
 								{currentUser.id !== event.creator.id && (

@@ -25,7 +25,7 @@ export const EventTraceRouter = () => {
 				{/* <UserRoutes /> */}
 				<Route path="/" element={<App />}>
 					{/* <Route path="/redirect" element={<Redirect />} /> */}
-					<Route index element={<Navigate to="u/home" />} />
+					<Route index element={<Navigate to="home" />} />
 					{/* INDEX */}
 					{/* USER */}
 					<Route path="home" element={<Home />} />
@@ -40,6 +40,7 @@ export const EventTraceRouter = () => {
 					<Route path="e" element={<Home />} />
 					<Route path="e/create" element={<CreateEvent />} />
 					<Route path="e/:eventId" element={<EventDescription />}>
+						<Route index element={<Navigate to={"about"} />} />
 						<Route path="about" element={<About />} />
 						<Route path="organizer" element={<Organizer />} />
 						<Route path="participants" element={<Participants />} />

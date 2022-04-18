@@ -7,6 +7,13 @@ export const createEvent = (event) => {
 	};
 };
 
+export const updateEvent = (event) => {
+	return {
+		type: ActionTypes.EVENT.UPDATE_EVENT,
+		payload: event,
+	};
+};
+
 export const allEvents = (events) => {
 	return {
 		type: ActionTypes.EVENT.ALL_EVENTS,

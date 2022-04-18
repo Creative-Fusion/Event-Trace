@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Brand from "./Brand";
-import { Link, NavLink } from "react-router-dom";
+import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
 import firebase from "firebase/compat/app";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { uiConfig } from "../services/firebase";
@@ -32,7 +32,7 @@ export const NavBar = () => {
 	});
 
 	const dispatch = useDispatch();
-
+	const navigate = useNavigate();
 	const { loggedIn, currentUser } = useSelector((state) => state.users);
 
 	const userMenuContent = () => {
@@ -82,6 +82,7 @@ export const NavBar = () => {
 						onClick={async () => {
 							setUMVisible(false);
 							await signOut(dispatch);
+							navigate("/");
 						}}
 					>
 						<IoLogOutOutline className="nav-icon group-hover:text-gray-500" />

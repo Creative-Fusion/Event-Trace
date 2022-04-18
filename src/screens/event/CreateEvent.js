@@ -56,6 +56,7 @@ export const CreateEvent = () => {
 			description: e.description,
 			categories: selectedCategories,
 			coverImage: null,
+			fee: null,
 			location: e.type === "Physical" ? { location: e.location } : null,
 			participantLimit: e.participantLimit ? e.participantLimit : null,
 			eventLink: e.type === "Virtual" ? e.eventLink : null,

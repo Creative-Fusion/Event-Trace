@@ -9,10 +9,12 @@ import {
 	arrayUnion,
 	query,
 	where,
+	getDoc,
 } from "firebase/firestore";
 import {
 	allEvents,
 	createEvent as create,
+	updateEvent as update,
 } from "../../redux/actions/eventActions";
 import { db } from "../firebase";
 
@@ -38,9 +40,8 @@ export const readEventByName = async (name) => {
 export const createEvent = async (event, dispatch) => {
 	try {
 		const existingEvent = await readEventByName(event.name);
-		console.log(existingEvent);
 		if (existingEvent) {
-			throw Error(`Event with name ${event.name} already exists`);
+			throw `Event with name ${event.name} already exists.`;
 		}
 		const userRef = doc(db, "users", event.creator.id);
 		const createdEvent = await addDoc(eventsCollectionRef, event);
@@ -53,9 +54,19 @@ export const createEvent = async (event, dispatch) => {
 };
 
 export const updateEvent = async (data, id, dispatch) => {
-	const document = doc(db, "events", id);
-	await updateDoc(document, data);
-	console.log("Updated");
+	try {
+		const existingEvent = await readEventByName(data.name);
+		if (existingEvent && existingEvent.id !== id) {
+			message.error(`Event with name ${data.name} already exists.`);
+		}
+		const document = doc(db, "events", id);
+		await updateDoc(document, data);
+		const updatedDoc = await getDoc(document);
+		dispatch(update({ ...updatedDoc.data(), id: updatedDoc.id }));
+	} catch (error) {
+		console.log(error);
+		// message.error(error);
+	}
 };
 
 export const deleteEvent = async (id, dispatch) => {

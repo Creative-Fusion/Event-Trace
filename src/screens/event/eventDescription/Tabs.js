@@ -42,7 +42,7 @@ export const Tabs = () => {
 					</Menu.Item>
 				)}
 			</Menu>
-			<Outlet />
+			{event && <Outlet />}
 		</div>
 	);
 };
