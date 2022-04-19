@@ -26,7 +26,7 @@ export const readUsers = async (user, dispatch) => {
 
 export const readUserById = async (id) => {
 	const user = await getDoc(doc(usersCollectionRef, id));
-	return user.data();
+	return { ...user.data(), id: user.id };
 };
 
 export const queryUser = async (email) => {
@@ -47,9 +47,9 @@ export const queryUser = async (email) => {
 
 export const createUser = async (user) => {
 	try {
-		await addDoc(usersCollectionRef, user);
-		const newUser = await queryUser(user.email);
-		return newUser;
+		const doc = await addDoc(usersCollectionRef, user);
+		// const newUser = await queryUser(user.email);
+		return { ...user, id: doc.id };
 	} catch (e) {
 		message.error("Unable to create account.");
 		console.log(e);
@@ -60,7 +60,7 @@ export const updateUser = async (data, id, dispatch) => {
 	try {
 		const document = doc(db, "users", id);
 		await updateDoc(document, data);
-		const updatedUser = queryUser(data.email);
+		const updatedUser = await readUserById(id);
 		dispatch(updateCurrentUser(updatedUser));
 	} catch (e) {
 		message.error("Unable to update user details.");

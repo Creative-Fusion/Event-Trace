@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Brand from "./Brand";
-import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import firebase from "firebase/compat/app";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { uiConfig } from "../services/firebase";
@@ -147,6 +147,7 @@ export const NavBar = () => {
 							content={() => userMenuContent()}
 							trigger="click"
 							visible={umVisible}
+							placement="bottomRight"
 							onVisibleChange={(value) => setUMVisible(value)}
 						>
 							<div className="ml-4 flex items-center group">

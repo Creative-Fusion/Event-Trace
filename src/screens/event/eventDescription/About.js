@@ -12,10 +12,16 @@ import {
 	BsStarFill,
 } from "react-icons/bs";
 import { Badge } from "../../../components/Badge";
-import { useGetEvent } from "./eventFunctions";
-import { useSelector } from "react-redux";
+import {
+	addToInterested,
+	addToRegistered,
+	useGetEvent,
+} from "./eventFunctions";
+import { useDispatch, useSelector } from "react-redux";
 import { DateTime } from "../../../data/classes";
+import { eventActionConditions } from "../../../data/functions";
 import { message } from "antd";
+import { async } from "@firebase/util";
 
 const CategoryTag = ({ category }) => {
 	return (
@@ -26,21 +32,10 @@ const CategoryTag = ({ category }) => {
 };
 
 export const About = () => {
-	const [interested, setInterested] = useState(false);
+	// const [interested, setInterested] = useState(false);
 	const event = useGetEvent();
 	const { loggedIn, currentUser } = useSelector((state) => state.users);
-
-	const conditions = () => {
-		let state = { disabled: true, message: "" };
-		if (!loggedIn) state.message = "Please login to perform this action.";
-		else if (currentUser.id === event.creator.id)
-			state.message = "You cannot perform this action.";
-		else if (DateTime.isBefore(event.dateTime.startDate))
-			state.message = "This event has already been conducted.";
-		else state.disabled = false;
-		return state;
-	};
-
+	const dispatch = useDispatch();
 	const infoList = () => {
 		const list = [
 			{
@@ -68,22 +63,26 @@ export const About = () => {
 		}
 		return list;
 	};
-	let avail = conditions();
 
-	const addToInterested = () => {
-		if (avail.disabled) message.error(avail.message);
-		else {
-			console.log("Add TO INTERESTED");
-		}
+	let actionDisabled = eventActionConditions(loggedIn, currentUser, event);
+	let [interested, setInterested] = useState(
+		currentUser.id ? currentUser.interestedEvents.includes(event.id) : false
+	);
+	let [registered, setRegistered] = useState(
+		currentUser.id ? currentUser.registeredEvents.includes(event.id) : false
+	);
+
+	const toggleInterested = async () => {
+		if (actionDisabled.disabled) message.error(actionDisabled.message);
+		else await addToInterested(event, currentUser, dispatch);
+		setInterested(!interested);
 	};
 
-	const addToRegistered = () => {
-		if (avail.disabled) message.error(avail.message);
-		else {
-			console.log("Add TO REGISTERED");
-		}
+	const toggleRegistered = async () => {
+		if (actionDisabled.disabled) message.error(actionDisabled.message);
+		else await addToRegistered(event, currentUser, dispatch);
+		setRegistered(!registered);
 	};
-
 	return (
 		<div className="md:w-4/6 w-9/12 mx-auto">
 			<div className="md:grid md:grid-cols-5 lg:gap-20 gap-10">
@@ -120,21 +119,21 @@ export const About = () => {
 									<div>
 										<button
 											className="flex items-center place-content-center outlined-primary-btn w-full mt-4 mb-2 py-2"
-											onClick={() => addToInterested()}
-											disabled={avail.disabled}
+											onClick={() => toggleInterested()}
+											disabled={actionDisabled.disabled}
 										>
-											Add to Favourites{" "}
+											{interested ? "Interested" : "Add to Interested"}
 											<span className="pl-1">
 												{!interested && <BsBookmark className="w-5 h-5" />}
 												{interested && <BsBookmarkFill className="w-5 h-5" />}
 											</span>
 										</button>
 										<button
-											disabled={avail.disabled}
+											disabled={actionDisabled.disabled}
 											className="filled-primary-btn py-3 w-full"
-											onClick={() => addToRegistered()}
+											onClick={() => toggleRegistered()}
 										>
-											Register
+											{registered ? "Registered" : "Register"}
 										</button>
 									</div>
 								)}

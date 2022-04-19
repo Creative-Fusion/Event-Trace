@@ -83,12 +83,14 @@ export const UserProfile = () => {
 									{currentUser.address ? currentUser.address : "UNKNOWN"}
 								</span>
 							</div>
-							<div
-								className="mt-3 p-3 w-32 sm:w-fit text-center rounded-md drop-shadow-lg font-medium text-white bg-[#108B50] cursor-pointer"
-								onClick={() => setModalVisible(true)}
-							>
-								Become an Organizer
-							</div>
+							{currentUser.role === UserRole.USER && (
+								<div
+									className="mt-3 p-3 w-32 sm:w-fit text-center rounded-md drop-shadow-lg font-medium text-white bg-[#108B50] cursor-pointer"
+									onClick={() => setModalVisible(true)}
+								>
+									Become an Organizer
+								</div>
+							)}
 							<BecomeOrganizerModal
 								visible={modalVisible}
 								onCreate={(data) => becomeOrganizerConfirm(data)}

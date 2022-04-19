@@ -1,13 +1,26 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { Menu } from "antd";
+import { Menu, Alert } from "antd";
 import { useSelector } from "react-redux";
 import { useGetEvent } from "./eventFunctions";
+import { DateTime } from "../../../data/classes";
 
 export const Tabs = () => {
 	const { currentUser } = useSelector((state) => state.users);
 	const event = useGetEvent();
 	const isOrganizer = currentUser.id === event.creator.id;
+	const checkConductedEvent = () => {
+		let state = { disabled: true, message: "" };
+		if (DateTime.isBetween(event.dateTime.startDate, event.dateTime.endDate))
+			state.message = "This event is currently being conducted.";
+		else if (DateTime.isBefore(event.dateTime.endDate))
+			state.message = "This event has already been conducted.";
+		else state.disabled = false;
+		return state;
+	};
+
+	const conducted = checkConductedEvent();
+
 	return (
 		<div className="pb-6">
 			<Menu
@@ -42,6 +55,11 @@ export const Tabs = () => {
 					</Menu.Item>
 				)}
 			</Menu>
+			{conducted.disabled && (
+				<div className="lg:w-2/6 md:3/6 sm:w-3/6 xs:w-4/6 w-5/6 mx-auto mb-3">
+					<Alert message={conducted.message} type="info" showIcon />
+				</div>
+			)}
 			{event && <Outlet />}
 		</div>
 	);

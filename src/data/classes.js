@@ -3,13 +3,18 @@ import moment from "moment";
 
 // ------------------DateTime
 export class DateTime {
-	static today = (inMoment) => {
-		if (!inMoment) return this.toStringDate(moment());
-		else return moment();
+	static today = ({ inMoment, inTimestamp }) => {
+		if (inMoment) return moment();
+		if (inTimestamp) return Timestamp.now();
+		else return this.toStringDate(moment());
+	};
+
+	static timestampToMoment = (date) => {
+		return moment(date.seconds * 1000);
 	};
 
 	static formattedDate = (date) => {
-		return moment(date.seconds * 1000).format("dddd, MMMM DD, YYYY");
+		return this.timestampToMoment(date).format("dddd, MMMM DD, YYYY");
 	};
 
 	static timestampDate = (date) => {
@@ -17,7 +22,7 @@ export class DateTime {
 	};
 
 	static toStringDate = (date) => {
-		return moment(date.seconds * 1000).format("D MMM, YYYY");
+		return this.timestampToMoment(date).format("D MMM, YYYY");
 	};
 
 	static toStringTime = (time) => {
@@ -25,7 +30,7 @@ export class DateTime {
 	};
 
 	static toMomentDate = (date) => {
-		return moment(date.seconds * 1000);
+		return this.timestampToMoment(date);
 	};
 
 	static toMomentTime = (time) => {
@@ -38,12 +43,32 @@ export class DateTime {
 	 * @param {String} pivot checkpoint - Defaults to today
 	 * @returns Boolean
 	 */
-	static isBefore = (date, pivot = this.today()) => {
-		return moment(date.seconds * 1000).isSameOrBefore(pivot);
+	static isBefore = (date, pivot = this.today({ inTimestamp: true })) => {
+		return this.timestampToMoment(date).isBefore(this.timestampToMoment(pivot));
+	};
+	/**
+	 *
+	 * @param {String} date Date to be checked
+	 * @param {String} pivot checkpoint - Defaults to today
+	 * @returns Boolean
+	 */
+	static isAfter = (date, pivot = this.today({ inTimestamp: true })) => {
+		return this.timestampToMoment(date).isAfter(this.timestampToMoment(pivot));
 	};
 
 	static isSame = (date1, date2) => {
-		return moment(date1.seconds * 1000).isSame(date2.seconds * 1000);
+		return this.timestampToMoment(date1).isSame(this.timestampToMoment(date2));
+	};
+
+	static isBetween = (
+		date1,
+		date2,
+		pivot = this.today({ inTimestamp: true })
+	) => {
+		return this.timestampToMoment(pivot).isBetween(
+			this.timestampToMoment(date1),
+			this.timestampToMoment(date2)
+		);
 	};
 
 	static disabledDate(current) {

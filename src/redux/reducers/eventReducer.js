@@ -20,6 +20,31 @@ export const eventReducer = (state = initialState, { type, payload }) => {
 			state.events = state.events.filter((event) => event.id !== payload.id);
 			state.events.unshift(payload);
 			return state;
+		case ActionTypes.EVENT.SET_INTERESTED:
+			state.interestedEvents = [...payload];
+			return state;
+		case ActionTypes.EVENT.SET_REGISTERED:
+			state.registeredEvents = [...payload];
+			return state;
+		case ActionTypes.EVENT.SET_CREATED:
+			state.createdEvents = [...payload];
+			return state;
+		case ActionTypes.EVENT.UPDATE_INTERESTED:
+			if (payload.action === "union")
+				state.interestedEvents.unshift(payload.event);
+			else if (payload.action === "remove")
+				state.interestedEvents = state.interestedEvents.filter(
+					(event) => event.id !== payload.event.id
+				);
+			return state;
+		case ActionTypes.EVENT.UPDATE_REGISTERED:
+			if (payload.action === "union")
+				state.registeredEvents.unshift(payload.event);
+			else if (payload.action === "remove")
+				state.registeredEvents = state.registeredEvents.filter(
+					(event) => event.id !== payload.event.id
+				);
+			return state;
 		default:
 			return state;
 	}

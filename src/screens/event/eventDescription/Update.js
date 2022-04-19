@@ -12,7 +12,7 @@ import {
 } from "antd";
 import { categories } from "../../../data/data";
 import { DateTime } from "../../../data/classes";
-import { updateEvent } from "../../../services/crud/events";
+import { updateEventDetails } from "../../../services/crud/events";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useGetEvent } from "./eventFunctions";
@@ -50,7 +50,7 @@ export const Update = () => {
 			},
 		};
 		if (!disabled) {
-			await updateEvent(updatedEvent, event.id, dispatch);
+			await updateEventDetails(updatedEvent, event.id, dispatch);
 			navigate(`/e/${e.name}/about`);
 			message.success("Event Successfully updated.");
 			setLoading(false);

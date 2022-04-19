@@ -26,6 +26,7 @@ export const readEvents = async (dispatch) => {
 	dispatch(allEvents(events));
 	return events;
 };
+
 export const readEventByName = async (name) => {
 	let event = null;
 	const events = await getDocs(
@@ -41,7 +42,8 @@ export const createEvent = async (event, dispatch) => {
 	try {
 		const existingEvent = await readEventByName(event.name);
 		if (existingEvent) {
-			throw `Event with name ${event.name} already exists.`;
+			message.error(`Event with name ${event.name} already exists.`);
+			return;
 		}
 		const userRef = doc(db, "users", event.creator.id);
 		const createdEvent = await addDoc(eventsCollectionRef, event);
@@ -53,11 +55,12 @@ export const createEvent = async (event, dispatch) => {
 	}
 };
 
-export const updateEvent = async (data, id, dispatch) => {
+export const updateEventDetails = async (data, id, dispatch) => {
 	try {
 		const existingEvent = await readEventByName(data.name);
 		if (existingEvent && existingEvent.id !== id) {
 			message.error(`Event with name ${data.name} already exists.`);
+			return;
 		}
 		const document = doc(db, "events", id);
 		await updateDoc(document, data);
@@ -66,6 +69,15 @@ export const updateEvent = async (data, id, dispatch) => {
 	} catch (error) {
 		console.log(error);
 		// message.error(error);
+	}
+};
+
+export const updateEvent = async (data, id) => {
+	try {
+		const document = doc(db, "events", id);
+		await updateDoc(document, data);
+	} catch (e) {
+		console.log(e);
 	}
 };
 
