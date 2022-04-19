@@ -14,6 +14,7 @@ import {
 import {
 	allEvents,
 	createEvent as create,
+	removeEvent,
 	updateEvent as update,
 } from "../../redux/actions/eventActions";
 import { db } from "../firebase";
@@ -86,6 +87,11 @@ export const updateEvent = async (data, id) => {
 };
 
 export const deleteEvent = async (id, dispatch) => {
-	const eventDoc = doc(db, "events", id);
-	await deleteDoc(eventDoc);
+	try {
+		const eventDoc = doc(db, "events", id);
+		await deleteDoc(eventDoc);
+		dispatch(removeEvent(id));
+	} catch (e) {
+		console.log(e);
+	}
 };

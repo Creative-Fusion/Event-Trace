@@ -45,6 +45,12 @@ export const eventReducer = (state = initialState, { type, payload }) => {
 					(event) => event.id !== payload.event.id
 				);
 			return state;
+		case ActionTypes.EVENT.REMOVE_EVENT:
+			state.events = state.events.filter((event) => event.id !== payload);
+			state.createdEvents = state.createdEvents.filter(
+				(event) => event.id !== payload
+			);
+			return state;
 		default:
 			return state;
 	}

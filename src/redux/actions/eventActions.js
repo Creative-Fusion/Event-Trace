@@ -55,3 +55,10 @@ export const updateRegistered = (payload) => {
 		payload: payload,
 	};
 };
+
+export const removeEvent = (eventID) => {
+	return {
+		type: ActionTypes.EVENT.REMOVE_EVENT,
+		payload: eventID,
+	};
+};

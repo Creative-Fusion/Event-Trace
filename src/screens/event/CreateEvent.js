@@ -57,7 +57,11 @@ export const CreateEvent = () => {
 			categories: selectedCategories,
 			coverImage: null,
 			fee: null,
-			location: e.type === "Physical" ? { location: e.location } : null,
+			location: {
+				location: e.type === "Physical" ? e.location : null,
+				latitude: null,
+				longitude: null,
+			},
 			participantLimit: e.participantLimit ? e.participantLimit : null,
 			eventLink: e.type === "Virtual" ? e.eventLink : null,
 			publish: true,
@@ -67,7 +71,7 @@ export const CreateEvent = () => {
 				startTime: DateTime.toStringTime(e.times[0]),
 				endTime: DateTime.toStringTime(e.times[1]),
 			},
-			createdAt: DateTime.timestampDate(DateTime.today(true)),
+			createdAt: DateTime.today({ inTimestamp: true }),
 			creator: {
 				id: currentUser.id,
 				role: currentUser.role,

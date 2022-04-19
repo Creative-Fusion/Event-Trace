@@ -3,23 +3,14 @@ import { NavLink, Outlet } from "react-router-dom";
 import { Menu, Alert } from "antd";
 import { useSelector } from "react-redux";
 import { useGetEvent } from "./eventFunctions";
-import { DateTime } from "../../../data/classes";
+import { checkConductedEvent } from "../../../data/functions";
 
 export const Tabs = () => {
 	const { currentUser } = useSelector((state) => state.users);
 	const event = useGetEvent();
 	const isOrganizer = currentUser.id === event.creator.id;
-	const checkConductedEvent = () => {
-		let state = { disabled: true, message: "" };
-		if (DateTime.isBetween(event.dateTime.startDate, event.dateTime.endDate))
-			state.message = "This event is currently being conducted.";
-		else if (DateTime.isBefore(event.dateTime.endDate))
-			state.message = "This event has already been conducted.";
-		else state.disabled = false;
-		return state;
-	};
 
-	const conducted = checkConductedEvent();
+	const conducted = checkConductedEvent(event);
 
 	return (
 		<div className="pb-6">

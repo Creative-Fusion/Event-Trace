@@ -37,3 +37,13 @@ export const eventActionConditions = (loggedIn, currentUser, event) => {
 	else state.disabled = false;
 	return state;
 };
+
+export const checkConductedEvent = (event) => {
+	let state = { conducting: true, message: "" };
+	if (DateTime.isBetween(event.dateTime.startDate, event.dateTime.endDate))
+		state.message = "This event is currently being conducted.";
+	else if (DateTime.isBefore(event.dateTime.endDate))
+		state.message = "This event has already been conducted.";
+	else state.conducting = false;
+	return state;
+};
