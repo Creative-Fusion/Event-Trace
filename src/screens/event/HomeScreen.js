@@ -7,7 +7,6 @@ export const HomeScreen = () => {
 	const { events, registeredEvents, interestedEvents } = useSelector(
 		(state) => state.events
 	);
-	console.log(events, registeredEvents, interestedEvents);
 	return (
 		<div className="h-full">
 			{loggedIn && (

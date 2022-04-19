@@ -21,7 +21,7 @@ export const uiConfig = {
 	signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
 	signInSuccessUrl: "http://localhost:3000/u/home",
 	callbacks: {
-		signInSuccessWithAuthResult: () => false,
+		signInSuccessWithAuthResult: () => window.location.reload(),
 	},
 };
 

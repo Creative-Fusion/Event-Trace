@@ -17,11 +17,36 @@ function App() {
 	const dispatch = useDispatch();
 	const [loading1, setLoading1] = useState(true);
 	const [loading2, setLoading2] = useState(true);
-	const [loading3, setLoading3] = useState(true);
-	const { loggedIn, currentUser } = useSelector((state) => state.users);
-	const allEvents = useSelector((state) => state.events.events);
+	const { currentUser } = useSelector((s) => s.users);
+	const { events } = useSelector((s) => s.events);
 
-	useEffect(() => {
+	const getFilteredEvents = (allEvents, ids) => {
+		return allEvents.filter((event) => ids.includes(event.id));
+	};
+
+	const getUsersEvents = useCallback(() => {
+		if (currentUser.id && events.length > 0) {
+			const interestedEvents = getFilteredEvents(
+				events,
+				currentUser.interestedEvents
+			);
+			const registeredEvents = getFilteredEvents(
+				events,
+				currentUser.registeredEvents
+			);
+			dispatch(setInterestedEvents(interestedEvents));
+			dispatch(setRegisteredEvents(registeredEvents));
+			if (currentUser.role === UserRole.ORGANIZATION) {
+				const createdEvents = getFilteredEvents(
+					events,
+					currentUser.createdEvents
+				);
+				dispatch(setCreatedEvents(createdEvents));
+			}
+		}
+	}, [currentUser, events, dispatch]);
+
+	const getAuthObserver = useCallback(() => {
 		const unregisterAuthObserver = firebase
 			.auth()
 			.onAuthStateChanged(async (user) => {
@@ -30,45 +55,25 @@ function App() {
 				}
 				setLoading1(false);
 			});
-		console.log("Auth State");
-		return () => unregisterAuthObserver();
-	});
+		return { observer: unregisterAuthObserver };
+	}, [dispatch]);
+
+	const getAllEvents = useCallback(async () => {
+		const allEvents = await readEvents(dispatch);
+		setLoading2(false);
+		return allEvents;
+	}, [dispatch]);
 
 	useEffect(() => {
-		readEvents(dispatch).then((events) => {
-			setLoading2(false);
-		});
-		console.log("Read Events");
-	});
+		getAllEvents()
+			.then((e) => console.log("Events received."))
+			.catch(console.error);
+		const { observer } = getAuthObserver();
+		getUsersEvents();
+		return () => observer();
+	}, [getAuthObserver, getAllEvents, getUsersEvents, currentUser, events]);
 
-	const getFilteredEvents = useCallback((events, ids) => {
-		return events.filter((event) => ids.includes(event.id));
-	}, []);
-
-	useEffect(() => {
-		if (loggedIn && allEvents.length > 0) {
-			const interestedEvents = getFilteredEvents(
-				allEvents,
-				currentUser.interestedEvents
-			);
-			const registeredEvents = getFilteredEvents(
-				allEvents,
-				currentUser.registeredEvents
-			);
-			dispatch(setInterestedEvents(interestedEvents));
-			dispatch(setRegisteredEvents(registeredEvents));
-			if (currentUser.role === UserRole.ORGANIZATION) {
-				const createdEvents = getFilteredEvents(
-					allEvents,
-					currentUser.createdEvents
-				);
-				dispatch(setCreatedEvents(createdEvents));
-			}
-		}
-		setLoading3(false);
-	}, [getFilteredEvents, loggedIn, allEvents, currentUser]);
-
-	if (loading1 && loading2) return <SplashScreen />;
+	if (loading1 || loading2) return <SplashScreen />;
 	return (
 		<div className="App">
 			<NavBar />

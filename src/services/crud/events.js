@@ -21,10 +21,14 @@ import { db } from "../firebase";
 const eventsCollectionRef = collection(db, "events");
 
 export const readEvents = async (dispatch) => {
-	const data = await getDocs(eventsCollectionRef);
-	const events = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-	dispatch(allEvents(events));
-	return events;
+	try {
+		const data = await getDocs(eventsCollectionRef);
+		const events = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+		dispatch(allEvents(events));
+		return events;
+	} catch (e) {
+		console.log(e);
+	}
 };
 
 export const readEventByName = async (name) => {

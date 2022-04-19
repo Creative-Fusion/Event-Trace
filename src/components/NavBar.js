@@ -82,7 +82,6 @@ export const NavBar = () => {
 						onClick={async () => {
 							setUMVisible(false);
 							await signOut(dispatch);
-							navigate("/");
 						}}
 					>
 						<IoLogOutOutline className="nav-icon group-hover:text-gray-500" />

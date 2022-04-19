@@ -1,5 +1,4 @@
 import firebase from "firebase/compat/app";
-import { useNavigate } from "react-router-dom";
 import { setLogin, setLogout } from "../redux/actions/userActions";
 import { createUser, queryUser, UserRole } from "./crud/user";
 
@@ -25,4 +24,5 @@ export const signIn = async (user, dispatch) => {
 export const signOut = async (dispatch) => {
 	await firebase.auth().signOut();
 	dispatch(setLogout());
+	window.location.reload();
 };
