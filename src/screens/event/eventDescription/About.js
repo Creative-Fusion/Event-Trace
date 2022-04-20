@@ -108,13 +108,13 @@ export const About = () => {
 	};
 
 	const deleteEvent = async () => {
-		// if (currentUser.id === event.creator.id && !conductedEvent.conducting) {
-		setDeleting(true);
-		await remove(event.id, dispatch);
-		message.success(`Your event ${event.name} has been deleted.`);
-		navigate("/");
-		setDeleting(false);
-		// }
+		if (currentUser.id === event.creator.id && !conductedEvent.conducting) {
+			setDeleting(true);
+			await remove(event.id, dispatch);
+			message.success(`Your event ${event.name} has been deleted.`);
+			navigate("/");
+			setDeleting(false);
+		}
 	};
 
 	return (
@@ -182,7 +182,7 @@ export const About = () => {
 										/>
 										<button
 											className="filled-primary-btn py-3 w-full"
-											// disabled={deleting || conductedEvent.conducting}
+											disabled={deleting || conductedEvent.conducting}
 											onClick={() => deleteEventConfirm()}
 										>
 											{deleting ? "Deleting" : "Delete Event"}

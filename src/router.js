@@ -34,7 +34,7 @@ export const EventTraceRouter = () => {
 						<Route index element={<Navigate to={"profile"} />} />
 						<Route path="profile" element={<UserProfile />} />
 						<Route path="edit-profile" element={<EditProfile />} />
-						<Route path="interested" element={<UserEvents />} />
+						<Route path="e/:category" element={<UserEvents />} />
 					</Route>
 					{/* EVENTS */}
 					<Route path="e" element={<Home />} />

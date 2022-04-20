@@ -6,6 +6,7 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { uiConfig } from "../services/firebase";
 import { signOut } from "../services/auth";
 import { useDispatch, useSelector } from "react-redux";
+import { UserRole } from "../services/crud/user";
 // Icons
 import { FaBars, FaBell, FaUserCircle } from "react-icons/fa";
 import {
@@ -45,25 +46,38 @@ export const NavBar = () => {
 						</span>
 					</Link>
 				</li>
+				{currentUser.role === UserRole.ORGANIZATION && (
+					<li>
+						<Link
+							to={"/u/0/e/created"}
+							className="flex items-center group py-1.5"
+						>
+							<BiCalendarHeart className="nav-icon group-hover:text-gray-500" />
+							<span className="px-2 nav-menu-text group-hover:text-gray-500">
+								Created Events
+							</span>
+						</Link>
+					</li>
+				)}
 				<li>
 					<Link
-						to={"/u/0/interested"}
-						className="flex items-center group py-1.5"
-					>
-						<BiCalendarCheck className="nav-icon group-hover:text-gray-500" />
-						<span className="px-2 nav-menu-text group-hover:text-gray-500">
-							Registered Events
-						</span>
-					</Link>
-				</li>
-				<li>
-					<Link
-						to={"/u/0/interested"}
+						to={"/u/0/e/interested"}
 						className="flex items-center group py-1.5"
 					>
 						<BiCalendarHeart className="nav-icon group-hover:text-gray-500" />
 						<span className="px-2 nav-menu-text group-hover:text-gray-500">
 							Interested Events
+						</span>
+					</Link>
+				</li>
+				<li>
+					<Link
+						to={"/u/0/e/registered"}
+						className="flex items-center group py-1.5"
+					>
+						<BiCalendarCheck className="nav-icon group-hover:text-gray-500" />
+						<span className="px-2 nav-menu-text group-hover:text-gray-500">
+							Registered Events
 						</span>
 					</Link>
 				</li>
@@ -132,7 +146,6 @@ export const NavBar = () => {
 					<StyledFirebaseAuth
 						uiConfig={uiConfig}
 						className="m-0"
-						// !Check
 						firebaseAuth={firebase.auth()}
 					/>
 				)}

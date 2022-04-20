@@ -81,27 +81,27 @@ const SideBar = () => {
 								<Menu.Item
 									key="3"
 									icon={<BiCalendarEvent className="w-5 h-5" />}
-									onClick={() => navigate("/u/0/interested")}
+									onClick={() => navigate("/u/0/e/created")}
 									className="font-medium"
 								>
 									Created Events
 								</Menu.Item>
 							)}
 							<Menu.Item
-								key="4"
-								icon={<BiCalendarEvent className="w-5 h-5" />}
-								onClick={() => navigate("/u/0/interested")}
-								className="font-medium"
-							>
-								Registered Events
-							</Menu.Item>
-							<Menu.Item
 								key="5"
 								icon={<BiHeart className="w-5 h-5" />}
-								onClick={() => navigate("/u/0/interested")}
+								onClick={() => navigate("/u/0/e/interested")}
 								className="font-medium"
 							>
 								Interested Events
+							</Menu.Item>
+							<Menu.Item
+								key="4"
+								icon={<BiCalendarEvent className="w-5 h-5" />}
+								onClick={() => navigate("/u/0/e/registered")}
+								className="font-medium"
+							>
+								Registered Events
 							</Menu.Item>
 						</Menu>
 					</div>
