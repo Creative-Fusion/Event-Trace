@@ -24,4 +24,5 @@ export const signIn = async (user, dispatch) => {
 export const signOut = async (dispatch) => {
 	await firebase.auth().signOut();
 	dispatch(setLogout());
+	window.location.reload();
 };

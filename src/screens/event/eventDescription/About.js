@@ -12,11 +12,21 @@ import {
 	BsStarFill,
 } from "react-icons/bs";
 import { Badge } from "../../../components/Badge";
-import { useGetEvent } from "./eventFunctions";
-import { useSelector } from "react-redux";
+import {
+	addToInterested,
+	addToRegistered,
+	useGetEvent,
+} from "./eventFunctions";
+import { useDispatch, useSelector } from "react-redux";
 import { DateTime } from "../../../data/classes";
-import { message } from "antd";
-
+import {
+	checkConductedEvent,
+	eventActionConditions,
+} from "../../../data/functions";
+import { message, Modal } from "antd";
+import { BsExclamationTriangle } from "react-icons/bs";
+import { deleteEvent as remove } from "../../../services/crud/events";
+import { useNavigate } from "react-router-dom";
 const CategoryTag = ({ category }) => {
 	return (
 		<div className="h-30 w-full bg-secondary text-primary rounded-full px-5 py-1.5 font-semibold text-center my-3">
@@ -26,21 +36,11 @@ const CategoryTag = ({ category }) => {
 };
 
 export const About = () => {
-	const [interested, setInterested] = useState(false);
 	const event = useGetEvent();
 	const { loggedIn, currentUser } = useSelector((state) => state.users);
-
-	const conditions = () => {
-		let state = { disabled: true, message: "" };
-		if (!loggedIn) state.message = "Please login to perform this action.";
-		else if (currentUser.id === event.creator.id)
-			state.message = "You cannot perform this action.";
-		else if (DateTime.isBefore(event.dateTime.startDate))
-			state.message = "This event has already been conducted.";
-		else state.disabled = false;
-		return state;
-	};
-
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const [deleting, setDeleting] = useState(false);
 	const infoList = () => {
 		const list = [
 			{
@@ -68,19 +68,52 @@ export const About = () => {
 		}
 		return list;
 	};
-	let avail = conditions();
 
-	const addToInterested = () => {
-		if (avail.disabled) message.error(avail.message);
-		else {
-			console.log("Add TO INTERESTED");
-		}
+	let actionDisabled = eventActionConditions(loggedIn, currentUser, event);
+	let conductedEvent = checkConductedEvent(event);
+	let [interested, setInterested] = useState(
+		currentUser.id ? currentUser.interestedEvents.includes(event.id) : false
+	);
+	let [registered, setRegistered] = useState(
+		currentUser.id ? currentUser.registeredEvents.includes(event.id) : false
+	);
+
+	const toggleInterested = async () => {
+		if (actionDisabled.disabled) message.error(actionDisabled.message);
+		else await addToInterested(event, currentUser, dispatch);
+		setInterested(!interested);
 	};
 
-	const addToRegistered = () => {
-		if (avail.disabled) message.error(avail.message);
-		else {
-			console.log("Add TO REGISTERED");
+	const toggleRegistered = async () => {
+		if (actionDisabled.disabled) message.error(actionDisabled.message);
+		else await addToRegistered(event, currentUser, dispatch);
+		setRegistered(!registered);
+	};
+
+	const deleteEventConfirm = (data) => {
+		Modal.confirm({
+			title: "Are you sure you want to delete this event?",
+			icon: (
+				<BsExclamationTriangle className="w-8 h-8 text-red-600 pb-2 mx-auto" />
+			),
+			centered: true,
+			content: "You will not be able to undo this action.",
+			okText: "Yes",
+			okType: "danger",
+			cancelText: "No",
+			onOk: async () => {
+				await deleteEvent();
+			},
+		});
+	};
+
+	const deleteEvent = async () => {
+		if (currentUser.id === event.creator.id && !conductedEvent.conducting) {
+			setDeleting(true);
+			await remove(event.id, dispatch);
+			message.success(`Your event ${event.name} has been deleted.`);
+			navigate("/");
+			setDeleting(false);
 		}
 	};
 
@@ -110,40 +143,51 @@ export const About = () => {
 							</div>
 							<div className="w-full my-3">
 								<div className="text-center text-[#6C6C6C] font-semibold text-sm opacity-70">
-									{event.fee && <p>Nrs. {event.fee} per entry</p>}
-									{!event.fee && <p>Free</p>}
+									{event.fee !== null && event.fee !== 0 && (
+										<p>{`Nrs. ${event.fee} per entry`}</p>
+									)}
+									{(event.fee === null || event.fee === 0) && <p>Free</p>}
 									<hr className="bg-gradient-to-r border-2 from-[#FBFBFB] via-[#6C6C6C] to-[#FBFBFB]" />
 								</div>
 								{currentUser.id !== event.creator.id && (
 									<div>
 										<button
 											className="flex items-center place-content-center outlined-primary-btn w-full mt-4 mb-2 py-2"
-											onClick={() => addToInterested()}
-											disabled={avail.disabled}
+											onClick={() => toggleInterested()}
+											disabled={actionDisabled.disabled}
 										>
-											Add to Favourites{" "}
+											{interested ? "Interested" : "Add to Interested"}
 											<span className="pl-1">
 												{!interested && <BsBookmark className="w-5 h-5" />}
 												{interested && <BsBookmarkFill className="w-5 h-5" />}
 											</span>
 										</button>
 										<button
-											disabled={avail.disabled}
+											disabled={actionDisabled.disabled}
 											className="filled-primary-btn py-3 w-full"
-											onClick={() => addToRegistered()}
+											onClick={() => toggleRegistered()}
 										>
-											Register
+											{registered ? "Registered" : "Register"}
 										</button>
 									</div>
 								)}
 								{currentUser.id === event.creator.id && (
-									<Badge
-										text="Organizer"
-										absolute={false}
-										icon={<BsStarFill className="w-4 h-4" />}
-										bgColor="bg-green-700"
-										className="h-fit my-auto mt-4 py-2.5"
-									/>
+									<div>
+										<Badge
+											text="Organizer"
+											absolute={false}
+											icon={<BsStarFill className="w-4 h-4 text-green-500" />}
+											bgColor="bg-transparent"
+											className="h-fit my-auto text-green-700 mb-1 py-2.5 border-0"
+										/>
+										<button
+											className="filled-primary-btn py-3 w-full"
+											disabled={deleting || conductedEvent.conducting}
+											onClick={() => deleteEventConfirm()}
+										>
+											{deleting ? "Deleting" : "Delete Event"}
+										</button>
+									</div>
 								)}
 							</div>
 						</div>

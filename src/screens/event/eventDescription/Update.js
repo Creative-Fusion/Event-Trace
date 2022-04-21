@@ -8,19 +8,54 @@ import {
 	Checkbox,
 	DatePicker,
 	TimePicker,
+	message,
 } from "antd";
 import { categories } from "../../../data/data";
-import { fake_event } from "../../../data/fakeDB";
 import { DateTime } from "../../../data/classes";
+import { updateEventDetails } from "../../../services/crud/events";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useGetEvent } from "./eventFunctions";
 
 export const Update = () => {
-	const event = fake_event;
-
+	const event = useGetEvent();
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const rules = { required: true, message: "Invalid Detail." };
 	const [loading, setLoading] = useState(false);
-	const [selectedCategories, setCategories] = useState(event.categories);
 	const [type, setType] = useState(event.type);
+	const [selectedCategories, setCategories] = useState(event.categories);
 	const [categoryModalVisible, setCategoryModalVisible] = useState(false);
+	const { currentUser } = useSelector((state) => state.users);
+	const disabled =
+		DateTime.isBefore(event.dateTime.startDate) ||
+		currentUser.id !== event.creator.id;
+
+	const saveEvent = async (e) => {
+		setLoading(true);
+		const updatedEvent = {
+			name: e.name,
+			type: e.type,
+			description: e.description,
+			categories: selectedCategories,
+			location: e.type === "Physical" ? { location: e.location } : null,
+			participantLimit: e.participantLimit ? e.participantLimit : null,
+			fee: e.fee,
+			eventLink: e.type === "Virtual" ? e.eventLink : null,
+			dateTime: {
+				startDate: DateTime.timestampDate(e.dates[0]),
+				endDate: DateTime.timestampDate(e.dates[1]),
+				startTime: DateTime.toStringTime(e.times[0]),
+				endTime: DateTime.toStringTime(e.times[1]),
+			},
+		};
+		if (!disabled) {
+			await updateEventDetails(updatedEvent, event.id, dispatch);
+			navigate(`/e/${e.name}/about`);
+			message.success("Event Successfully updated.");
+			setLoading(false);
+		} else message.error("You cannot update this event.");
+	};
 	return (
 		<div className="md:w-4/6 w-9/12 mx-auto">
 			<Form
@@ -32,6 +67,7 @@ export const Update = () => {
 					type: event.type,
 					description: event.description,
 					location: event.location.location ? event.location.location : null,
+					categories: selectedCategories,
 					eventLink: event.eventLink ? event.eventLink : null,
 					fee: event.fee ? event.fee : null,
 					participantLimit: event.participantLimit
@@ -46,9 +82,9 @@ export const Update = () => {
 						DateTime.toMomentTime(event.dateTime.endTime),
 					],
 				}}
-				onFinish={(e) => console.log(e)}
+				onFinish={(e) => saveEvent(e)}
 			>
-				<h2 className="mb-6 px-3">Create an Event</h2>
+				<h2 className="mb-6 px-3">Update {event.name}</h2>
 				<div className="flex flex-wrap">
 					<div className="w-full sm:w-1/2 px-3">
 						<Form.Item label="Name" name={"name"} rules={[rules]}>
@@ -153,21 +189,17 @@ export const Update = () => {
 					</div>
 					<div className="w-full sm:w-1/2 px-3">
 						<Form.Item label="Time" name={"times"} rules={[rules]}>
-							<TimePicker.RangePicker
-								format="HH:mm"
-								className="form-input"
-								onChange={(e) => console.log(e)}
-							/>
+							<TimePicker.RangePicker format="HH:mm" className="form-input" />
 						</Form.Item>
 					</div>
 				</div>
 				<div className="flex p-4">
 					<button
 						className="filled-primary-btn justify-content-center m-auto py-3"
-						disabled={loading}
+						disabled={loading || disabled}
 						type="submit"
 					>
-						{loading ? "Creating" : "Create Event"}
+						{loading ? "Saving" : "Save Event"}
 					</button>
 				</div>{" "}
 			</Form>

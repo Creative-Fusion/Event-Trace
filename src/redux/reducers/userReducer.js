@@ -11,9 +11,12 @@ export const userReducer = (state = initialState, { type, payload }) => {
 			state.loggedIn = true;
 			state.currentUser = payload;
 			return state;
+		case ActionTypes.USER.UPDATE_USER:
+			state.currentUser = payload;
+			return state;
 		case ActionTypes.USER.LOGOUT:
 			state.loggedIn = false;
-			state.currentUser = null;
+			state.currentUser = {};
 			return state;
 		default:
 			return state;
