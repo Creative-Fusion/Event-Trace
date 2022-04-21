@@ -2,6 +2,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
 	apiKey: process.env.REACT_APP_API_KEY,
@@ -28,5 +29,6 @@ export const uiConfig = {
 // Initialize Firebase
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 export const db = getFirestore(firebaseApp);
+export const storage = getStorage(firebaseApp);
 
 export const firebaseLoggedInUser = () => firebase.auth().currentUser;

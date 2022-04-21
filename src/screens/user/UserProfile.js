@@ -1,18 +1,22 @@
 import { IoLocationOutline } from "@react-icons/all-files/io5/IoLocationOutline";
 import { MdEdit } from "@react-icons/all-files/md/MdEdit";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { BecomeOrganizerModal } from "./becomeOrganizer";
 import { BsExclamationTriangle } from "react-icons/bs";
-import { message, Modal } from "antd";
+import { message, Modal, Spin } from "antd";
 import { UserRole, updateUser } from "../../services/crud/user";
 import { Badge } from "../../components/Badge";
+import { uploadFile } from "../../services/upload_file";
 export const UserProfile = () => {
 	const { currentUser } = useSelector((state) => state.users);
 	const navigate = useNavigate();
 	const [modalVisible, setModalVisible] = useState(false);
 	const dispatch = useDispatch();
+	const [uploadingProfile, setuploadingProfile] = useState(false);
+	const fileInput = useRef(null);
+
 	const becomeOrganizer = async (data) => {
 		const updatedUser = {
 			email: currentUser.email,
@@ -46,18 +50,75 @@ export const UserProfile = () => {
 			},
 		});
 	};
+
+	const uploadProfileImage = async (file) => {
+		try {
+			setuploadingProfile(true);
+			const profileImageUrl = await uploadFile({
+				file: file,
+				folderRef: "users",
+			});
+			await updateUser(
+				{ profileImage: profileImageUrl },
+				currentUser.id,
+				dispatch
+			);
+			message.success("Your profile picture has been updated");
+		} catch (err) {
+			console.log("Error");
+			message.error("There was an error uploading your profile picture.");
+		}
+		setuploadingProfile(false);
+	};
+
 	return (
 		<div className="flex flex-col xl:items-center xl:justify-center h-full lg:items-start lg:justify-start items-center justify-center w-full">
 			<div className="flex flex-col items-start xl:w-3/5 w-5/6  justify-start p-10 pt-8">
 				<div className="flex flex-row w-full justify-between">
 					<div className="flex sm:w-auto w-full">
-						<div className="sm:w-auto lg:pr-16 pr-10 my-auto">
+						<div className="relative sm:w-auto lg:mr-16 mr-10 my-auto">
 							<img
 								src={currentUser.profileImage}
 								className="w-[5rem] h-[5rem] lg:w-[9.5rem] lg:h-[9.5rem]"
 								alt=""
 							/>
+							<button
+								className="absolute group flex -bottom-3 -right-3 text-primary bg-white p-2 rounded-full shadow-lg"
+								onClick={() => fileInput.current.click()}
+							>
+								{uploadingProfile && <Spin className="w-4 h-4" />}
+								{!uploadingProfile && <MdEdit className="w-4 h-4" />}
+								<span
+									className={`group-hover:block ${
+										uploadingProfile ? "block" : "hidden"
+									} pl-1.5 text-sm font-medium`}
+								>
+									{uploadingProfile ? "Uploading" : "Upload Cover"}
+								</span>
+								<input
+									type="file"
+									className="hidden"
+									disabled={uploadingProfile}
+									ref={fileInput}
+									onChange={async (file) =>
+										await uploadProfileImage(file.target.files[0])
+									}
+								/>
+							</button>
+							{/* <button
+								className="rounded-full bg-white h-7 aspect-square shadow-lg"
+								onClick={() => fileInput.current.click()}
+							>
+								<MdEdit className="mx-auto my-1.5 text-primary h-4" />
+							</button> */}
 						</div>
+						{/* <input
+							type="file"
+							className="hidden"
+							// disabled={saving}
+							ref={fileInput}
+							onChange={async(file)=> await uploadProfileImage(file.target.files[0])}
+						/> */}
 						<div className="flex flex-col items-start justify-start">
 							<div className="flex flex-row gap-3">
 								<div className="pt-1 lg:text-[24px] text-[18px] font-bold whitespace-nowrap text-black">

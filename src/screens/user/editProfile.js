@@ -1,7 +1,6 @@
-import React from "react";
-import { Avatar, Badge, Form, Input, Select, message } from "antd";
+import React, { useState } from "react";
+import { Form, Input, Select, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { MdEdit } from "@react-icons/all-files/md/MdEdit";
 import { updateUser, UserRole } from "../../services/crud/user";
 import { useNavigate } from "react-router-dom";
 
@@ -10,25 +9,36 @@ export const EditProfile = () => {
 	const rules = { required: true, message: "Invalid Detail." };
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const [saving, setSaving] = useState(false);
+
 	const saveUser = async (u) => {
-		const updatedUser = {
-			name: `${u.firstName} ${u.lastName}`,
-			email: currentUser.email,
-			address: u.address,
-			phone: u.phone,
-			bio: u.bio,
-		};
-		if (currentUser.role === UserRole.USER) updatedUser.gender = u.gender;
-		if (currentUser.role === UserRole.ORGANIZATION)
-			updatedUser.website = u.website;
-		await updateUser(updatedUser, currentUser.id, dispatch);
-		message.success("Updated your account.");
-		navigate("/u/0/profile");
+		try {
+			setSaving(true);
+
+			const updatedUser = {
+				name: `${u.firstName} ${u.lastName}`,
+				email: currentUser.email,
+				address: u.address,
+				phone: u.phone,
+				bio: u.bio,
+			};
+
+			if (currentUser.role === UserRole.USER) updatedUser.gender = u.gender;
+			if (currentUser.role === UserRole.ORGANIZATION)
+				updatedUser.website = u.website;
+			await updateUser(updatedUser, currentUser.id, dispatch);
+			message.success("Your profile has been updated.");
+			navigate("/u/0/profile");
+		} catch (err) {
+			console.log(err);
+			message.error("There was an error while saving your data.");
+		}
+		setSaving(false);
 	};
 
 	return (
 		<div className="h-full w-full px-10">
-			<h2>Edit Profile</h2>
+			<h2 className="p-3">Edit Profile</h2>
 			<Form
 				name="UserProfile"
 				layout="vertical"
@@ -49,28 +59,6 @@ export const EditProfile = () => {
 				}}
 				onFinish={(u) => saveUser(u)}
 			>
-				{/* //TODO: Upload Image */}
-				<Form.Item name={"profileImage"} className="w-fit mx-auto">
-					<Badge
-						count={
-							<div className="rounded-full bg-white h-7 aspect-square shadow-lg">
-								<MdEdit className="mx-auto my-1.5 text-primary h-4" />
-							</div>
-						}
-						offset={[-30, 120]}
-					>
-						<Avatar
-							className="w-32 h-32"
-							src={
-								<img
-									src={currentUser.profileImage}
-									className="object-cover"
-									alt={`${currentUser.name}'s Profile`}
-								/>
-							}
-						/>
-					</Badge>
-				</Form.Item>
 				<div className="flex flex-wrap">
 					<div className="w-full sm:w-1/2 px-3">
 						<Form.Item label="First Name" name={"firstName"} rules={[rules]}>
@@ -130,8 +118,12 @@ export const EditProfile = () => {
 						/>
 					</Form.Item>
 				</div>
-				<button type="submit" className="filled-primary-btn m-auto py-3">
-					Save
+				<button
+					type="submit"
+					className="filled-primary-btn m-auto py-3"
+					disabled={saving}
+				>
+					{saving ? "Saving" : "Save"}
 				</button>
 			</Form>
 		</div>

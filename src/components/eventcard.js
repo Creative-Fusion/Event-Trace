@@ -18,6 +18,7 @@ export const EventCard = ({ event }) => {
 	const [interested, setInterested] = useState(
 		currentUser.id ? currentUser.interestedEvents.includes(event.id) : false
 	);
+	
 	const toggleInterested = async () => {
 		if (actionDisabled.disabled) message.error(actionDisabled.message);
 		else await addToInterested(event, currentUser, dispatch);
