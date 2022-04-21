@@ -5,8 +5,9 @@ import { AiOutlineMenuUnfold, AiOutlineEdit } from "react-icons/ai";
 import { Layout, Menu, Divider } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { UserRole } from "../services/crud/user";
+import { signOut } from "../services/auth";
 
 const { Sider } = Layout;
 
@@ -14,6 +15,7 @@ const SideBar = () => {
 	const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 	const { currentUser } = useSelector((state) => state.users);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	return (
 		<div>
 			<Sider
@@ -106,11 +108,17 @@ const SideBar = () => {
 						</Menu>
 					</div>
 					<div className="px-6 py-5">
-						<div className="flex text-secondary font-semibold text-base justify-start items-center py-1.5">
+						<div className="flex text-secondary font-semibold text-base justify-start items-center py-1.5 cursor-pointer">
 							<IoSettingsOutline className="w-5 h-5 mr-2" />
 							Settings and Privacy
 						</div>
-						<div className="flex text-secondary font-semibold text-base justify-start items-center py-1.5">
+						<div
+							className="flex text-secondary font-semibold text-base justify-start cursor-pointer items-center py-1.5"
+							onClick={async () => {
+								await signOut(dispatch);
+								navigate("/home");
+							}}
+						>
 							<BiPowerOff className="w-5 h-5 mr-2" />
 							Logout
 						</div>

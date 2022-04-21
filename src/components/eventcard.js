@@ -24,6 +24,10 @@ export const EventCard = ({ event }) => {
 		setInterested(!interested);
 	};
 
+	const days = DateTime.difference(
+		event.dateTime.startDate,
+		event.dateTime.endDate
+	);
 	return (
 		<div className="shadow-lg max-w-xs min-w-[280px] rounded-sm overflow-hidden md:mr-8 mr-5 my-5 shrink hover:shadow-2xl ease-out-transition">
 			<div className="relative">
@@ -33,7 +37,7 @@ export const EventCard = ({ event }) => {
 					className="h-52 object-cover cursor-pointer"
 					onClick={() => navigate(`/e/${event.name}/about`)}
 				/>
-				<Badge text="2 days" />
+				<Badge text={`${days} ${days > 1 ? "days" : "day"}`} />
 
 				{event.type === "Virtual" && (
 					<Badge

@@ -25,6 +25,14 @@ export class DateTime {
 		return this.timestampToMoment(date).format("D MMM, YYYY");
 	};
 
+	static difference = (beforeDate, afterDate) => {
+		return (
+			this.timestampToMoment(afterDate).dayOfYear() -
+			this.timestampToMoment(beforeDate).dayOfYear() +
+			1
+		);
+	};
+
 	static toStringTime = (time) => {
 		return time.format("HH:mm");
 	};

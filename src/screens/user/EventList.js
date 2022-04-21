@@ -1,7 +1,10 @@
 import { IoLocationOutline } from "@react-icons/all-files/io5/IoLocationOutline";
 import DefaultCover from "../../app-images/DefaultCover.png";
 import { DateTime } from "../../data/classes";
+import { useNavigate } from "react-router-dom";
+
 export const EventList = ({ event, index }) => {
+	const navigate = useNavigate();
 	const truncate = (string, n) => {
 		return string.length > n ? string.substr(0, n - 1) + "..." : string;
 	};
@@ -11,7 +14,10 @@ export const EventList = ({ event, index }) => {
 		.split(" ")[1];
 
 	return (
-		<div className="flex flex-row justify-start my-6 shadow-md w-auto items-start border-[0.2px] border-slate-100">
+		<div
+			className="flex flex-row justify-start my-6 shadow-md w-auto items-start border-[0.2px] border-slate-100 cursor-pointer"
+			onClick={() => navigate(`/e/${event.name}/about`)}
+		>
 			<div className="flex flex-row justify-between w-full">
 				<div className="flex flex-col sm:flex-row w-full">
 					<div className="lg:w-auto h-full">
