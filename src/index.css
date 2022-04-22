@@ -19,6 +19,10 @@ code {
 		monospace;
 }
 
+div#root{
+	height: 100%;
+}
+
 /* Global */
 h1,
 h2,

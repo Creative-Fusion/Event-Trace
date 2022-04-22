@@ -1,3 +1,4 @@
+import { DateTime } from "../../data/classes";
 import { ActionTypes } from "../constants/actionTypes";
 
 const initialState = {
@@ -60,4 +61,9 @@ export const eventReducer = (state = initialState, { type, payload }) => {
 	}
 };
 
-export const getAllEvents = (state) => state.events;
+export const getFutureEvents = (state) =>
+	state.events.events.filter(
+		(event) =>
+			DateTime.isAfter(event.dateTime.startDate) &&
+			DateTime.isAfter(event.dateTime.endDate)
+	);
