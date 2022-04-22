@@ -2,8 +2,9 @@ import React from "react";
 import { EventList } from "../components/eventList";
 import HomePageImage from "../app-images/HomePage.jpg";
 import { useSelector } from "react-redux";
+import { getFutureEvents } from "../redux/reducers/eventReducer";
 export const Home = () => {
-	const eventList = useSelector((state) => state.events.events);
+	const eventList = useSelector(getFutureEvents);
 	return (
 		<div className="w-full">
 			<div className="relative w-full lg:h-[36rem] md:h-[32rem] h-[24rem]">

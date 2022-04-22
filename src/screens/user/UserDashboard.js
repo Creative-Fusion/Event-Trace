@@ -5,9 +5,9 @@ const { Content } = Layout;
 
 const Userdashboard = () => {
 	return (
-		<Layout hasSider>
+		<Layout hasSider className="h-full">
 			<SideBar />
-			<Content className="lg:w-full lg:pl-[225px] py-10">
+			<Content className="lg:w-full lg:pl-[225px] py-10 h-full">
 				<Outlet />
 			</Content>
 		</Layout>

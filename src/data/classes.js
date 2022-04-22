@@ -9,8 +9,10 @@ export class DateTime {
 		else return this.toStringDate(moment());
 	};
 
-	static timestampToMoment = (date) => {
-		return moment(date.seconds * 1000);
+	static timestampToMoment = (date, endOf = false) => {
+		let transformedDate = moment(date.seconds * 1000);
+		if (endOf) return transformedDate.endOf("day");
+		else return transformedDate.startOf("day");
 	};
 
 	static formattedDate = (date) => {
@@ -52,7 +54,9 @@ export class DateTime {
 	 * @returns Boolean
 	 */
 	static isBefore = (date, pivot = this.today({ inTimestamp: true })) => {
-		return this.timestampToMoment(date).isBefore(this.timestampToMoment(pivot));
+		return this.timestampToMoment(date, true).isBefore(
+			this.timestampToMoment(pivot)
+		);
 	};
 	/**
 	 *
@@ -61,7 +65,9 @@ export class DateTime {
 	 * @returns Boolean
 	 */
 	static isAfter = (date, pivot = this.today({ inTimestamp: true })) => {
-		return this.timestampToMoment(date).isAfter(this.timestampToMoment(pivot));
+		return this.timestampToMoment(date).isAfter(
+			this.timestampToMoment(pivot, true)
+		);
 	};
 
 	static isSame = (date1, date2) => {
@@ -75,7 +81,7 @@ export class DateTime {
 	) => {
 		return this.timestampToMoment(pivot).isBetween(
 			this.timestampToMoment(date1),
-			this.timestampToMoment(date2)
+			this.timestampToMoment(date2, true)
 		);
 	};
 
@@ -88,9 +94,9 @@ export class DateTime {
 export class Filter {
 	static filterText = (optionText, key, arr) => {
 		const filtered = [];
-
 		arr.map((a) => {
-			if (a[key].includes(optionText)) filtered.push(a);
+			if (a[key].toLowerCase().includes(optionText.toLowerCase()))
+				filtered.push(a);
 			return undefined;
 		});
 
@@ -130,7 +136,30 @@ export class Filter {
 		return filtered;
 	};
 
-	//TODO: Filter and Sort by DateTime
+	static filterDate = (optionDates, keys, arr) => {
+		const filtered = [];
+		arr.map((a) => {
+			if (
+				DateTime.isBetween(
+					DateTime.timestampDate(optionDates[0]),
+					DateTime.timestampDate(optionDates[1]),
+					a[keys[0]][keys[1]]
+				) ||
+				DateTime.isSame(
+					DateTime.timestampDate(optionDates[0]),
+					a[keys[0]][keys[1]]
+				) ||
+				DateTime.isSame(
+					DateTime.timestampDate(optionDates[1]),
+					a[keys[0]][keys[1]]
+				)
+			)
+				filtered.push(a);
+			return undefined;
+		});
+		return filtered;
+	};
+
 	static sortByString = (key, arr) => {
 		return arr.sort((a, b) => a[key].localeCompare(b[key]));
 	};
