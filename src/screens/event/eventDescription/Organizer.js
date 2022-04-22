@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Container } from "../../../components/container";
 import { IconedInfoList } from "../../../components/IconedInfoList";
 import { checkContactLinks } from "../../../data/functions";
-import { ConnectIcons } from "../../../components/connectIcons";
+// import { ConnectIcons } from "../../../components/connectIcons";
 import { TrimmedText } from "../../../components/trimmedText";
 import { useGetEvent } from "./eventFunctions";
 import { SplashScreen } from "../../../splash";

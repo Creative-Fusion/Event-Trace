@@ -104,6 +104,8 @@ export class TableFilter extends React.Component {
 		this.setState({
 			filteredInfo: null,
 			sortedInfo: null,
+			searchText: "",
+			searchedColumn: "",
 		});
 	};
 }

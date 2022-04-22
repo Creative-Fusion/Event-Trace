@@ -138,4 +138,21 @@ export class Filter {
 	static sortByNumber = (key, arr) => {
 		return arr.sort((a, b) => a[key] - b[key]);
 	};
+
+	static sortByDate = (keys, arr) => {
+		if (keys.length === 1)
+			return arr.sort((a, b) => {
+				return (
+					DateTime.timestampToMoment(a[keys[0]]) -
+					DateTime.timestampToMoment(b[keys[0]])
+				);
+			});
+		if (keys.length === 2)
+			return arr.sort((a, b) => {
+				return (
+					DateTime.timestampToMoment(a[keys[0]][keys[1]]) -
+					DateTime.timestampToMoment(b[keys[0]][keys[1]])
+				);
+			});
+	};
 }

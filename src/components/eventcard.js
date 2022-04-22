@@ -18,7 +18,7 @@ export const EventCard = ({ event }) => {
 	const [interested, setInterested] = useState(
 		currentUser.id ? currentUser.interestedEvents.includes(event.id) : false
 	);
-	
+
 	const toggleInterested = async () => {
 		if (actionDisabled.disabled) message.error(actionDisabled.message);
 		else await addToInterested(event, currentUser, dispatch);
@@ -65,12 +65,15 @@ export const EventCard = ({ event }) => {
 					>
 						{event.name}
 					</h3>
-					<p>
+					<p className="truncate">
 						{DateTime.toStringDate(event.dateTime.startDate)} -{" "}
 						{DateTime.toStringDate(event.dateTime.endDate)}
 					</p>
-					{event.type === "Physical" && <p>{event.location.location}</p>}
-					{event.type === "Virtual" && <p>{event.eventLink}</p>}
+					<p className="truncate">
+						{event.type === "Physical"
+							? event.location.location
+							: event.eventLink}
+					</p>
 				</div>
 			</div>
 			<div className="flex overflow-auto px-4 pb-4 pt-1">

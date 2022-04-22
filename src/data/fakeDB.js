@@ -1,3 +1,34 @@
+export const fake_participants = [
+	{
+		key: "1",
+		name: "Jopn Brown",
+		phone: 32,
+		gender: "Male",
+		email: "abcd@gmail.com",
+		address: "New York No. 1 Lake Park",
+	},
+	{
+		key: "2",
+		name: "Moe Black",
+		email: "abcd@gmail.com",
+		gender: "Female",
+		phone: 42,
+	},
+	{
+		key: "3",
+		name: "Bim Green",
+		email: "abcd@gmail.com",
+		phone: 32,
+		address: "Sidney No. 1 Lake Park",
+	},
+	{
+		key: "4",
+		name: "Pim Red",
+		email: "abcd@gmail.com",
+		address: "London No. 2 Lake Park",
+	},
+];
+
 export const fake_event = {
 	name: "KU HackFest 2023",
 	description:
