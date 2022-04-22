@@ -81,6 +81,7 @@ export const updateEvent = async (data, id) => {
 	try {
 		const document = doc(db, "events", id);
 		await updateDoc(document, data);
+		// return await getDoc(document);
 	} catch (e) {
 		console.log(e);
 	}

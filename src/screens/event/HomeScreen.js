@@ -1,12 +1,15 @@
 import React from "react";
 import { EventList } from "../../components/eventList";
 import { useSelector } from "react-redux";
+import { Filter } from "../../data/classes";
 
 export const HomeScreen = () => {
 	const { loggedIn } = useSelector((state) => state.users);
 	const { events, registeredEvents, interestedEvents } = useSelector(
 		(state) => state.events
 	);
+	const upcoming = Filter.sortByDate(["dateTime", "startDate"], events.slice());
+	// const newlyCreated = Filter.sortByDate(["createdAt"], events.slice());
 	return (
 		<div className="h-full">
 			{loggedIn && (
@@ -25,6 +28,13 @@ export const HomeScreen = () => {
 					type="h"
 				/>
 			)}
+			<EventList title={"Upcoming Events"} to="/" events={upcoming} type="h" />
+			{/* <EventList
+				title={"Newly Created"}
+				to="/"
+				events={newlyCreated}
+				type="h"
+			/> */}
 			<EventList title={"All Events"} to="/" events={events} />
 		</div>
 	);

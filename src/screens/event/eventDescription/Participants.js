@@ -1,75 +1,65 @@
-import React from "react";
-import { Table, Modal } from "antd";
+import React, { useCallback, useEffect, useState } from "react";
+import { Table } from "antd";
 import { TableFilter } from "../../../data/tableFilter";
 import { Container } from "../../../components/container";
-import { BsExclamationTriangle } from "react-icons/bs";
+import { readUserById } from "../../../services/crud/user";
+import { useGetEvent } from "./eventFunctions";
 
-export class Participants extends TableFilter {
-	showDeleteConfirm() {
-		Modal.confirm({
-			title: "Are you sure remove this user's registration?",
-			icon: (
-				<BsExclamationTriangle className="w-8 h-8 text-yellow-400 pb-2 mx-auto" />
-			),
-			centered: true,
-			content: "You will not be able to undo this action.",
-			okText: "Yes",
-			okType: "danger",
-			cancelText: "No",
-			onOk() {
-				console.log("OK");
-			},
-			onCancel() {
-				console.log("Cancel");
-			},
-		});
-	}
-
-	handleChange = (filters, sorter) => {
-		console.log(
-			`Filters: ${JSON.stringify(filters)} \nSorter: ${JSON.stringify(sorter)}`
+export const Participants = () => {
+	const event = useGetEvent();
+	const [participants, setParticipants] = useState([]);
+	const requestParticipants = useCallback(async (ids) => {
+		const list = [];
+		await Promise.all(
+			ids.map(async (id) => {
+				const user = await readUserById(id);
+				if (user) list.push({ ...user, key: id });
+				return user;
+			})
 		);
+		setParticipants(list);
+	}, []);
+
+	useEffect(() => {
+		requestParticipants(event.registeredUsers).catch(console.error);
+	}, [requestParticipants, event]);
+
+	return <ParticipantsList participants={participants} />;
+};
+
+class ParticipantsList extends TableFilter {
+	handleChange = (filters, sorter) => {
 		this.setState({
 			filteredInfo: filters,
 			sortedInfo: sorter,
 		});
 	};
 
-	fake_participants = [
-		{
-			key: "1",
-			name: "Jopn Brown",
-			phone: 32,
-			gender: "Male",
-			email: "abcd@gmail.com",
-			address: "New York No. 1 Lake Park",
-		},
-		{
-			key: "2",
-			name: "Moe Black",
-			email: "abcd@gmail.com",
-			gender: "Female",
-			phone: 42,
-		},
-		{
-			key: "3",
-			name: "Bim Green",
-			email: "abcd@gmail.com",
-			phone: 32,
-			address: "Sidney No. 1 Lake Park",
-		},
-		{
-			key: "4",
-			name: "Pim Red",
-			email: "abcd@gmail.com",
-			address: "London No. 2 Lake Park",
-		},
-	];
-
 	render() {
 		let { sortedInfo, filteredInfo } = this.state;
 		sortedInfo = sortedInfo || {};
 		filteredInfo = filteredInfo || {};
+
+		// const showDeleteConfirm = (user) => {
+		// 	Modal.confirm({
+		// 		title: "Are you sure remove this user's registration?",
+		// 		icon: (
+		// 			<BsExclamationTriangle className="w-8 h-8 text-yellow-400 pb-2 mx-auto" />
+		// 		),
+		// 		centered: true,
+		// 		content: "You will not be able to undo this action.",
+		// 		okText: "Yes",
+		// 		okType: "danger",
+		// 		cancelText: "No",
+		// 		async onOk() {
+		// 			console.log(this.props);
+		// 			await this.handleRemove(user);
+		// 		},
+		// 		onCancel() {
+		// 			console.log("Cancel");
+		// 		},
+		// 	});
+		// };
 
 		const columns = [
 			{
@@ -78,7 +68,6 @@ export class Participants extends TableFilter {
 				key: "name",
 				ellipsis: true,
 				sorter: (a, b) => a.name.localeCompare(b.name),
-				// sortOrder: sortedInfo.columnKey === "name" && sortedInfo.order,
 				...this.getColumnSearchProps("name"),
 			},
 			{
@@ -104,7 +93,7 @@ export class Participants extends TableFilter {
 					{ text: "Male", value: "Male" },
 					{ text: "Female", value: "Female" },
 				],
-				// filteredValue: filteredInfo.gender || null,
+				filteredValue: filteredInfo.gender || null,
 				onFilter: (value, record) =>
 					record.gender ? record.gender.indexOf(value) === 0 : null,
 				render: (value) => (value ? value : "---"),
@@ -119,30 +108,41 @@ export class Participants extends TableFilter {
 				render: (value) => (value ? value : "---"),
 				...this.getColumnSearchProps("address"),
 			},
-			{
-				title: "Action",
-				key: "action",
-				ellipsis: true,
-				render: (text, record) => (
-					<button
-						className="border-none text-primary text-base"
-						onClick={this.showDeleteConfirm}
-					>
-						Remove
-					</button>
-				),
-			},
+			// {
+			// 	title: "Action",
+			// 	key: "action",
+			// 	ellipsis: true,
+			// 	render: (text, record) => {
+			// 		return (
+			// 			<button
+			// 				className="border-none text-primary text-base"
+			// 				onClick={() => showDeleteConfirm(record)}
+			// 			>
+			// 				Remove
+			// 			</button>
+			// 		);
+			// 	},
+			// },
 		];
 
 		return (
 			<div className="md:w-4/6 w-9/12 mx-auto">
 				<Container>
-					<div className="pb-3">
+					<div className="flex pb-3 justify-between">
 						<h2>Participants' List</h2>
+						{/* <button
+							className="text-base font-medium border-2 border-grey rounded-md px-2 py-1 text-grey"
+							onClick={this.clearAll}
+						>
+							<span className="align-middle inline-block">
+								<MdClear className="w-6 h-6" />
+							</span>
+							Clear Filters
+						</button> */}
 					</div>
 					<Table
 						columns={columns}
-						dataSource={this.fake_participants}
+						dataSource={this.props.participants}
 						size="middle"
 						onChange={this.handleChange}
 					/>

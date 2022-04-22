@@ -1,7 +1,7 @@
 import { Filter } from "../../../data/classes";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { updateUser } from "../../../services/crud/user";
+import { readUserById, updateUser } from "../../../services/crud/user";
 import { arrayRemove, arrayUnion } from "firebase/firestore";
 import {
 	updateInterested,
@@ -14,6 +14,16 @@ export const useGetEvent = () => {
 	const eventName = useParams().eventId;
 	const events = useSelector((state) => state.events.events);
 	return Filter.filterRadio(eventName, "name", events)[0];
+};
+
+export const getParticipants = async (ids) => {
+	const participantList = [];
+	await ids.map(async (id) => {
+		const user = await readUserById(id);
+		if (user) participantList.push({ ...user, key: id });
+		return user;
+	});
+	return participantList;
 };
 
 export const addToInterested = async (event, user, dispatch) => {
@@ -66,4 +76,9 @@ export const addToRegistered = async (event, user, dispatch) => {
 			event.name
 		} successfully.`
 	);
+};
+
+export const removeParticipant = async (eventId, userId, dispatch) => {
+	await updateUser({ registeredEvents: arrayRemove(eventId) }, userId);
+	await updateEvent({ registeredUsers: arrayRemove(userId) }, eventId);
 };

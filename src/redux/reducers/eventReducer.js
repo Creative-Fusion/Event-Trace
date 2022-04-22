@@ -28,6 +28,10 @@ export const eventReducer = (state = initialState, { type, payload }) => {
 		case ActionTypes.EVENT.UPDATE_EVENT:
 			state.events = state.events.filter((event) => event.id !== payload.id);
 			state.events.unshift(payload);
+			state.createdEvents = state.createdEvents.filter(
+				(event) => event.id !== payload.id
+			);
+			state.createdEvents.unshift(payload);
 			return state;
 		case ActionTypes.EVENT.UPDATE_INTERESTED:
 			if (payload.action === "union")

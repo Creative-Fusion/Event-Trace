@@ -60,8 +60,10 @@ export const updateUser = async (data, id, dispatch) => {
 	try {
 		const document = doc(db, "users", id);
 		await updateDoc(document, data);
-		const updatedUser = await readUserById(id);
-		dispatch(updateCurrentUser(updatedUser));
+		if (dispatch) {
+			const updatedUser = await readUserById(id);
+			dispatch(updateCurrentUser(updatedUser));
+		}
 	} catch (e) {
 		message.error("Unable to update user details.");
 		console.log(e);
