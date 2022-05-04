@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { VisibilityContext } from "react-horizontal-scrolling-menu";
 import { ScrollMenu } from "react-horizontal-scrolling-menu";
 import { EventCard } from "./eventcard";
@@ -58,7 +58,7 @@ const OneRowList = ({ events }) => {
 			wrapperClassName="h-full lg:px-8 md:px-4"
 			scrollContainerClassName="lg:pl-12 pl-6 pr-4"
 		>
-			{events.map((event) => (
+			{Filter.sortByDate(["dateTime", "startDate"], events).map((event) => (
 				<EventCard event={event} key={event.name} />
 			))}
 		</ScrollMenu>
@@ -71,7 +71,9 @@ const MultipleRowList = ({ events }) => {
 	const [selectedCategories, setCategories] = useState([]);
 	const [displayEvents, setDisplayEvents] = useState(events);
 	const [csb, setCSB] = useState("createdDate");
-
+	useEffect(() => {
+		setDisplayEvents(Filter.sortByDate(["createdAt"], events));
+	}, []);
 	const filterEvents = (filterOptions) => {
 		console.log(filterOptions);
 		let filteredEvents = events.slice();

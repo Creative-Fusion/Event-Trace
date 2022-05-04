@@ -2,6 +2,7 @@ import { EventList } from "./EventList";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { Filter } from "../../data/classes";
 
 export const UserEvents = () => {
 	let [filteredEvents, setEvents] = useState([]);
@@ -40,9 +41,11 @@ export const UserEvents = () => {
 			)}
 			{filteredEvents.length > 0 && (
 				<div>
-					{filteredEvents.map((event, index) => {
-						return <EventList event={event} key={event.id} index={index} />;
-					})}
+					{Filter.sortByDate(["dateTime", "startDate"], filteredEvents).map(
+						(event, index) => {
+							return <EventList event={event} key={event.id} index={index} />;
+						}
+					)}
 				</div>
 			)}
 		</div>
