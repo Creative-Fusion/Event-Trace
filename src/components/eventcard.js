@@ -76,7 +76,7 @@ export const EventCard = ({ event }) => {
 					</p>
 				</div>
 			</div>
-			<div className="flex overflow-auto px-4 pb-4 pt-1">
+			<div className="flex overflow-hidden px-4 pb-4 pt-1">
 				{event.categories.slice(0, 3).map((category) => {
 					return (
 						<div

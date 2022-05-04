@@ -81,9 +81,9 @@ export const CreateEvent = () => {
 		if (!createEventWarning()) {
 			await createEvent(newEvent, dispatch);
 			message.success("Event Successfully created.");
-			setLoading(false);
 			navigate(`/e/${newEvent.name}/about`);
 		}
+		setLoading(false);
 	};
 
 	return (
