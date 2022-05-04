@@ -71,11 +71,12 @@ const MultipleRowList = ({ events }) => {
 	const [selectedCategories, setCategories] = useState([]);
 	const [displayEvents, setDisplayEvents] = useState(events);
 	const [csb, setCSB] = useState("createdDate");
+
 	useEffect(() => {
-		setDisplayEvents(Filter.sortByDate(["createdAt"], events));
-	}, []);
+		setDisplayEvents(Filter.sortByDate(["createdAt"], displayEvents));
+	}, [displayEvents]);
+
 	const filterEvents = (filterOptions) => {
-		console.log(filterOptions);
 		let filteredEvents = events.slice();
 		if (filterOptions.name)
 			filteredEvents = Filter.filterText(

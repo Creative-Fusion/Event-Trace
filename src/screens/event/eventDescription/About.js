@@ -60,9 +60,9 @@ export const About = () => {
 				icon: <MdOutlineLocationOn className="w-6 h-6" />,
 			});
 		else {
-			if (event.website)
+			if (event.eventLink)
 				list.push({
-					value: event.website,
+					value: event.eventLink,
 					icon: <BsGlobe2 className="w-6 h-6" />,
 				});
 		}

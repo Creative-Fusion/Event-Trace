@@ -66,7 +66,7 @@ export const Update = () => {
 					name: event.name,
 					type: event.type,
 					description: event.description,
-					location: event.location.location ? event.location.location : null,
+					location: event.location ? event.location.location : null,
 					categories: selectedCategories,
 					eventLink: event.eventLink ? event.eventLink : null,
 					fee: event.fee ? event.fee : null,
