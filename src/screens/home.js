@@ -29,7 +29,9 @@ export const Home = () => {
 					className="w-full object-cover h-full"
 				/>
 			</div>
-			<EventList title={"New Events"} to={"/"} events={eventList} />
+			<div id="new_events">
+				<EventList title={"New Events"} to={"/"} events={eventList} />
+			</div>
 		</div>
 	);
 };

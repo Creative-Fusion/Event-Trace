@@ -30,12 +30,12 @@ export const EventCard = ({ event }) => {
 		event.dateTime.endDate
 	);
 	return (
-		<div className="shadow-lg max-w-xs min-w-[280px] rounded-sm overflow-hidden md:mr-8 mr-5 my-5 shrink hover:shadow-2xl ease-out-transition">
-			<div className="relative">
+		<div className="shadow-lg w-[320px] rounded-sm overflow-hidden md:mr-8 mr-5 my-5 shrink hover:shadow-2xl ease-out-transition">
+			<div className="relative w-full">
 				<img
 					src={event.coverImage ?? DefaultCover}
 					alt={event.name + "'s Cover Image"}
-					className="h-52 object-cover cursor-pointer"
+					className="w-full h-52 object-cover cursor-pointer"
 					onClick={() => navigate(`/e/${event.name}/about`)}
 				/>
 				<Badge text={`${days} ${days > 1 ? "days" : "day"}`} />

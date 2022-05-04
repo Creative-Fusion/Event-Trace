@@ -8,6 +8,7 @@ import { uploadFile } from "../../../services/upload_file";
 import { updateEvent } from "../../../services/crud/events";
 import { updateEvent as updateState } from "../../../redux/actions/eventActions";
 import { message, Spin } from "antd";
+import { SplashScreen } from "../../../splash";
 
 export const EventDescription = () => {
 	const event = useGetEvent();
@@ -34,6 +35,7 @@ export const EventDescription = () => {
 		setUploadingCover(false);
 	};
 
+	if (!event) return <SplashScreen />;
 	return (
 		<div className="w-full">
 			<section className="relative w-full lg:h-[32rem] md:h-[24rem] h-[18rem] bg-grey">
