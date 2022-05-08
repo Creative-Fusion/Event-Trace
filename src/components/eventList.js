@@ -246,7 +246,7 @@ const MultipleRowList = ({ events }) => {
 					)}
 				</Affix>
 			</div>
-			<div className="flex flex-wrap justify-start lg:pl-20 md:pl-14 gap-x-10 gap-y-5">
+			<div className="flex flex-wrap justify-start lg:pl-20 md:pl-10 pl-6 gap-x-10 gap-y-5">
 				{displayEvents.map((event) => (
 					<EventCard event={event} key={event.name} />
 				))}

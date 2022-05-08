@@ -68,14 +68,15 @@ class ParticipantsList extends TableFilter {
 				key: "name",
 				ellipsis: true,
 				sorter: (a, b) => a.name.localeCompare(b.name),
-				...this.getColumnSearchProps("name"),
+				// ...this.getColumnSearchProps("name"),
 			},
 			{
 				title: "Email",
 				dataIndex: "email",
 				key: "email",
 				ellipsis: true,
-				...this.getColumnSearchProps("email"),
+				sorter: (a, b) => a.name.localeCompare(b.name),
+				// ...this.getColumnSearchProps("email"),
 			},
 			{
 				title: "Phone",
@@ -89,13 +90,13 @@ class ParticipantsList extends TableFilter {
 				dataIndex: "gender",
 				key: "gender",
 				ellipsis: true,
-				filters: [
-					{ text: "Male", value: "Male" },
-					{ text: "Female", value: "Female" },
-				],
-				filteredValue: filteredInfo.gender || null,
-				onFilter: (value, record) =>
-					record.gender ? record.gender.indexOf(value) === 0 : null,
+				// filters: [
+				// 	{ text: "Male", value: "Male" },
+				// 	{ text: "Female", value: "Female" },
+				// ],
+				// filteredValue: filteredInfo.gender || null,
+				// onFilter: (value, record) =>
+				// 	record.gender ? record.gender.indexOf(value) === 0 : null,
 				render: (value) => (value ? value : "---"),
 			},
 			{
@@ -106,7 +107,7 @@ class ParticipantsList extends TableFilter {
 				sorter: (a, b) =>
 					a.address ? a.address.localeCompare(b.address) : null,
 				render: (value) => (value ? value : "---"),
-				...this.getColumnSearchProps("address"),
+				// ...this.getColumnSearchProps("address"),
 			},
 			// {
 			// 	title: "Action",

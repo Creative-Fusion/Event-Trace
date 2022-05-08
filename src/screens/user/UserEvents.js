@@ -32,7 +32,7 @@ export const UserEvents = () => {
 	}, [interestedEvents, registeredEvents, createdEvents, category]);
 
 	return (
-		<div className="mx-28 h-full">
+		<div className="mx-28 min-h-[90vh]">
 			<h2>{title} Events</h2>
 			{filteredEvents.length === 0 && (
 				<p className="text-center text-lg font-medium py-5">

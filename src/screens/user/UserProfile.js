@@ -161,7 +161,7 @@ export const UserProfile = () => {
 							/>
 						</div>
 					</div>
-					<div className="block">
+					<div className="block pl-3">
 						<button
 							className="hidden md:flex border-2 text-[16px] border-primary text-primary rounded px-3"
 							onClick={() => navigate("/u/0/edit-profile")}

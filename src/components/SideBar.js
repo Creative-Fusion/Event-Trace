@@ -115,8 +115,8 @@ const SideBar = () => {
 						<div
 							className="flex text-secondary font-semibold text-base justify-start cursor-pointer items-center py-1.5"
 							onClick={async () => {
-								await signOut(dispatch);
 								navigate("/home");
+								await signOut(dispatch);
 							}}
 						>
 							<BiPowerOff className="w-5 h-5 mr-2" />
