@@ -10,7 +10,7 @@
 ## About 
 <h1></h1>
 
-EventTrace is the complete Event managament and tracking Web-based Application that brings participants and organiser of the events in a single platfom. It helps user find and register for an event. EventTrace helps the organiser manage and promote the event on the single platform.
+[EventTrace](https://event-trace.vercel.app/home) is the complete Event managament and tracking Web-based Application that brings participants and organiser of the events in a single platfom. It helps user find and register for an event. EventTrace helps the organiser manage and promote the event on the single platform.
 
 ## Key Features 🧑‍💻
 
